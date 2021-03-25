@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MyGithubUserApps</string>
+    <string name="wellcome">Wellcome</string>
+    <string name="connect">Connect with developers around the world</string>
+    <string name="recommended_for_you">Recommended For You</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
