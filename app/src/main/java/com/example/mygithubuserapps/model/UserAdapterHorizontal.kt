@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class UserAdapterHorizontal : RecyclerView.Adapter<UserAdapterHorizontal.UserAdapterHorizontalViewHolder>() {
+class UserAdapterHorizontal(private val listUser: ArrayList<UserModel>) : RecyclerView.Adapter<UserAdapterHorizontal.UserAdapterHorizontalViewHolder>() {
 
 
     inner class UserAdapterHorizontalViewHolder(itemView: View) :
@@ -21,6 +21,6 @@ class UserAdapterHorizontal : RecyclerView.Adapter<UserAdapterHorizontal.UserAda
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return listUser.size
     }
 }

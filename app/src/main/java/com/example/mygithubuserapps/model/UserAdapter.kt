@@ -18,7 +18,7 @@ class UserAdapter(private val listUser: ArrayList<UserModel>) : RecyclerView.Ada
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return listUser.size
     }
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
