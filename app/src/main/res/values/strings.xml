@@ -4,6 +4,7 @@
     <string name="connect">Connect with developers around the world</string>
     <string name="recommended_for_you">Recommended For You</string>
     <string name="share">Share</string>
+    <string name="follow">Follow</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
