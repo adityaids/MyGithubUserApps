@@ -1,29 +1,53 @@
 package com.example.mygithubuserapps.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.mygithubuserapps.databinding.UserItemsBinding
 import com.example.mygithubuserapps.model.UserModel
 import java.util.ArrayList
 
-class UserVerticalAdapter(private val listUser: ArrayList<UserModel>) : RecyclerView.Adapter<UserVerticalAdapter.UserVerticalViewHolder>(){
+class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVerticalViewHolder>(){
+
+    private val listUser = ArrayList<UserModel>()
+
+    fun setData(items: ArrayList<UserModel>){
+        listUser.clear()
+        listUser.addAll(items)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-    ): UserVerticalViewHolder {
-        TODO("Not yet implemented")
-    }
+    ): UserVerticalViewHolder = UserVerticalViewHolder(
+            UserItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    )
 
     override fun onBindViewHolder(holder: UserVerticalViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val user = listUser[position]
+        holder.bind(user)
     }
 
     override fun getItemCount(): Int {
         return listUser.size
     }
 
-    inner class UserVerticalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UserVerticalViewHolder(private val binding : UserItemsBinding)
+        :RecyclerView.ViewHolder(binding.root) {
+        fun bind(userModel: UserModel){
+            binding.tvName.text = userModel.name
+            binding.tvUsername.text = userModel.userName
+            Glide.with(itemView.context)
+                .load(userModel.avatar)
+                .apply(RequestOptions().override(80, 80))
+                .into(binding.imgProfil)
+            binding.btnFollow.setOnClickListener {
 
+            }
+        }
     }
 }

@@ -2,64 +2,40 @@ package com.example.mygithubuserapps
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mygithubuserapps.databinding.ActivityMainBinding
 import com.example.mygithubuserapps.adapter.UserHorizontalAdapter
 import com.example.mygithubuserapps.model.UserModel
 import com.example.mygithubuserapps.adapter.UserVerticalAdapter
+import com.example.mygithubuserapps.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var dataName: Array<String>
-    private lateinit var dataUserName: Array<String>
-    private lateinit var dataAvatar: Array<String>
-    private lateinit var dataCompany: Array<String>
-    private lateinit var dataLocation: Array<String>
-    private lateinit var dataRepository: Array<String>
-    private lateinit var dataFollower: Array<String>
-    private lateinit var dataFollowing: Array<String>
     private lateinit var userVerticalAdapter: UserVerticalAdapter
     private lateinit var userHorizontalAdapter: UserHorizontalAdapter
-    private var listUser = arrayListOf<UserModel>()
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        prepare()
-        addItem()
-        showRecycler()
-    }
+        userHorizontalAdapter = UserHorizontalAdapter()
+        userVerticalAdapter = UserVerticalAdapter()
 
-    private fun prepare(){
-        dataName = resources.getStringArray(R.array.name)
-        dataUserName = resources.getStringArray(R.array.username)
-        dataAvatar = resources.getStringArray(R.array.avatar)
-        dataCompany = resources.getStringArray(R.array.company)
-        dataLocation = resources.getStringArray(R.array.location)
-        dataRepository = resources.getStringArray(R.array.repository)
-        dataFollowing = resources.getStringArray(R.array.following)
-        dataFollower = resources.getStringArray(R.array.followers)
-    }
-
-    private fun addItem(){
-        for (position in dataName.indices) {
-            val userModel = UserModel(
-                    dataName[position],
-                    dataUserName[position],
-                    dataAvatar[position],
-                    dataLocation[position],
-                    dataCompany[position],
-                    dataRepository[position],
-                    dataFollowing[position],
-                    dataFollower[position]
-            )
-            listUser.add(userModel)
+        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        mainViewModel.prepare(this)
+        mainViewModel.getListUser().observe(this){ listItem ->
+            if (listItem != null) {
+                userHorizontalAdapter.setData(listItem)
+                userVerticalAdapter.setData(listItem)
+                showRecycler()
+            }
         }
-        userVerticalAdapter = UserVerticalAdapter(listUser)
-        userHorizontalAdapter = UserHorizontalAdapter(listUser)
     }
 
     private fun showRecycler(){
@@ -67,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvUserVertical.setHasFixedSize(true)
         binding.rvUserVertical.adapter = userVerticalAdapter
 
-        binding.rvUserHorizontal.layoutManager = LinearLayoutManager(this)
+        binding.rvUserHorizontal.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvUserHorizontal.setHasFixedSize(true)
         binding.rvUserHorizontal.adapter = userHorizontalAdapter
     }

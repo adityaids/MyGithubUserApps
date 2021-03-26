@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="140dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,12 +30,12 @@
             android:id="@+id/tv_name_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_profil_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:fontFamily="@font/roboto_medium"
             tools:text="Jake Wharton" />
         <TextView
@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/text_secondary_color"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:fontFamily="@font/roboto_medium"
             tools:text="Jake Wharton"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
