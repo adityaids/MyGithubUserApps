@@ -6,13 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mygithubuserapps.model.UserModel
 import java.util.ArrayList
 
-class UserVerticalAdapter(private val listUser: ArrayList<UserModel>) : RecyclerView.Adapter<UserVerticalAdapter.UserViewHolder>(){
+class UserVerticalAdapter(private val listUser: ArrayList<UserModel>) : RecyclerView.Adapter<UserVerticalAdapter.UserVerticalViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+    override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+    ): UserVerticalViewHolder {
         TODO("Not yet implemented")
     }
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserVerticalViewHolder, position: Int) {
         TODO("Not yet implemented")
     }
 
@@ -20,7 +23,7 @@ class UserVerticalAdapter(private val listUser: ArrayList<UserModel>) : Recycler
         return listUser.size
     }
 
-    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UserVerticalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
 }
