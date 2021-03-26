@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mygithubuserapps.databinding.ActivityMainBinding
-import com.example.mygithubuserapps.model.UserHorizontalAdapter
+import com.example.mygithubuserapps.adapter.UserHorizontalAdapter
 import com.example.mygithubuserapps.model.UserModel
-import com.example.mygithubuserapps.model.UserVerticalAdapter
+import com.example.mygithubuserapps.adapter.UserVerticalAdapter
 
 class MainActivity : AppCompatActivity() {
 

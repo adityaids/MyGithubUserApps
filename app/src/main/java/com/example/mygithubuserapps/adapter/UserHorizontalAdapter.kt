@@ -1,8 +1,9 @@
-package com.example.mygithubuserapps.model
+package com.example.mygithubuserapps.adapter
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mygithubuserapps.model.UserModel
 
 class UserHorizontalAdapter(private val listUser: ArrayList<UserModel>) : RecyclerView.Adapter<UserHorizontalAdapter.UserAdapterHorizontalViewHolder>() {
 
