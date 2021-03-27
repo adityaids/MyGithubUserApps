@@ -1,7 +1,6 @@
 package com.example.mygithubuserapps.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -16,7 +15,7 @@ import java.util.ArrayList
 class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVerticalViewHolder>(){
 
     private val listUser = ArrayList<UserModel>()
-    private lateinit var onItemClickedCallback: OnClickedItem
+    private lateinit var onItemClickedRecyclerCallback: OnClickedRecyclerItem
 
     fun setData(items: ArrayList<UserModel>){
         listUser.clear()
@@ -24,8 +23,8 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
         notifyDataSetChanged()
     }
 
-    fun SetOnItemClickCallback(onClickedItem: OnClickedItem){
-        this.onItemClickedCallback = onClickedItem
+    fun SetOnItemClickCallback(onClickedRecyclerItem: OnClickedRecyclerItem){
+        this.onItemClickedRecyclerCallback = onClickedRecyclerItem
     }
 
     override fun onCreateViewHolder(
@@ -59,7 +58,7 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
                 Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
             }
             itemView.setOnClickListener {
-                onItemClickedCallback.onItemClicked(userModel, binding.imgProfil)
+                onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfil)
             }
         }
     }

@@ -1,20 +1,17 @@
 package com.example.mygithubuserapps.adapter
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.mygithubuserapps.R
 import com.example.mygithubuserapps.databinding.UserItemsHorizontalBinding
 import com.example.mygithubuserapps.model.UserModel
 
 class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHorizontalViewHolder>() {
 
     private val listUser = ArrayList<UserModel>()
-    private lateinit var onItemClickedCallback: OnClickedItem
+    private lateinit var onItemClickedRecyclerCallback: OnClickedRecyclerItem
 
     fun setData(items: ArrayList<UserModel>){
         listUser.clear()
@@ -22,8 +19,8 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
         notifyDataSetChanged()
     }
 
-    fun SetOnItemCLickCallback(onCLickItem: OnClickedItem){
-        this.onItemClickedCallback = onCLickItem
+    fun SetOnItemCLickCallback(onCLickRecyclerItem: OnClickedRecyclerItem){
+        this.onItemClickedRecyclerCallback = onCLickRecyclerItem
     }
 
     override fun onCreateViewHolder(
@@ -54,7 +51,7 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
             binding.tvNameHorizontal.text = userModel.name
             binding.tvUsernameHorizontal.text = userModel.userName
 
-            itemView.setOnClickListener { onItemClickedCallback.onItemClicked(userModel, binding.imgProfilHorizontal) }
+            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfilHorizontal) }
         }
     }
 }

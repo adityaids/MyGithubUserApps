@@ -2,10 +2,10 @@ package com.example.mygithubuserapps
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
-import androidx.lifecycle.Observer
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mygithubuserapps.adapter.OnClickedRecyclerItem
 import com.example.mygithubuserapps.databinding.ActivityMainBinding
 import com.example.mygithubuserapps.adapter.UserHorizontalAdapter
 import com.example.mygithubuserapps.model.UserModel
@@ -36,6 +36,18 @@ class MainActivity : AppCompatActivity() {
                 showRecycler()
             }
         }
+
+        userVerticalAdapter.SetOnItemClickCallback(object: OnClickedRecyclerItem{
+            override fun onItemClicked(userModel: UserModel, imageView: View) {
+
+            }
+        })
+
+        userHorizontalAdapter.SetOnItemCLickCallback(object: OnClickedRecyclerItem{
+            override fun onItemClicked(userModel: UserModel, imageView: View) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     private fun showRecycler(){
