@@ -1,7 +1,11 @@
 package com.example.mygithubuserapps
 
+import android.app.ActivityOptions
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Pair
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
         userHorizontalAdapter = UserHorizontalAdapter()
         userVerticalAdapter = UserVerticalAdapter()
 
@@ -39,13 +44,35 @@ class MainActivity : AppCompatActivity() {
 
         userVerticalAdapter.SetOnItemClickCallback(object: OnClickedRecyclerItem{
             override fun onItemClicked(userModel: UserModel, imageView: View) {
+                val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
 
+                val intent = Intent(this@MainActivity, ProfilActivity::class.java).apply {
+                    putExtra(ProfilActivity.EXTRA_DATA, data)
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val activityOption = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, imagePair)
+                    startActivity(intent, activityOption.toBundle())
+                } else {
+                    startActivity(intent)
+                }
             }
         })
 
         userHorizontalAdapter.SetOnItemCLickCallback(object: OnClickedRecyclerItem{
             override fun onItemClicked(userModel: UserModel, imageView: View) {
-                TODO("Not yet implemented")
+                val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
+
+                val intent = Intent(this@MainActivity, ProfilActivity::class.java).apply {
+                    putExtra(ProfilActivity.EXTRA_DATA, data)
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val activityOption = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, imagePair)
+                    startActivity(intent, activityOption.toBundle())
+                } else {
+                    startActivity(intent)
+                }
             }
         })
     }
