@@ -7,6 +7,8 @@
     <string name="follow">Follow</string>
     <string name="follower">Follower</string>
     <string name="following">Following</string>
+    <string name="discover">Discover</string>
+    <string name="intro">Discover Developer around the world, learn how they build various project in various technology</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
