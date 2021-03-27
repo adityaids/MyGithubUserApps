@@ -23,7 +23,7 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
         notifyDataSetChanged()
     }
 
-    fun SetOnItemClickCallback(onClickedRecyclerItem: OnClickedRecyclerItem){
+    fun setOnItemClickCallback(onClickedRecyclerItem: OnClickedRecyclerItem){
         this.onItemClickedRecyclerCallback = onClickedRecyclerItem
     }
 
@@ -53,7 +53,7 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
                 .apply(RequestOptions().override(80, 80))
                 .into(binding.imgProfil)
             binding.btnFollow.setOnClickListener {
-                binding.btnFollow.text = "Followed"
+                binding.btnFollow.text = "Following"
                 binding.btnFollow.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_secondary_color))
                 Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
             }

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        userVerticalAdapter.SetOnItemClickCallback(object: OnClickedRecyclerItem{
+        userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem{
             override fun onItemClicked(userModel: UserModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        userHorizontalAdapter.SetOnItemCLickCallback(object: OnClickedRecyclerItem{
+        userHorizontalAdapter.setOnItemCLickCallback(object: OnClickedRecyclerItem{
             override fun onItemClicked(userModel: UserModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
 

@@ -19,7 +19,7 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
         notifyDataSetChanged()
     }
 
-    fun SetOnItemCLickCallback(onCLickRecyclerItem: OnClickedRecyclerItem){
+    fun setOnItemCLickCallback(onCLickRecyclerItem: OnClickedRecyclerItem){
         this.onItemClickedRecyclerCallback = onCLickRecyclerItem
     }
 
@@ -39,7 +39,6 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
     override fun getItemCount(): Int {
         return listUser.size
     }
-
 
     inner class UserHorizontalViewHolder(private val binding: UserItemsHorizontalBinding) :
             RecyclerView.ViewHolder(binding.root) {

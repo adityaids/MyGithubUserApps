@@ -15,8 +15,8 @@ import com.example.mygithubuserapps.model.UserModel
 class ProfilActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object{
-        val EXTRA_IMAGE_TRANSITION: String = "extra_image_transition"
-        val EXTRA_DATA: String = "extra_data"
+        const val EXTRA_IMAGE_TRANSITION: String = "extra_image_transition"
+        const val EXTRA_DATA: String = "extra_data"
     }
     private lateinit var userDetail: UserModel
     private lateinit var binding: ActivityProfilBinding
