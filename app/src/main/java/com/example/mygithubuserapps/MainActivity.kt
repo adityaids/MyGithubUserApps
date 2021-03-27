@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
 
                 val intent = Intent(this@MainActivity, ProfilActivity::class.java).apply {
-                    putExtra(ProfilActivity.EXTRA_DATA, data)
+                    putExtra(ProfilActivity.EXTRA_DATA, userModel)
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
 
                 val intent = Intent(this@MainActivity, ProfilActivity::class.java).apply {
-                    putExtra(ProfilActivity.EXTRA_DATA, data)
+                    putExtra(ProfilActivity.EXTRA_DATA, userModel)
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

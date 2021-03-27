@@ -5,6 +5,8 @@
     <string name="recommended_for_you">Recommended For You</string>
     <string name="share">Share</string>
     <string name="follow">Follow</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
