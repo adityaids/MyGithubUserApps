@@ -14,11 +14,16 @@ import com.example.mygithubuserapps.model.UserModel
 class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHorizontalViewHolder>() {
 
     private val listUser = ArrayList<UserModel>()
+    private lateinit var onItemClickedCallback: OnClickedItem
 
     fun setData(items: ArrayList<UserModel>){
         listUser.clear()
         listUser.addAll(items)
         notifyDataSetChanged()
+    }
+
+    fun SetOnItemCLickCallback(onCLickItem: OnClickedItem){
+        this.onItemClickedCallback = onCLickItem
     }
 
     override fun onCreateViewHolder(
@@ -48,6 +53,8 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
                 .into(binding.imgProfilHorizontal)
             binding.tvNameHorizontal.text = userModel.name
             binding.tvUsernameHorizontal.text = userModel.userName
+
+            itemView.setOnClickListener { onItemClickedCallback.onItemClicked(userModel, binding.imgProfilHorizontal) }
         }
     }
 }

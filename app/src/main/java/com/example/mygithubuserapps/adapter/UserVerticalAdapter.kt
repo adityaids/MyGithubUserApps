@@ -3,9 +3,11 @@ package com.example.mygithubuserapps.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.mygithubuserapps.R
 import com.example.mygithubuserapps.databinding.UserItemsBinding
 import com.example.mygithubuserapps.model.UserModel
 import java.util.ArrayList
@@ -13,11 +15,16 @@ import java.util.ArrayList
 class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVerticalViewHolder>(){
 
     private val listUser = ArrayList<UserModel>()
+    private lateinit var onItemClickedCallback: OnClickedItem
 
     fun setData(items: ArrayList<UserModel>){
         listUser.clear()
         listUser.addAll(items)
         notifyDataSetChanged()
+    }
+
+    fun SetOnItemClickCallback(onClickedItem: OnClickedItem){
+        this.onItemClickedCallback = onClickedItem
     }
 
     override fun onCreateViewHolder(
@@ -46,7 +53,12 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
                 .apply(RequestOptions().override(80, 80))
                 .into(binding.imgProfil)
             binding.btnFollow.setOnClickListener {
-
+                binding.btnFollow.text = "Followed"
+                binding.btnFollow.setBackgroundResource(R.color.primary)
+                Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
+            }
+            itemView.setOnClickListener {
+                onItemClickedCallback.onItemClicked(userModel, binding.imgProfil)
             }
         }
     }
