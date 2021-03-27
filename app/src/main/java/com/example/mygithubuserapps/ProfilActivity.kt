@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Switch
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.mygithubuserapps.databinding.ActivityProfilBinding
 import com.example.mygithubuserapps.model.UserModel
@@ -25,6 +26,7 @@ class ProfilActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityProfilBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Profile"
         userDetail = intent.getParcelableExtra<UserModel>(EXTRA_DATA) as UserModel
         Glide.with(this)
             .load(userDetail.avatar)
@@ -43,7 +45,13 @@ class ProfilActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.btn_follow -> Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
+            R.id.btn_follow -> {
+                Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
+                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
+                binding.btnFollow.text = "Following"
+                binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.text_secondary_color))
+                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            }
             R.id.btn_share -> {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
