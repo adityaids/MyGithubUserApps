@@ -15,5 +15,5 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="text_secondary_color">#DDBCBCBC</color>
+    <color name="text_secondary_color">#DDAAAAAA</color>
 </resources>

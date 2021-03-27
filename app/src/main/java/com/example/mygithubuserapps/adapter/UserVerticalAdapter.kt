@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -54,7 +55,7 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
                 .into(binding.imgProfil)
             binding.btnFollow.setOnClickListener {
                 binding.btnFollow.text = "Followed"
-                binding.btnFollow.setBackgroundResource(R.color.primary)
+                binding.btnFollow.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_secondary_color))
                 Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
             }
             itemView.setOnClickListener {
