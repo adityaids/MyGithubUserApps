@@ -24,12 +24,12 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
     }
 
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
+        parent: ViewGroup,
+        viewType: Int
     ): UserHorizontalViewHolder =
-            UserHorizontalViewHolder(
-                    UserItemsHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
+        UserHorizontalViewHolder(
+            UserItemsHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 
     override fun onBindViewHolder(holder: UserHorizontalViewHolder, position: Int) {
         val user = listUser[position]
@@ -41,7 +41,7 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
     }
 
     inner class UserHorizontalViewHolder(private val binding: UserItemsHorizontalBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(userModel: UserModel){
             Glide.with(itemView.context)
                 .load(userModel.avatar)

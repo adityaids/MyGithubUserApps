@@ -28,10 +28,10 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
     }
 
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
+        parent: ViewGroup,
+        viewType: Int
     ): UserVerticalViewHolder = UserVerticalViewHolder(
-            UserItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        UserItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun onBindViewHolder(holder: UserVerticalViewHolder, position: Int) {

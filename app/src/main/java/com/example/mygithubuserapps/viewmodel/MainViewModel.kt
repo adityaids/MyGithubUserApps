@@ -6,8 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mygithubuserapps.R
-import com.example.mygithubuserapps.adapter.UserHorizontalAdapter
-import com.example.mygithubuserapps.adapter.UserVerticalAdapter
 import com.example.mygithubuserapps.model.UserModel
 
 class MainViewModel : ViewModel() {
