@@ -39,6 +39,19 @@ class ProfilActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvDetailFollower.text = if (userDetail.follower != null) userDetail.follower else "0"
         binding.tvDetailFollowing.text = if (userDetail.following != null) userDetail.following else "0"
 
+
+        if (userDetail.isFavorited) {
+            val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
+            binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.text_secondary_color))
+            binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            binding.btnFollow.text = "Following"
+        } else {
+            val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
+            binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.btnFollow.text = "Follow"
+        }
+
         binding.btnFollow.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
     }
@@ -46,11 +59,21 @@ class ProfilActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_follow -> {
-                Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
-                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
-                binding.btnFollow.text = "Following"
-                binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.text_secondary_color))
-                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+                if (userDetail.isFavorited) {
+                    val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
+                    binding.btnFollow.text = "Follow"
+                    binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
+                    binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+                    Toast.makeText(this, "Unfollow", Toast.LENGTH_LONG).show()
+                    userDetail.isFavorited = false
+                } else {
+                    val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
+                    binding.btnFollow.text = "Following"
+                    binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.text_secondary_color))
+                    binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+                    Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
+                    userDetail.isFavorited = true
+                }
             }
             R.id.btn_share -> {
                 val sendIntent: Intent = Intent().apply {

@@ -169,7 +169,7 @@
             android:layout_weight="1"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:icon="@drawable/ic_share"
+            android:drawableLeft="@drawable/ic_share"
             android:text="@string/share"
             android:textColor="@color/white"/>
 
@@ -181,7 +181,7 @@
             android:layout_weight="1"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:icon="@drawable/ic_add"
+            android:drawableLeft="@drawable/ic_add"
             android:text="@string/follow"
             android:textColor="@color/white"/>
     </LinearLayout>

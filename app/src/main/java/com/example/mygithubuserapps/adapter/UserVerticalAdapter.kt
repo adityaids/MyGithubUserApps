@@ -53,9 +53,17 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
                 .apply(RequestOptions().override(80, 80))
                 .into(binding.imgProfil)
             binding.btnFollow.setOnClickListener {
-                binding.btnFollow.text = "Following"
-                binding.btnFollow.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_secondary_color))
-                Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
+                if (userModel.isFavorited) {
+                    binding.btnFollow.text = "Follow"
+                    binding.btnFollow.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
+                    Toast.makeText(itemView.context, "Unfollow", Toast.LENGTH_SHORT).show()
+                    userModel.isFavorited = false
+                } else {
+                    binding.btnFollow.text = "Following"
+                    binding.btnFollow.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_secondary_color))
+                    Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
+                    userModel.isFavorited = true
+                }
             }
             itemView.setOnClickListener {
                 onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfil)
