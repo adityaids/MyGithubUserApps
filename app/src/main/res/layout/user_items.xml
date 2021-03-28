@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardCornerRadius="@dimen/_4sdp"
+    app:cardCornerRadius="@dimen/_8sdp"
     android:layout_marginBottom="@dimen/_4sdp"
     android:layout_marginLeft="@dimen/_4sdp"
     android:layout_marginStart="@dimen/_4sdp"
