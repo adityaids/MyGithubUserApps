@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/_24sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/wellcome"
+        android:text="@string/welcome"
         android:textSize="@dimen/_28ssp"
         android:textColor="@color/white"
         android:fontFamily="@font/roboto_medium"/>
