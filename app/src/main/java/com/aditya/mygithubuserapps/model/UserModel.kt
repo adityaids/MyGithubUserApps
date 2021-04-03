@@ -1,4 +1,4 @@
-package com.example.mygithubuserapps.model
+package com.aditya.mygithubuserapps.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,4 +1,4 @@
-package com.example.mygithubuserapps
+package com.aditya.mygithubuserapps
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

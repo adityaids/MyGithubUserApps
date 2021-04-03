@@ -1,4 +1,4 @@
-package com.example.mygithubuserapps
+package com.aditya.mygithubuserapps
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.aditya.mygithubuserapps.databinding.ActivityProfilBinding
+import com.aditya.mygithubuserapps.model.UserModel
 import com.bumptech.glide.Glide
-import com.example.mygithubuserapps.databinding.ActivityProfilBinding
-import com.example.mygithubuserapps.model.UserModel
 
 class ProfilActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -40,7 +40,9 @@ class ProfilActivity : AppCompatActivity(), View.OnClickListener {
 
         if (userDetail.isFavorited) {
             val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
-            binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.text_secondary_color))
+            binding.btnFollow.setTextColor(ContextCompat.getColor(this,
+                R.color.text_secondary_color
+            ))
             binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
             binding.btnFollow.text = resources.getString(R.string.following)
         } else {
@@ -67,7 +69,9 @@ class ProfilActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
                     binding.btnFollow.text = resources.getString(R.string.following)
-                    binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.text_secondary_color))
+                    binding.btnFollow.setTextColor(ContextCompat.getColor(this,
+                        R.color.text_secondary_color
+                    ))
                     binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                     Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
                     userDetail.isFavorited = true

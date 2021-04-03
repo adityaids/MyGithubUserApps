@@ -1,12 +1,12 @@
-package com.example.mygithubuserapps.viewmodel
+package com.aditya.mygithubuserapps.viewmodel
 
 import android.content.Context
 import android.content.res.TypedArray
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mygithubuserapps.R
-import com.example.mygithubuserapps.model.UserModel
+import com.aditya.mygithubuserapps.R
+import com.aditya.mygithubuserapps.model.UserModel
 
 class MainViewModel : ViewModel() {
 

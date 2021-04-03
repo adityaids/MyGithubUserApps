@@ -1,12 +1,12 @@
-package com.example.mygithubuserapps.adapter
+package com.aditya.mygithubuserapps.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.mygithubuserapps.databinding.UserItemsHorizontalBinding
-import com.example.mygithubuserapps.model.UserModel
+import com.aditya.mygithubuserapps.databinding.UserItemsHorizontalBinding
+import com.aditya.mygithubuserapps.model.UserModel
 
 class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHorizontalViewHolder>() {
 

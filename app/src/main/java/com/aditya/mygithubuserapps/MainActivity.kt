@@ -1,4 +1,4 @@
-package com.example.mygithubuserapps
+package com.aditya.mygithubuserapps
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -9,12 +9,12 @@ import android.util.Pair
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mygithubuserapps.adapter.OnClickedRecyclerItem
-import com.example.mygithubuserapps.databinding.ActivityMainBinding
-import com.example.mygithubuserapps.adapter.UserHorizontalAdapter
-import com.example.mygithubuserapps.model.UserModel
-import com.example.mygithubuserapps.adapter.UserVerticalAdapter
-import com.example.mygithubuserapps.viewmodel.MainViewModel
+import com.aditya.mygithubuserapps.adapter.OnClickedRecyclerItem
+import com.aditya.mygithubuserapps.databinding.ActivityMainBinding
+import com.aditya.mygithubuserapps.adapter.UserHorizontalAdapter
+import com.aditya.mygithubuserapps.model.UserModel
+import com.aditya.mygithubuserapps.adapter.UserVerticalAdapter
+import com.aditya.mygithubuserapps.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
         userHorizontalAdapter = UserHorizontalAdapter()
         userVerticalAdapter = UserVerticalAdapter()
 
-        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            MainViewModel::class.java)
         mainViewModel.prepare(this)
         mainViewModel.getListUser().observe(this){ listItem ->
             if (listItem != null) {
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem{
+        userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userModel: UserModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
 
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        userHorizontalAdapter.setOnItemCLickCallback(object: OnClickedRecyclerItem{
+        userHorizontalAdapter.setOnItemCLickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userModel: UserModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
 

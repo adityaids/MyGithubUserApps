@@ -1,4 +1,4 @@
-package com.example.mygithubuserapps.adapter
+package com.aditya.mygithubuserapps.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.mygithubuserapps.R
-import com.example.mygithubuserapps.databinding.UserItemsBinding
-import com.example.mygithubuserapps.model.UserModel
+import com.aditya.mygithubuserapps.R
+import com.aditya.mygithubuserapps.databinding.UserItemsBinding
+import com.aditya.mygithubuserapps.model.UserModel
 import java.util.ArrayList
 
 class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVerticalViewHolder>(){
