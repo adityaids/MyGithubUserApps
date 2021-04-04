@@ -17,7 +17,7 @@
         android:background="@color/primary">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profil"
+            android:id="@+id/img_profile"
             android:layout_width="@dimen/_64sdp"
             android:layout_height="@dimen/_64sdp"
             android:layout_marginTop="@dimen/_8sdp"
@@ -40,7 +40,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             android:fontFamily="@font/roboto_medium"
-            app:layout_constraintStart_toEndOf="@+id/img_profil"
+            app:layout_constraintStart_toEndOf="@+id/img_profile"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="jake wharton" />
 
@@ -53,7 +53,7 @@
             android:textSize="@dimen/_10ssp"
             android:textColor="@color/text_secondary_color"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            app:layout_constraintStart_toEndOf="@+id/img_profil"
+            app:layout_constraintStart_toEndOf="@+id/img_profile"
             tools:text="jakeWharton"/>
 
         <Button

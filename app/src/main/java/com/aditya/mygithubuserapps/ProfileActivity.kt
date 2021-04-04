@@ -6,22 +6,22 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.aditya.mygithubuserapps.databinding.ActivityProfilBinding
+import com.aditya.mygithubuserapps.databinding.ActivityProfileBinding
 import com.aditya.mygithubuserapps.model.UserModel
 import com.bumptech.glide.Glide
 
-class ProfilActivity : AppCompatActivity(), View.OnClickListener {
+class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object{
         const val EXTRA_IMAGE_TRANSITION: String = "extra_image_transition"
         const val EXTRA_DATA: String = "extra_data"
     }
     private lateinit var userDetail: UserModel
-    private lateinit var binding: ActivityProfilBinding
+    private lateinit var binding: ActivityProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfilBinding.inflate(layoutInflater)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.title = "Profile"

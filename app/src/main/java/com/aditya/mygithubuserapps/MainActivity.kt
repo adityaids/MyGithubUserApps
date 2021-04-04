@@ -45,10 +45,10 @@ class MainActivity : AppCompatActivity() {
 
         userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userModel: UserModel, imageView: View) {
-                val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
+                val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
 
-                val intent = Intent(this@MainActivity, ProfilActivity::class.java).apply {
-                    putExtra(ProfilActivity.EXTRA_DATA, userModel)
+                val intent = Intent(this@MainActivity, ProfileActivity::class.java).apply {
+                    putExtra(ProfileActivity.EXTRA_DATA, userModel)
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity() {
 
         userHorizontalAdapter.setOnItemCLickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userModel: UserModel, imageView: View) {
-                val imagePair = Pair.create(imageView, ProfilActivity.EXTRA_IMAGE_TRANSITION)
+                val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
 
-                val intent = Intent(this@MainActivity, ProfilActivity::class.java).apply {
-                    putExtra(ProfilActivity.EXTRA_DATA, userModel)
+                val intent = Intent(this@MainActivity, ProfileActivity::class.java).apply {
+                    putExtra(ProfileActivity.EXTRA_DATA, userModel)
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

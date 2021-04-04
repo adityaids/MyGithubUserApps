@@ -46,11 +46,11 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
             Glide.with(itemView.context)
                 .load(userModel.avatar)
                 .apply(RequestOptions().override(80, 80))
-                .into(binding.imgProfilHorizontal)
+                .into(binding.imgProfileHorizontal)
             binding.tvNameHorizontal.text = userModel.name
             binding.tvUsernameHorizontal.text = userModel.userName
 
-            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfilHorizontal) }
+            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfileHorizontal) }
         }
     }
 }

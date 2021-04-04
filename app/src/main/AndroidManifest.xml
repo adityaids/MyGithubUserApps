@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.aditya.mygithubuserapps.MainActivity" />
-        <activity android:name="com.aditya.mygithubuserapps.ProfilActivity"
+        <activity android:name="com.aditya.mygithubuserapps.ProfileActivity"
             android:parentActivityName="com.aditya.mygithubuserapps.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

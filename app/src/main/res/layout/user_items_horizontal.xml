@@ -18,7 +18,7 @@
         android:padding="@dimen/_4sdp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profil_horizontal"
+            android:id="@+id/img_profile_horizontal"
             android:layout_width="@dimen/_56sdp"
             android:layout_height="@dimen/_56sdp"
             android:layout_marginTop="@dimen/_4sdp"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_14sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_profil_horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/img_profile_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/white"
             android:textSize="@dimen/_10ssp"

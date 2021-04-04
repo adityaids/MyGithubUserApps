@@ -51,7 +51,7 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
             Glide.with(itemView.context)
                 .load(userModel.avatar)
                 .apply(RequestOptions().override(80, 80))
-                .into(binding.imgProfil)
+                .into(binding.imgProfile)
             binding.btnFollow.setOnClickListener {
                 if (userModel.isFavorited) {
                     binding.btnFollow.text = itemView.context.getString(R.string.follow)
@@ -66,7 +66,7 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
                 }
             }
             itemView.setOnClickListener {
-                onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfil)
+                onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfile)
             }
         }
     }

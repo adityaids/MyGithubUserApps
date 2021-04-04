@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
-    tools:context=".ProfilActivity">
+    android:background="@color/primary_dark"
+    tools:context=".ProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_detail_profile"
