@@ -15,7 +15,7 @@ interface ApiService {
 
     @GET
     @Headers("Authorization: token<" + BuildConfig.API_KEY + ">")
-    fun getUserDetail(@Url userdetail: String): Call<UserDetail>
+    fun getUserDetail(@Url userDetail: String): Call<UserDetail>
 
     @GET("{username}/followers")
     @Headers("Authorization: token<" + BuildConfig.API_KEY + ">")

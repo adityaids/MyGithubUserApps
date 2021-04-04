@@ -38,7 +38,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvDetailFollowing.text = if (userDetail.following != null) userDetail.following else "0"
 
 
-        if (userDetail.isFavorited) {
+        if (userDetail.isFavorit) {
             val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
             binding.btnFollow.setTextColor(ContextCompat.getColor(this,
                 R.color.text_secondary_color
@@ -59,13 +59,13 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_follow -> {
-                if (userDetail.isFavorited) {
+                if (userDetail.isFavorit) {
                     val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
                     binding.btnFollow.text = resources.getString(R.string.follow)
                     binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
                     binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                     Toast.makeText(this, "Unfollow", Toast.LENGTH_LONG).show()
-                    userDetail.isFavorited = false
+                    userDetail.isFavorit = false
                 } else {
                     val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
                     binding.btnFollow.text = resources.getString(R.string.following)
@@ -74,7 +74,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                     ))
                     binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                     Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
-                    userDetail.isFavorited = true
+                    userDetail.isFavorit = true
                 }
             }
             R.id.btn_share -> {
