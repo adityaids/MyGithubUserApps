@@ -37,9 +37,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.prepare(this)
         mainViewModel.getListUser().observe(this){ listItem ->
             if (listItem != null) {
-                userHorizontalAdapter.setData(listItem)
-                userVerticalAdapter.setData(listItem)
-                showRecycler()
+                showRecycler(listItem)
             }
         }
 
@@ -78,7 +76,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun showRecycler(){
+    private fun showRecycler(listUser: ArrayList<UserModel>){
+        userHorizontalAdapter.setData(listUser)
+        userVerticalAdapter.setData(listUser)
+
         binding.rvUserVertical.layoutManager = LinearLayoutManager(this)
         binding.rvUserVertical.setHasFixedSize(true)
         binding.rvUserVertical.adapter = userVerticalAdapter
