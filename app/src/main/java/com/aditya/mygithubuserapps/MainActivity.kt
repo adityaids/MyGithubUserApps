@@ -31,13 +31,14 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         userHorizontalAdapter = UserHorizontalAdapter()
         userVerticalAdapter = UserVerticalAdapter()
+        showRecycler()
 
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
             MainViewModel::class.java)
         mainViewModel.prepare(this)
         mainViewModel.getListUser().observe(this){ listItem ->
             if (listItem != null) {
-                showRecycler(listItem)
+                setDataRecycler(listItem)
             }
         }
 
@@ -76,10 +77,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun showRecycler(listUser: ArrayList<UserModel>){
-        userHorizontalAdapter.setData(listUser)
-        userVerticalAdapter.setData(listUser)
-
+    private fun showRecycler(){
         binding.rvUserVertical.layoutManager = LinearLayoutManager(this)
         binding.rvUserVertical.setHasFixedSize(true)
         binding.rvUserVertical.adapter = userVerticalAdapter
@@ -87,5 +85,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvUserHorizontal.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvUserHorizontal.setHasFixedSize(true)
         binding.rvUserHorizontal.adapter = userHorizontalAdapter
+    }
+
+    private fun setDataRecycler(listUser: ArrayList<UserModel>){
+        userHorizontalAdapter.setData(listUser)
+        userVerticalAdapter.setData(listUser)
     }
 }
