@@ -1,5 +1,12 @@
 package com.aditya.mygithubuserapps.model
 
-data class UserList (
-        var resultUser: ArrayList<UserModel>? = null
-)
+import com.google.gson.annotations.SerializedName
+
+class UserList {
+        @SerializedName("items")
+        private var resultUser = ArrayList<UserModel>()
+
+        fun getResultUser() : ArrayList<UserModel> {
+                return resultUser
+        }
+}

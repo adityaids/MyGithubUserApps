@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Pair
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedRecyclerItem
@@ -36,11 +37,12 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
             MainViewModel::class.java)
         mainViewModel.prepare(this)
-        mainViewModel.getListUser().observe(this){ listItem ->
+        testQuery()
+        /*mainViewModel.getListUser().observe(this){ listItem ->
             if (listItem != null) {
                 setDataRecycler(listItem)
             }
-        }
+        }*/
 
         userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userModel: UserModel, imageView: View) {
@@ -90,5 +92,14 @@ class MainActivity : AppCompatActivity() {
     private fun setDataRecycler(listUser: ArrayList<UserModel>){
         userHorizontalAdapter.setData(listUser)
         userVerticalAdapter.setData(listUser)
+    }
+
+    private fun testQuery(){
+        mainViewModel.setQuerySarch("aditya")
+        mainViewModel.getListSearchUser().observe(this){listItem ->
+            if (listItem!= null){
+                setDataRecycler(listItem)
+            }
+        }
     }
 }

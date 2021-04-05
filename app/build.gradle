@@ -15,7 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_KEY", '"5ac297774d6c88df8283a5355c843dcc541fccb7"')
+        buildConfigField("String", "API_KEY", '"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"')
     }
 
     buildTypes {
@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
