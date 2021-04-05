@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Pair
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedRecyclerItem
@@ -98,7 +97,22 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.setQuerySarch("aditya")
         mainViewModel.getListSearchUser().observe(this){listItem ->
             if (listItem!= null){
-                setDataRecycler(listItem)
+                val listResponse = ArrayList<UserModel>()
+                for (position in listItem.indices) {
+                    val userModel = UserModel(
+                            listItem.get(position).login,
+                            listItem.get(position).name,
+                            listItem.get(position).avatarUrl,
+                            "-",
+                            "-",
+                            "-",
+                            "-",
+                            "-",
+                            false
+                    )
+                    listResponse.add(userModel)
+                }
+                setDataRecycler(listResponse)
             }
         }
     }

@@ -8,8 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aditya.mygithubuserapps.R
 import com.aditya.mygithubuserapps.api.ApiService
-import com.aditya.mygithubuserapps.model.UserList
-import com.aditya.mygithubuserapps.model.UserModel
+import com.aditya.mygithubuserapps.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +23,7 @@ class MainViewModel : ViewModel() {
     }
 
     private val listUser = MutableLiveData<ArrayList<UserModel>>()
-    private val listSearchUser = MutableLiveData<ArrayList<UserModel>>()
+    private val listSearchUser = MutableLiveData<ArrayList<ApiUserModel>>()
     private lateinit var dataName: Array<String>
     private lateinit var dataUserName: Array<String>
     private lateinit var dataAvatar: TypedArray
@@ -43,10 +42,10 @@ class MainViewModel : ViewModel() {
         dataRepository = context.resources.getStringArray(R.array.repository)
         dataFollowing = context.resources.getStringArray(R.array.following)
         dataFollower = context.resources.getStringArray(R.array.followers)
-        addItem()
+        //addItem()
     }
 
-    private fun addItem(){
+    /*private fun addItem(){
         val listItem = ArrayList<UserModel>()
         for (position in dataName.indices) {
             val userModel = UserModel(
@@ -62,7 +61,7 @@ class MainViewModel : ViewModel() {
             listItem.add(userModel)
         }
         listUser.postValue(listItem)
-    }
+    }*/
 
     fun setQuerySarch(q: String){
         val retrofit: Retrofit = Retrofit.Builder()
@@ -71,17 +70,16 @@ class MainViewModel : ViewModel() {
                 .build()
         val service = retrofit.create(ApiService::class.java)
         val userListCall = service.getUserList(q)
-        userListCall.enqueue(object : Callback<UserList?> {
-            override fun onResponse(call: Call<UserList?>?, response: Response<UserList?>) {
+        userListCall.enqueue(object : Callback<SearchUserModel?> {
+            override fun onResponse(call: Call<SearchUserModel?>?, response: Response<SearchUserModel?>) {
                 if (response.body() != null) {
-                    val listResponseQuery = ArrayList<UserModel>()
-                    response.body()?.getResultUser()?.let { listResponseQuery.addAll(it)}
-                    Log.d("MainVIewModel", listResponseQuery.get(1).toString())
-                    listSearchUser.postValue(listResponseQuery)
+                    val responseList = ArrayList<ApiUserModel>()
+                    response.body()?.items?.let { responseList.addAll(it) }
+                    listSearchUser.postValue(responseList)
                 }
             }
 
-            override fun onFailure(call: Call<UserList?>, t: Throwable) {
+            override fun onFailure(call: Call<SearchUserModel?>, t: Throwable) {
                 Log.d("MainActivity", "error loading from API")
             }
         })
@@ -91,7 +89,7 @@ class MainViewModel : ViewModel() {
         return listUser
     }
 
-    fun getListSearchUser(): LiveData<ArrayList<UserModel>>{
+    fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>>{
         return listSearchUser
     }
 }
