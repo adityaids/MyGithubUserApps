@@ -15,6 +15,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     companion object{
         const val EXTRA_IMAGE_TRANSITION: String = "extra_image_transition"
         const val EXTRA_DATA: String = "extra_data"
+        const val EXTRA_DATA_API: String = "extra_data_api"
     }
     private lateinit var userDetail: UserModel
     private lateinit var binding: ActivityProfileBinding

@@ -16,7 +16,7 @@ import com.aditya.mygithubuserapps.model.UserModel
 import com.aditya.mygithubuserapps.adapter.UserVerticalAdapter
 import com.aditya.mygithubuserapps.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var userVerticalAdapter: UserVerticalAdapter
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnSearch.setOnClickListener(this)
         userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userModel: UserModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
@@ -90,5 +91,14 @@ class MainActivity : AppCompatActivity() {
     private fun setDataRecycler(listUser: ArrayList<UserModel>){
         userHorizontalAdapter.setData(listUser)
         userVerticalAdapter.setData(listUser)
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.btn_search -> {
+                val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }
