@@ -13,5 +13,5 @@ data class UserModel(
         var repository: String?,
         var following: String?,
         var follower: String?,
-        var isFavorit: Boolean = false
+        var isFollow: Boolean = false
 ) : Parcelable
