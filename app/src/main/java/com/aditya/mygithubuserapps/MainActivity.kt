@@ -36,12 +36,11 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
             MainViewModel::class.java)
         mainViewModel.prepare(this)
-        testQuery()
-        /*mainViewModel.getListUser().observe(this){ listItem ->
+        mainViewModel.getListUser().observe(this){ listItem ->
             if (listItem != null) {
                 setDataRecycler(listItem)
             }
-        }*/
+        }
 
         userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userModel: UserModel, imageView: View) {
@@ -91,29 +90,5 @@ class MainActivity : AppCompatActivity() {
     private fun setDataRecycler(listUser: ArrayList<UserModel>){
         userHorizontalAdapter.setData(listUser)
         userVerticalAdapter.setData(listUser)
-    }
-
-    private fun testQuery(){
-        mainViewModel.setQuerySarch("aditya")
-        mainViewModel.getListSearchUser().observe(this){listItem ->
-            if (listItem!= null){
-                val listResponse = ArrayList<UserModel>()
-                for (position in listItem.indices) {
-                    val userModel = UserModel(
-                            listItem.get(position).login,
-                            listItem.get(position).name,
-                            listItem.get(position).avatarUrl,
-                            "-",
-                            "-",
-                            "-",
-                            "-",
-                            "-",
-                            false
-                    )
-                    listResponse.add(userModel)
-                }
-                setDataRecycler(listResponse)
-            }
-        }
     }
 }

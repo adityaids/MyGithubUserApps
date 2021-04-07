@@ -10,6 +10,7 @@
     <string name="discover">Discover</string>
     <string name="intro">Discover Developer around the world, learn how they build various project in various technology</string>
     <string name="search">Search</string>
+    <string name="lets_searching">there is no result on your seraching lets searching another one</string>
 
     <string-array name="username">
         <item>JakeWharton</item>

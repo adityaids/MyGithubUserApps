@@ -23,7 +23,6 @@ class MainViewModel : ViewModel() {
     }
 
     private val listUser = MutableLiveData<ArrayList<UserModel>>()
-    private val listSearchUser = MutableLiveData<ArrayList<ApiUserModel>>()
     private lateinit var dataName: Array<String>
     private lateinit var dataUserName: Array<String>
     private lateinit var dataAvatar: TypedArray
@@ -42,10 +41,10 @@ class MainViewModel : ViewModel() {
         dataRepository = context.resources.getStringArray(R.array.repository)
         dataFollowing = context.resources.getStringArray(R.array.following)
         dataFollower = context.resources.getStringArray(R.array.followers)
-        //addItem()
+        addItem()
     }
 
-    /*private fun addItem(){
+    private fun addItem(){
         val listItem = ArrayList<UserModel>()
         for (position in dataName.indices) {
             val userModel = UserModel(
@@ -61,35 +60,9 @@ class MainViewModel : ViewModel() {
             listItem.add(userModel)
         }
         listUser.postValue(listItem)
-    }*/
-
-    fun setQuerySarch(q: String){
-        val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl(urlSearch)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        val service = retrofit.create(ApiService::class.java)
-        val userListCall = service.getUserList(q)
-        userListCall.enqueue(object : Callback<SearchUserModel?> {
-            override fun onResponse(call: Call<SearchUserModel?>?, response: Response<SearchUserModel?>) {
-                if (response.body() != null) {
-                    val responseList = ArrayList<ApiUserModel>()
-                    response.body()?.items?.let { responseList.addAll(it) }
-                    listSearchUser.postValue(responseList)
-                }
-            }
-
-            override fun onFailure(call: Call<SearchUserModel?>, t: Throwable) {
-                Log.d("MainActivity", "error loading from API")
-            }
-        })
     }
 
     fun getListUser(): LiveData<ArrayList<UserModel>>{
         return listUser
-    }
-
-    fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>>{
-        return listSearchUser
     }
 }
