@@ -26,6 +26,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         supportActionBar?.title = "Profile"
+
         userDetail = intent.getParcelableExtra<UserModel>(EXTRA_DATA) as UserModel
         Glide.with(this)
             .load(userDetail.avatar)

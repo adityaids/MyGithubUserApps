@@ -41,7 +41,7 @@ class SearchActivity : AppCompatActivity() {
                 val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
 
                 val intent = Intent(this@SearchActivity, ProfileActivity::class.java).apply {
-                    putExtra(ProfileActivity.EXTRA_DATA, apiUserModel)
+                    putExtra(ProfileActivity.EXTRA_DATA_API, apiUserModel)
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
