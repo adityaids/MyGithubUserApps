@@ -99,7 +99,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_follow -> {
-                if (userDetail.isFollow || userDetailModel.isFollow) {
+                if (userDetail.isFollow) {
                     val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
                     binding.btnFollow.text = resources.getString(R.string.follow)
                     binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))

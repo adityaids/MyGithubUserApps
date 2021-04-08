@@ -67,13 +67,13 @@ class SearchViewModel : ViewModel() {
                         false
                 )
                 Log.d("request Detail", response.body().toString())
+                userDetail.postValue(userDetailModel)
             }
 
             override fun onFailure(call: Call<UserDetailModel>, t: Throwable) {
                 Log.d("request detail error", t.message.toString())
             }
         })
-        userDetail.postValue(userDetailModel)
     }
 
     fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>> {
