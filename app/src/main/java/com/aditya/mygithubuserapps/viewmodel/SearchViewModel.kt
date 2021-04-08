@@ -56,17 +56,16 @@ class SearchViewModel : ViewModel() {
         userCall.enqueue(object : Callback<UserDetailModel> {
             override fun onResponse(call: Call<UserDetailModel>, response: Response<UserDetailModel>) {
                 userDetailModel = UserDetailModel(
-                        response.body()?.login,
-                        response.body()?.company,
-                        response.body()?.publicRepos,
-                        response.body()?.followers,
-                        response.body()?.avatarUrl,
-                        response.body()?.following,
-                        response.body()?.name,
-                        response.body()?.location,
-                        false
+                    response.body()?.login,
+                    response.body()?.name,
+                    response.body()?.avatarUrl,
+                    response.body()?.location,
+                    response.body()?.company,
+                    response.body()?.publicRepos,
+                    response.body()?.followers,
+                    response.body()?.following,
+                    false
                 )
-                Log.d("request Detail", response.body().toString())
                 userDetail.postValue(userDetailModel)
             }
 
@@ -74,6 +73,14 @@ class SearchViewModel : ViewModel() {
                 Log.d("request detail error", t.message.toString())
             }
         })
+    }
+
+    fun getUserFollower(urlFollowers: String){
+
+    }
+
+    fun getUserFollowing(urlFollowing: String){
+
     }
 
     fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>> {

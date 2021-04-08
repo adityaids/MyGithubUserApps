@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.mygithubuserapps.databinding.SearchResultUserBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
-import com.aditya.mygithubuserapps.model.SearchUserModel
 import com.bumptech.glide.Glide
 
 class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {

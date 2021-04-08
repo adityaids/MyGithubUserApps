@@ -1,8 +1,8 @@
 package com.aditya.mygithubuserapps.adapter
 
 import android.view.View
-import com.aditya.mygithubuserapps.model.UserModel
+import com.aditya.mygithubuserapps.model.UserDetailModel
 
 interface OnClickedRecyclerItem {
-    fun onItemClicked(userModel: UserModel, imageView: View)
+    fun onItemClicked(userDetailModel: UserDetailModel, imageView: View)
 }

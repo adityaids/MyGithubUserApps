@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.aditya.mygithubuserapps.databinding.UserItemsHorizontalBinding
+import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.aditya.mygithubuserapps.databinding.UserItemsHorizontalBinding
-import com.aditya.mygithubuserapps.model.UserModel
 
 class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHorizontalViewHolder>() {
 
-    private val listUser = ArrayList<UserModel>()
+    private val listUser = ArrayList<UserDetailModel>()
     private lateinit var onItemClickedRecyclerCallback: OnClickedRecyclerItem
 
-    fun setData(items: ArrayList<UserModel>){
+    fun setData(items: ArrayList<UserDetailModel>){
         listUser.clear()
         listUser.addAll(items)
         notifyDataSetChanged()
@@ -44,17 +44,18 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
 
     inner class UserHorizontalViewHolder(private val binding: UserItemsHorizontalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(userModel: UserModel){
-            val intRes: Int = itemView.context.resources.getIdentifier(userModel.avatar, "drawable", itemView.context.packageName)
+        fun bind(userDetailModel: UserDetailModel){
+            val intRes: Int = itemView.context.resources.getIdentifier(userDetailModel.avatarUrl,
+                "drawable", itemView.context.packageName)
             val avatar: Drawable? = ContextCompat.getDrawable(itemView.context, intRes)
             Glide.with(itemView.context)
                 .load(avatar)
                 .apply(RequestOptions().override(80, 80))
                 .into(binding.imgProfileHorizontal)
-            binding.tvNameHorizontal.text = userModel.name
-            binding.tvUsernameHorizontal.text = userModel.userName
+            binding.tvNameHorizontal.text = userDetailModel.name
+            binding.tvUsernameHorizontal.text = userDetailModel.login
 
-            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(userModel, binding.imgProfileHorizontal) }
+            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(userDetailModel, binding.imgProfileHorizontal) }
         }
     }
 }

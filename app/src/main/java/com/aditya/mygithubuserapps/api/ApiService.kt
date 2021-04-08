@@ -3,8 +3,6 @@ package com.aditya.mygithubuserapps.api
 import com.aditya.mygithubuserapps.BuildConfig
 import com.aditya.mygithubuserapps.model.SearchUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
-import com.aditya.mygithubuserapps.model.UserList
-import com.aditya.mygithubuserapps.model.UserModel
 import retrofit2.Call
 import retrofit2.http.*
 

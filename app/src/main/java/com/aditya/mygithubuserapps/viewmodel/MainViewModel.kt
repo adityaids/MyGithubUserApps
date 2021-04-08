@@ -1,28 +1,16 @@
 package com.aditya.mygithubuserapps.viewmodel
 
 import android.content.Context
-import android.content.res.TypedArray
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aditya.mygithubuserapps.R
-import com.aditya.mygithubuserapps.api.ApiService
-import com.aditya.mygithubuserapps.model.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.aditya.mygithubuserapps.model.UserDetailModel
 
 
 class MainViewModel : ViewModel() {
 
-    companion object {
-        const val urlSearch : String = "https://api.github.com/search/"
-    }
-
-    private val listUser = MutableLiveData<ArrayList<UserModel>>()
+    private val listUser = MutableLiveData<ArrayList<UserDetailModel>>()
     private lateinit var dataName: Array<String>
     private lateinit var dataUserName: Array<String>
     private lateinit var dataAvatar: Array<String>
@@ -45,24 +33,24 @@ class MainViewModel : ViewModel() {
     }
 
     private fun addItem(){
-        val listItem = ArrayList<UserModel>()
+        val listItem = ArrayList<UserDetailModel>()
         for (position in dataName.indices) {
-            val userModel = UserModel(
+            val userDetailModel = UserDetailModel(
                     dataName[position],
                     dataUserName[position],
                     dataAvatar[position],
                     dataLocation[position],
                     dataCompany[position],
-                    dataRepository[position],
-                    dataFollowing[position],
-                    dataFollower[position]
+                    dataRepository[position].toInt(),
+                    dataFollowing[position].toInt(),
+                    dataFollower[position].toInt()
             )
-            listItem.add(userModel)
+            listItem.add(userDetailModel)
         }
         listUser.postValue(listItem)
     }
 
-    fun getListUser(): LiveData<ArrayList<UserModel>>{
+    fun getListUser(): LiveData<ArrayList<UserDetailModel>>{
         return listUser
     }
 }

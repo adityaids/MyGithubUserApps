@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedRecyclerItem
 import com.aditya.mygithubuserapps.databinding.ActivityMainBinding
 import com.aditya.mygithubuserapps.adapter.UserHorizontalAdapter
-import com.aditya.mygithubuserapps.model.UserModel
 import com.aditya.mygithubuserapps.adapter.UserVerticalAdapter
+import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -44,11 +44,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.btnSearch.setOnClickListener(this)
         userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem {
-            override fun onItemClicked(userModel: UserModel, imageView: View) {
+            override fun onItemClicked(userDetailModel: UserDetailModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
 
                 val intent = Intent(this@MainActivity, ProfileActivity::class.java).apply {
-                    putExtra(ProfileActivity.EXTRA_DATA, userModel)
+                    putExtra(ProfileActivity.EXTRA_DATA, userDetailModel)
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -61,11 +61,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         })
 
         userHorizontalAdapter.setOnItemCLickCallback(object: OnClickedRecyclerItem {
-            override fun onItemClicked(userModel: UserModel, imageView: View) {
+            override fun onItemClicked(userDetailModel: UserDetailModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
 
                 val intent = Intent(this@MainActivity, ProfileActivity::class.java).apply {
-                    putExtra(ProfileActivity.EXTRA_DATA, userModel)
+                    putExtra(ProfileActivity.EXTRA_DATA, userDetailModel)
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.rvUserHorizontal.adapter = userHorizontalAdapter
     }
 
-    private fun setDataRecycler(listUser: ArrayList<UserModel>){
+    private fun setDataRecycler(listUser: ArrayList<UserDetailModel>){
         userHorizontalAdapter.setData(listUser)
         userVerticalAdapter.setData(listUser)
     }
