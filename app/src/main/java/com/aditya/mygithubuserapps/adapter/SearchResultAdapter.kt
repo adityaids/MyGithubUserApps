@@ -46,7 +46,8 @@ class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResult
             Glide.with(itemView.context)
                     .load(apiUserModel.avatarUrl)
                     .into(binding.imgProfileSearch)
-            binding.tvNameSeach.text = apiUserModel.login
+            binding.tvNameSearch.text = apiUserModel.login
+            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(apiUserModel) }
         }
     }
 }

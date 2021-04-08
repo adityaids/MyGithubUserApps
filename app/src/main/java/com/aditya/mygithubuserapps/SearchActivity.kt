@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Pair
 import android.view.View
 import android.widget.LinearLayout
@@ -16,6 +17,7 @@ import com.aditya.mygithubuserapps.adapter.OnClickedRecyclerItem
 import com.aditya.mygithubuserapps.adapter.SearchResultAdapter
 import com.aditya.mygithubuserapps.databinding.ActivitySearchBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
+import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.model.UserModel
 import com.aditya.mygithubuserapps.viewmodel.SearchViewModel
 
@@ -37,21 +39,19 @@ class SearchActivity : AppCompatActivity() {
         binding.rvSearch.adapter = searchResultAdapter
 
         searchResultAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
-            override fun onItemClicked(apiUserModel: ApiUserModel, imageView: View) {
-                val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
-
-                val intent = Intent(this@SearchActivity, ProfileActivity::class.java).apply {
-                    putExtra(ProfileActivity.EXTRA_DATA_API, apiUserModel)
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    val activityOption = ActivityOptions.makeSceneTransitionAnimation(this@SearchActivity, imagePair)
-                    startActivity(intent, activityOption.toBundle())
-                } else {
-                    startActivity(intent)
-                }
+            override fun onItemClicked(apiUserModel: ApiUserModel) {
+                searchViewModel.getDetailUser(apiUserModel.url)
             }
         })
+        searchViewModel.getUserDetail().observe(this){ result->
+            Log.d("observe userDetail", result.name.toString())
+            if (result != null) {
+                val intent = Intent(this@SearchActivity, ProfileActivity::class.java).apply {
+                    putExtra(ProfileActivity.EXTRA_DATA_API, result)
+                }
+                startActivity(intent)
+            }
+        }
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

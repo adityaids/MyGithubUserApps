@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.aditya.mygithubuserapps.api.ApiService
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.SearchUserModel
+import com.aditya.mygithubuserapps.model.UserDetailModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,9 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SearchViewModel : ViewModel() {
     companion object {
         const val urlSearch : String = "https://api.github.com/search/"
+        const val urlDetailUser: String = "https://api.github.com/users/"
     }
 
     private val listSearchUser = MutableLiveData<ArrayList<ApiUserModel>>()
+    private val userDetail = MutableLiveData<UserDetailModel>()
 
     fun setQuerySarch(q: String){
         val retrofit: Retrofit = Retrofit.Builder()
@@ -42,7 +45,41 @@ class SearchViewModel : ViewModel() {
         })
     }
 
+    fun getDetailUser(userName: String) {
+        var userDetailModel = UserDetailModel()
+        val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl(urlDetailUser)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val service = retrofit.create(ApiService::class.java)
+        val userCall = service.getUserDetail(userName)
+        userCall.enqueue(object : Callback<UserDetailModel> {
+            override fun onResponse(call: Call<UserDetailModel>, response: Response<UserDetailModel>) {
+                userDetailModel = UserDetailModel(
+                        response.body()?.login,
+                        response.body()?.company,
+                        response.body()?.publicRepos,
+                        response.body()?.followers,
+                        response.body()?.avatarUrl,
+                        response.body()?.following,
+                        response.body()?.name,
+                        response.body()?.location,
+                        false
+                )
+                Log.d("request Detail", response.body().toString())
+            }
+
+            override fun onFailure(call: Call<UserDetailModel>, t: Throwable) {
+                Log.d("request detail error", t.message.toString())
+            }
+        })
+        userDetail.postValue(userDetailModel)
+    }
+
     fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>> {
         return listSearchUser
+    }
+    fun getUserDetail(): LiveData<UserDetailModel>{
+        return userDetail
     }
 }

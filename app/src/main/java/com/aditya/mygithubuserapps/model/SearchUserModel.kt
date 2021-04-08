@@ -16,7 +16,7 @@ data class ApiUserModel(
 	val login: String? = null,
 
 	@field:SerializedName("url")
-	val url: String? = null,
+	val url: String,
 
 	@field:SerializedName("avatar_url")
 	val avatarUrl: String? = null

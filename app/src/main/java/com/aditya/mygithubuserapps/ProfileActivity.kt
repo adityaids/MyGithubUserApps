@@ -2,10 +2,13 @@ package com.aditya.mygithubuserapps
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.aditya.mygithubuserapps.databinding.ActivityProfileBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
@@ -32,10 +35,10 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         supportActionBar?.title = "Profile"
+        profileViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ProfileViewModel::class.java)
 
         if (intent.hasExtra(EXTRA_DATA)) {
             userDetail = intent.getParcelableExtra<UserModel>(EXTRA_DATA) as UserModel
-
             Glide.with(this)
                     .load(userDetail.avatar)
                     .into(binding.imgDetailProfile)
@@ -62,8 +65,31 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
         } else {
-            userApi = intent.getParcelableExtra<ApiUserModel>(EXTRA_DATA_API) as ApiUserModel
-
+            userDetailModel = intent.getParcelableExtra<ApiUserModel>(EXTRA_DATA_API) as UserDetailModel
+            Glide.with(this)
+                    .load(userDetailModel.avatarUrl)
+                    .into(binding.imgDetailProfile)
+            binding.tvDetailUsername.text = userDetailModel.login?:"null"
+            binding.tvCompany.text = userDetailModel.company?:"-"
+            binding.tvDetailName.text = userDetailModel.name?:"-"
+            binding.tvLocation.text = userDetailModel.location?:"-"
+            binding.tvRepository.text = userDetailModel.publicRepos?.toString()?: "0"
+            binding.tvDetailFollower.text = userDetailModel.followers?.toString()?: "0"
+            binding.tvDetailFollowing.text = userDetailModel.following?.toString()?: "0"
+            Log.d("hasExtra search", userDetailModel.name.toString())
+            if (userDetailModel.isFollow) {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
+                binding.btnFollow.setTextColor(ContextCompat.getColor(this,
+                        R.color.text_secondary_color
+                ))
+                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+                binding.btnFollow.text = resources.getString(R.string.following)
+            } else {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
+                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+                binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
+                binding.btnFollow.text = resources.getString(R.string.follow)
+            }
         }
 
         binding.btnFollow.setOnClickListener(this)
@@ -73,7 +99,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_follow -> {
-                if (userDetail.isFollow) {
+                if (userDetail.isFollow || userDetailModel.isFollow) {
                     val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
                     binding.btnFollow.text = resources.getString(R.string.follow)
                     binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -89,6 +115,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                     binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                     Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
                     userDetail.isFollow = true
+                    userDetailModel.isFollow = true
                 }
             }
             R.id.btn_share -> {

@@ -4,5 +4,5 @@ import android.view.View
 import com.aditya.mygithubuserapps.model.ApiUserModel
 
 interface OnClickedApiRecycler {
-    fun onItemClicked(apiUserModel: ApiUserModel, imageView: View)
+    fun onItemClicked(apiUserModel: ApiUserModel)
 }
