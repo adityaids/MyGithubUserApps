@@ -46,7 +46,7 @@ class SearchViewModel : ViewModel() {
     }
 
     fun getDetailUser(userName: String) {
-        var userDetailModel = UserDetailModel()
+        var userDetailModel: UserDetailModel
         val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl(urlDetailUser)
                 .addConverterFactory(GsonConverterFactory.create())

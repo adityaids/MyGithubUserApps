@@ -1,5 +1,6 @@
 package com.aditya.mygithubuserapps.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -46,10 +47,12 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
     inner class UserVerticalViewHolder(private val binding : UserItemsBinding)
         :RecyclerView.ViewHolder(binding.root) {
         fun bind(userModel: UserModel){
+            val intRes: Int = itemView.context.resources.getIdentifier(userModel.avatar, "drawable", itemView.context.packageName)
+            val avatar: Drawable? = ContextCompat.getDrawable(itemView.context, intRes)
             binding.tvName.text = userModel.name
             binding.tvUsername.text = userModel.userName
             Glide.with(itemView.context)
-                .load(userModel.avatar)
+                .load(avatar)
                 .apply(RequestOptions().override(80, 80))
                 .into(binding.imgProfile)
             binding.btnFollow.setOnClickListener {

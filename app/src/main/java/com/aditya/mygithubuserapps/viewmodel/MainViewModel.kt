@@ -25,7 +25,7 @@ class MainViewModel : ViewModel() {
     private val listUser = MutableLiveData<ArrayList<UserModel>>()
     private lateinit var dataName: Array<String>
     private lateinit var dataUserName: Array<String>
-    private lateinit var dataAvatar: TypedArray
+    private lateinit var dataAvatar: Array<String>
     private lateinit var dataCompany: Array<String>
     private lateinit var dataLocation: Array<String>
     private lateinit var dataRepository: Array<String>
@@ -35,7 +35,7 @@ class MainViewModel : ViewModel() {
     fun prepare(context: Context){
         dataName = context.resources.getStringArray(R.array.name)
         dataUserName = context.resources.getStringArray(R.array.username)
-        dataAvatar = context.resources.obtainTypedArray(R.array.avatar)
+        dataAvatar = context.resources.getStringArray(R.array.avatar)
         dataCompany = context.resources.getStringArray(R.array.company)
         dataLocation = context.resources.getStringArray(R.array.location)
         dataRepository = context.resources.getStringArray(R.array.repository)
@@ -50,7 +50,7 @@ class MainViewModel : ViewModel() {
             val userModel = UserModel(
                     dataName[position],
                     dataUserName[position],
-                    dataAvatar.getResourceId(position, -1),
+                    dataAvatar[position],
                     dataLocation[position],
                     dataCompany[position],
                     dataRepository[position],

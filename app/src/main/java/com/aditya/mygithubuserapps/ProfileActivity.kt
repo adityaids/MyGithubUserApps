@@ -1,6 +1,7 @@
 package com.aditya.mygithubuserapps
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,8 +40,10 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         if (intent.hasExtra(EXTRA_DATA)) {
             userDetail = intent.getParcelableExtra<UserModel>(EXTRA_DATA) as UserModel
+            val intRes: Int = resources.getIdentifier(userDetail.avatar, "drawable", packageName)
+            val avatar: Drawable? = ContextCompat.getDrawable(this, intRes)
             Glide.with(this)
-                    .load(userDetail.avatar)
+                    .load(avatar)
                     .into(binding.imgDetailProfile)
             binding.tvDetailName.text = if (userDetail.name != null) userDetail.name else "-"
             binding.tvDetailUsername.text = if (userDetail.userName != null) userDetail.userName else "-"
@@ -65,7 +68,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
         } else {
-            userDetailModel = intent.getParcelableExtra<ApiUserModel>(EXTRA_DATA_API) as UserDetailModel
+            userDetailModel = intent.getParcelableExtra<UserDetailModel>(EXTRA_DATA_API) as UserDetailModel
             Glide.with(this)
                     .load(userDetailModel.avatarUrl)
                     .into(binding.imgDetailProfile)

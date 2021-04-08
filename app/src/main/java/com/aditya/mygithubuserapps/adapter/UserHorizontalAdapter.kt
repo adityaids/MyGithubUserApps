@@ -1,7 +1,9 @@
 package com.aditya.mygithubuserapps.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -43,8 +45,10 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
     inner class UserHorizontalViewHolder(private val binding: UserItemsHorizontalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userModel: UserModel){
+            val intRes: Int = itemView.context.resources.getIdentifier(userModel.avatar, "drawable", itemView.context.packageName)
+            val avatar: Drawable? = ContextCompat.getDrawable(itemView.context, intRes)
             Glide.with(itemView.context)
-                .load(userModel.avatar)
+                .load(avatar)
                 .apply(RequestOptions().override(80, 80))
                 .into(binding.imgProfileHorizontal)
             binding.tvNameHorizontal.text = userModel.name
