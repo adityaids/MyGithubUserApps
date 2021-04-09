@@ -70,7 +70,7 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
                 }
             }
             itemView.setOnClickListener {
-                onItemClickedRecyclerCallback.onItemClicked(userDetailModel, binding.imgProfile, listUser)
+                onItemClickedRecyclerCallback.onItemClicked(userDetailModel, binding.imgProfile)
             }
         }
     }

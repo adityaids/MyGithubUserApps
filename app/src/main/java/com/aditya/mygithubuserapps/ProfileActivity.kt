@@ -9,14 +9,11 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.aditya.mygithubuserapps.databinding.ActivityProfileBinding
-import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.ProfileViewModel
 import com.aditya.mygithubuserapps.viewpager.ViewPagerAdapter
 import com.bumptech.glide.Glide
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ProfileActivity : AppCompatActivity(), View.OnClickListener {
@@ -25,7 +22,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         const val EXTRA_IMAGE_TRANSITION: String = "extra_image_transition"
         const val EXTRA_DATA: String = "extra_data"
         const val EXTRA_DATA_API: String = "extra_data_api"
-        const val EXTRA_DUMMY_FOLLOW: String = "extra_dummy_follow"
         @StringRes
         private val TAB_TITLES = intArrayOf(
                 R.string.follower,
