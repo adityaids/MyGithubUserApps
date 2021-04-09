@@ -55,7 +55,7 @@ class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHor
             binding.tvNameHorizontal.text = userDetailModel.name
             binding.tvUsernameHorizontal.text = userDetailModel.login
 
-            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(userDetailModel, binding.imgProfileHorizontal) }
+            itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(userDetailModel, binding.imgProfileHorizontal, listUser) }
         }
     }
 }

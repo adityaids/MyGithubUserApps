@@ -75,14 +75,6 @@ class SearchViewModel : ViewModel() {
         })
     }
 
-    fun getUserFollower(urlFollowers: String){
-
-    }
-
-    fun getUserFollowing(urlFollowing: String){
-
-    }
-
     fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>> {
         return listSearchUser
     }

@@ -5,13 +5,19 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.aditya.mygithubuserapps.databinding.ActivityProfileBinding
+import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.ProfileViewModel
+import com.aditya.mygithubuserapps.viewpager.ViewPagerAdapter
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -19,6 +25,12 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         const val EXTRA_IMAGE_TRANSITION: String = "extra_image_transition"
         const val EXTRA_DATA: String = "extra_data"
         const val EXTRA_DATA_API: String = "extra_data_api"
+        const val EXTRA_DUMMY_FOLLOW: String = "extra_dummy_follow"
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+                R.string.follower,
+                R.string.following
+        )
     }
     private lateinit var userDetailModel: UserDetailModel
     private lateinit var binding: ActivityProfileBinding
@@ -34,6 +46,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         if (intent.hasExtra(EXTRA_DATA)) {
             userDetailModel = intent.getParcelableExtra<UserDetailModel>(EXTRA_DATA) as UserDetailModel
+            init(userDetailModel.login?: "null")
             val intRes: Int = resources.getIdentifier(userDetailModel.avatarUrl, "drawable", packageName)
             val avatar: Drawable? = ContextCompat.getDrawable(this, intRes)
             Glide.with(this)
@@ -43,7 +56,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             binding.tvCompany.text = userDetailModel.company?:"-"
             binding.tvDetailName.text = userDetailModel.name?:"-"
             binding.tvLocation.text = userDetailModel.location?:"-"
-            binding.tvRepository.text = userDetailModel.publicRepos?.toString()?: "0"
+            binding.tvDetailRepo.text = userDetailModel.publicRepos?.toString()?: "0"
             binding.tvDetailFollower.text = userDetailModel.followers?.toString()?: "0"
             binding.tvDetailFollowing.text = userDetailModel.following?.toString()?: "0"
 
@@ -69,7 +82,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             binding.tvCompany.text = userDetailModel.company?:"-"
             binding.tvDetailName.text = userDetailModel.name?:"-"
             binding.tvLocation.text = userDetailModel.location?:"-"
-            binding.tvRepository.text = userDetailModel.publicRepos?.toString()?: "0"
+            binding.tvDetailRepo.text = userDetailModel.publicRepos?.toString()?: "0"
             binding.tvDetailFollower.text = userDetailModel.followers?.toString()?: "0"
             binding.tvDetailFollowing.text = userDetailModel.following?.toString()?: "0"
 
@@ -87,7 +100,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
         }
-
         binding.btnFollow.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
     }
@@ -123,8 +135,17 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 val shareIntent = Intent.createChooser(sendIntent, "Share")
                 startActivity(shareIntent)
-
             }
         }
+    }
+
+    private fun init(userName: String){
+        val pagerAdapter = ViewPagerAdapter(this)
+        pagerAdapter.setUserName(userName)
+        binding.viewPager.adapter = pagerAdapter
+        TabLayoutMediator(binding.tabHost, binding.viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+        supportActionBar?.elevation = 0f
     }
 }

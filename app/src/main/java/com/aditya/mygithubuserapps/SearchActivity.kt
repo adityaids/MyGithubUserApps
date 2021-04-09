@@ -2,14 +2,13 @@ package com.aditya.mygithubuserapps
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
-import com.aditya.mygithubuserapps.adapter.SearchResultAdapter
+import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.ActivitySearchBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.viewmodel.SearchViewModel
@@ -18,7 +17,7 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
     private lateinit var searchViewModel: SearchViewModel
-    private lateinit var searchResultAdapter: SearchResultAdapter
+    private lateinit var userAdapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +26,12 @@ class SearchActivity : AppCompatActivity() {
 
         actionBar?.title = "Search"
         searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
-        searchResultAdapter = SearchResultAdapter()
+        userAdapter = UserAdapter()
         binding.rvSearch.layoutManager = LinearLayoutManager(this)
         binding.rvSearch.setHasFixedSize(true)
-        binding.rvSearch.adapter = searchResultAdapter
+        binding.rvSearch.adapter = userAdapter
 
-        searchResultAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
+        userAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 searchViewModel.getDetailUser(apiUserModel.url)
             }
@@ -63,7 +62,7 @@ class SearchActivity : AppCompatActivity() {
         searchViewModel.getListSearchUser().observe(this){result->
             if (result != null) {
                 binding.searchingLoading.visibility = View.GONE
-                searchResultAdapter.setData(result)
+                userAdapter.setData(result)
             } else {
                 binding.searchingLoading.visibility = View.GONE
                 binding.tvSearchNotif.visibility = View.VISIBLE

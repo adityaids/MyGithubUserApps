@@ -7,7 +7,7 @@ import com.aditya.mygithubuserapps.databinding.SearchResultUserBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.bumptech.glide.Glide
 
-class SearchResultAdapter: RecyclerView.Adapter<SearchResultAdapter.SearchResultViewHolder>() {
+class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
 
     private val listUser = ArrayList<ApiUserModel>()
     private lateinit var onItemClickedRecyclerCallback: OnClickedApiRecycler
