@@ -31,7 +31,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     }
     private lateinit var userDetailModel: UserDetailModel
     private lateinit var binding: ActivityProfileBinding
-    private lateinit var profileViewModel: ProfileViewModel
     private lateinit var pagerAdapter: ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +39,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         supportActionBar?.title = "Profile"
-        profileViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ProfileViewModel::class.java)
-        init()
 
         if (intent.hasExtra(EXTRA_DATA)) {
             userDetailModel = intent.getParcelableExtra<UserDetailModel>(EXTRA_DATA) as UserDetailModel
@@ -73,8 +70,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             }
         } else {
             userDetailModel = intent.getParcelableExtra<UserDetailModel>(EXTRA_DATA_API) as UserDetailModel
-            profileViewModel.getFollower(userDetailModel.login!!)
-            profileViewModel.getFollowing(userDetailModel.login!!)
             Glide.with(this)
                     .load(userDetailModel.avatarUrl)
                     .into(binding.imgDetailProfile)
@@ -100,15 +95,9 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
         }
+        userDetailModel.login?.let { init(it) }
         binding.btnFollow.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
-
-        profileViewModel.getFollowerList().observe(this){listFollowers->
-            setFollowers(listFollowers)
-        }
-        profileViewModel.getFollowingList().observe(this){listFollowing->
-            setFollowing(listFollowing)
-        }
     }
 
     override fun onClick(v: View?) {
@@ -146,20 +135,13 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun init(){
+    private fun init(userName: String){
         pagerAdapter = ViewPagerAdapter(this)
+        pagerAdapter.setUserName(userName)
         binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(binding.tabHost, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
         supportActionBar?.elevation = 0f
-    }
-
-    private fun setFollowers(followList: ArrayList<ApiUserModel>){
-        pagerAdapter.setUserList(followList)
-    }
-
-    private fun setFollowing(followList: ArrayList<ApiUserModel>){
-        pagerAdapter.setUserList(followList)
     }
 }
