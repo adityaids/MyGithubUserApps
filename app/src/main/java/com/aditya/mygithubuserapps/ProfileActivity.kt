@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.aditya.mygithubuserapps.databinding.ActivityProfileBinding
+import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.ProfileViewModel
 import com.aditya.mygithubuserapps.viewpager.ViewPagerAdapter
@@ -31,6 +32,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var userDetailModel: UserDetailModel
     private lateinit var binding: ActivityProfileBinding
     private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var pagerAdapter: ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +41,10 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         supportActionBar?.title = "Profile"
         profileViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ProfileViewModel::class.java)
+        init()
 
         if (intent.hasExtra(EXTRA_DATA)) {
             userDetailModel = intent.getParcelableExtra<UserDetailModel>(EXTRA_DATA) as UserDetailModel
-            init(userDetailModel.login?: "null")
             val intRes: Int = resources.getIdentifier(userDetailModel.avatarUrl, "drawable", packageName)
             val avatar: Drawable? = ContextCompat.getDrawable(this, intRes)
             Glide.with(this)
@@ -71,6 +73,8 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             }
         } else {
             userDetailModel = intent.getParcelableExtra<UserDetailModel>(EXTRA_DATA_API) as UserDetailModel
+            profileViewModel.getFollower(userDetailModel.login!!)
+            profileViewModel.getFollowing(userDetailModel.login!!)
             Glide.with(this)
                     .load(userDetailModel.avatarUrl)
                     .into(binding.imgDetailProfile)
@@ -98,6 +102,13 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         }
         binding.btnFollow.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
+
+        profileViewModel.getFollowerList().observe(this){listFollowers->
+            setFollowers(listFollowers)
+        }
+        profileViewModel.getFollowingList().observe(this){listFollowing->
+            setFollowing(listFollowing)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -135,13 +146,20 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun init(userName: String){
-        val pagerAdapter = ViewPagerAdapter(this)
-        pagerAdapter.setUserName(userName)
+    private fun init(){
+        pagerAdapter = ViewPagerAdapter(this)
         binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(binding.tabHost, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
         supportActionBar?.elevation = 0f
+    }
+
+    private fun setFollowers(followList: ArrayList<ApiUserModel>){
+        pagerAdapter.setUserList(followList)
+    }
+
+    private fun setFollowing(followList: ArrayList<ApiUserModel>){
+        pagerAdapter.setUserList(followList)
     }
 }

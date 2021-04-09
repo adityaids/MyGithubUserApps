@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.FragmentFollowBinding
+import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.viewmodel.FollowViewModel
 
 class FollowFragment : Fragment() {
@@ -14,10 +17,10 @@ class FollowFragment : Fragment() {
     companion object {
         private const val FOLLOW_ARG = "follow_arg"
         @JvmStatic
-        fun newInstance(userName: String) =
+        fun newInstance(followList: ArrayList<ApiUserModel>) =
                 FollowFragment().apply {
                     arguments = Bundle().apply {
-                        putString(FOLLOW_ARG, userName)
+                        putParcelableArrayList(FOLLOW_ARG, followList)
                     }
                 }
     }
@@ -36,19 +39,13 @@ class FollowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userName = arguments?.getString(FOLLOW_ARG)
-        if (userName != "null") {
-            if (userName != null) {
-                followViewModel.getFollower(userName)
-                followViewModel.getFollowing(userName)
-            }
-        }
-        followViewModel.getFollowerList().observe(viewLifecycleOwner){listFollower->
-
-        }
-
-        followViewModel.getFollowingList().observe(viewLifecycleOwner){listFollowing->
-
+        val userList = arguments?.getParcelableArrayList<ApiUserModel>(FOLLOW_ARG)
+        val userAdapter = UserAdapter()
+        binding.rvFollow.layoutManager = LinearLayoutManager(view.context)
+        binding.rvFollow.setHasFixedSize(true)
+        binding.rvFollow.adapter = userAdapter
+        if (userList != null) {
+            userAdapter.setData(userList)
         }
     }
 
