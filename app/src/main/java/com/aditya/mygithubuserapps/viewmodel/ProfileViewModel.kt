@@ -1,12 +1,12 @@
 package com.aditya.mygithubuserapps.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aditya.mygithubuserapps.api.ApiService
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.SearchUserModel
-import com.aditya.mygithubuserapps.model.UserDetailModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,13 +39,14 @@ class ProfileViewModel : ViewModel() {
         val userListCall = service.getFollower(userName)
         userListCall.enqueue(object : Callback<SearchUserModel?>{
             override fun onResponse(call: Call<SearchUserModel?>, response: Response<SearchUserModel?>) {
-                TODO("Not yet implemented")
+                val responseList = ArrayList<ApiUserModel>()
+                response.body()?.items?.let { responseList.addAll(it) }
+                listFollower.postValue(responseList)
             }
 
             override fun onFailure(call: Call<SearchUserModel?>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("requestFollower", t.message.toString())
             }
-
         })
     }
 
@@ -59,11 +60,13 @@ class ProfileViewModel : ViewModel() {
         val userListCall = service.getFollowing(userName)
         userListCall.enqueue(object : Callback<SearchUserModel?>{
             override fun onResponse(call: Call<SearchUserModel?>, response: Response<SearchUserModel?>) {
-                TODO("Not yet implemented")
+                val responseList = ArrayList<ApiUserModel>()
+                response.body()?.items?.let { responseList.addAll(it) }
+                listFollowing.postValue(responseList)
             }
 
             override fun onFailure(call: Call<SearchUserModel?>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("requestFollower", t.message.toString())
             }
 
         })
