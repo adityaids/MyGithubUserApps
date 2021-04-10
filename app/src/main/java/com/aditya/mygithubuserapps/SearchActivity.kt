@@ -33,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
 
         userAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
             override fun onItemClicked(apiUserModel: ApiUserModel) {
-                searchViewModel.getDetailUser(apiUserModel.url)
+                searchViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
             }
         })
         searchViewModel.getUserDetail().observe(this){ result->

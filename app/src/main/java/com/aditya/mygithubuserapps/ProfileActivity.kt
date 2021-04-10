@@ -56,15 +56,11 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             binding.tvDetailFollowing.text = userDetailModel.following?.toString()?: "0"
 
             if (userDetailModel.isFollow) {
-                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
                 binding.btnFollow.setTextColor(ContextCompat.getColor(this,
                         R.color.text_secondary_color
                 ))
-                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                 binding.btnFollow.text = resources.getString(R.string.following)
             } else {
-                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
-                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                 binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
@@ -82,15 +78,11 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             binding.tvDetailFollowing.text = userDetailModel.following?.toString()?: "0"
 
             if (userDetailModel.isFollow) {
-                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
                 binding.btnFollow.setTextColor(ContextCompat.getColor(this,
                         R.color.text_secondary_color
                 ))
-                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                 binding.btnFollow.text = resources.getString(R.string.following)
             } else {
-                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
-                binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                 binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
@@ -104,21 +96,16 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         when(v?.id){
             R.id.btn_follow -> {
                 if (userDetailModel.isFollow) {
-                    val drawable = ContextCompat.getDrawable(this, R.drawable.ic_add)
                     binding.btnFollow.text = resources.getString(R.string.follow)
                     binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
-                    binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                     Toast.makeText(this, "Unfollow", Toast.LENGTH_LONG).show()
                     userDetailModel.isFollow = false
                 } else {
-                    val drawable = ContextCompat.getDrawable(this, R.drawable.ic_check)
                     binding.btnFollow.text = resources.getString(R.string.following)
                     binding.btnFollow.setTextColor(ContextCompat.getColor(this,
                         R.color.text_secondary_color
                     ))
-                    binding.btnFollow.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
                     Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
-                    userDetailModel.isFollow = true
                     userDetailModel.isFollow = true
                 }
             }

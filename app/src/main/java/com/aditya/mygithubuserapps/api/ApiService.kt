@@ -1,6 +1,7 @@
 package com.aditya.mygithubuserapps.api
 
 import com.aditya.mygithubuserapps.BuildConfig
+import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.SearchUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import retrofit2.Call
@@ -18,9 +19,9 @@ interface ApiService {
 
     @GET("{username}/followers")
     @Headers("Authorization: token<" + BuildConfig.API_KEY + ">")
-    fun getFollower(@Path("username") username: String): Call<SearchUserModel>
+    fun getFollower(@Path("username") username: String): Call<ArrayList<ApiUserModel>>
 
     @GET("{username}/following")
     @Headers("Authorization: token<" + BuildConfig.API_KEY + ">")
-    fun getFollowing(@Path("username") username: String): Call<SearchUserModel>
+    fun getFollowing(@Path("username") username: String): Call<ArrayList<ApiUserModel>>
 }

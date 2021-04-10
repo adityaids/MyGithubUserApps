@@ -45,7 +45,7 @@ class SearchViewModel : ViewModel() {
         })
     }
 
-    fun getDetailUser(userName: String) {
+    fun getDetailUser(userName: String, isFollow: Boolean) {
         var userDetailModel: UserDetailModel
         val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl(urlDetailUser)
@@ -64,7 +64,7 @@ class SearchViewModel : ViewModel() {
                     response.body()?.publicRepos,
                     response.body()?.followers,
                     response.body()?.following,
-                    false
+                    isFollow
                 )
                 userDetail.postValue(userDetailModel)
             }

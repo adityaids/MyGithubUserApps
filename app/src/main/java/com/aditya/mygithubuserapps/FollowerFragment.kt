@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.UserAdapter
-import com.aditya.mygithubuserapps.databinding.FragmentFollowBinding
+import com.aditya.mygithubuserapps.databinding.FragmentFollowerBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.viewmodel.FollowerViewModel
-import kotlin.math.log
 
 class FollowerFragment : Fragment() {
 
@@ -26,15 +25,19 @@ class FollowerFragment : Fragment() {
                     }
                 }
     }
-    private var mBinding: FragmentFollowBinding? = null
+    private var mBinding: FragmentFollowerBinding? = null
     private val binding get() = mBinding!!
     private lateinit var followerViewModel: FollowerViewModel
+    private val userAdapter = UserAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mBinding = FragmentFollowBinding.inflate(inflater, container, false)
+        mBinding = FragmentFollowerBinding.inflate(inflater, container, false)
+        binding.rvFollow.layoutManager = LinearLayoutManager(context)
+        binding.rvFollow.setHasFixedSize(true)
+        binding.rvFollow.adapter = userAdapter
         return binding.root
     }
 
@@ -48,10 +51,6 @@ class FollowerFragment : Fragment() {
         }
         followerViewModel.getFollowerList().observe(viewLifecycleOwner){result->
             Log.d("observer follower", result.get(0).toString())
-            val userAdapter = UserAdapter()
-            binding.rvFollow.layoutManager = LinearLayoutManager(view.context)
-            binding.rvFollow.setHasFixedSize(true)
-            binding.rvFollow.adapter = userAdapter
             userAdapter.setData(result)
             binding.loadingFollower.visibility = View.GONE
         }

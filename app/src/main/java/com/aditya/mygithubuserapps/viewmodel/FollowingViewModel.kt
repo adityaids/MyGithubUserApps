@@ -28,15 +28,15 @@ class FollowingViewModel: ViewModel() {
             .build()
         val service = retrofit.create(ApiService::class.java)
         val userListCall = service.getFollowing(userName)
-        userListCall.enqueue(object : Callback<SearchUserModel?> {
-            override fun onResponse(call: Call<SearchUserModel?>, response: Response<SearchUserModel?>) {
+        userListCall.enqueue(object : Callback<ArrayList<ApiUserModel>?> {
+            override fun onResponse(call: Call<ArrayList<ApiUserModel>?>, response: Response<ArrayList<ApiUserModel>?>) {
                 val responseList = ArrayList<ApiUserModel>()
-                response.body()?.items?.let { responseList.addAll(it) }
+                response.body()?.let { responseList.addAll(it) }
                 listFollowing.postValue(responseList)
+                Log.d("reqAPIFolowing", response?.body().toString())
             }
-
-            override fun onFailure(call: Call<SearchUserModel?>, t: Throwable) {
-                Log.d("requestFollower", t.message.toString())
+            override fun onFailure(call: Call<ArrayList<ApiUserModel>?>, t: Throwable) {
+                TODO("Not yet implemented")
             }
         })
     }
