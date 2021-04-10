@@ -1,5 +1,6 @@
 package com.aditya.mygithubuserapps
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
 import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.FragmentFollowerBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
@@ -49,8 +51,27 @@ class FollowerFragment : Fragment() {
             if (!userName.equals("dummy")) {
                 followerViewModel.getFollower(userName)
                 followerViewModel.getFollowerList().observe(viewLifecycleOwner){result->
-                    userAdapter.setData(result)
-                    binding.loadingFollower.visibility = View.GONE
+                    if (result != null) {
+                        userAdapter.setData(result)
+                        binding.loadingFollower.visibility = View.GONE
+                    } else {
+                        binding.loadingFollower.visibility = View.GONE
+                        binding.rvFollow.visibility = View.GONE
+                        binding.tvFollowerNotif.visibility = View.VISIBLE
+                    }
+                }
+                userAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
+                    override fun onItemClicked(apiUserModel: ApiUserModel) {
+                        followerViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
+                    }
+                })
+                followerViewModel.getUserDetail().observe(viewLifecycleOwner){result->
+                    if (result != null) {
+                        val intent = Intent(context, ProfileActivity::class.java).apply {
+                            putExtra(ProfileActivity.EXTRA_DATA_API, result)
+                        }
+                        startActivity(intent)
+                    }
                 }
             } else {
                 Log.d("userName dummy", userName)
