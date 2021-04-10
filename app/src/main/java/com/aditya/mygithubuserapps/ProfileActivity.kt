@@ -64,6 +64,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
+            init("dummy")
         } else {
             userDetailModel = intent.getParcelableExtra<UserDetailModel>(EXTRA_DATA_API) as UserDetailModel
             Glide.with(this)
@@ -86,8 +87,8 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 binding.btnFollow.setTextColor(ContextCompat.getColor(this, R.color.white))
                 binding.btnFollow.text = resources.getString(R.string.follow)
             }
+            userDetailModel.login?.let { init(it) }
         }
-        userDetailModel.login?.let { init(it) }
         binding.btnFollow.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
     }

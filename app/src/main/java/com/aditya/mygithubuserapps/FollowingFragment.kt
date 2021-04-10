@@ -48,13 +48,18 @@ class FollowingFragment : Fragment() {
         val userName = arguments?.getString(NAME_ARG)
         followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FollowingViewModel::class.java)
         if (userName != null) {
-            followingViewModel.getFollowing(userName)
-            Log.d("username follower", userName)
-        }
-        followingViewModel.getFollowingList().observe(viewLifecycleOwner){result->
-            Log.d("observer follower", result[0].toString())
-            userAdapter.setData(result)
-            binding.loadingFollower.visibility = View.GONE
+            if (!userName.equals("dummy")) {
+                followingViewModel.getFollowing(userName)
+                followingViewModel.getFollowingList().observe(viewLifecycleOwner){result->
+                    userAdapter.setData(result)
+                    binding.loadingFollowing.visibility = View.GONE
+                }
+            } else {
+                Log.d("userName dummy", userName)
+                binding.loadingFollowing.visibility = View.GONE
+                binding.rvFollow.visibility = View.GONE
+                binding.tvFollowingNotif.visibility = View.VISIBLE
+            }
         }
     }
 

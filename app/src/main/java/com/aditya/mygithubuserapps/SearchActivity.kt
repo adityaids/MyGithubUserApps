@@ -2,6 +2,7 @@ package com.aditya.mygithubuserapps
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,9 @@ import com.aditya.mygithubuserapps.viewmodel.SearchViewModel
 
 class SearchActivity : AppCompatActivity() {
 
+    companion object{
+        const val STATE: String = "state"
+    }
     private lateinit var binding: ActivitySearchBinding
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var userAdapter: UserAdapter
@@ -25,6 +29,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         actionBar?.title = "Search"
+        binding.searchView.setQuery(savedInstanceState?.getString(STATE)?:"", false)
         searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
         userAdapter = UserAdapter()
         binding.rvSearch.layoutManager = LinearLayoutManager(this)
@@ -68,5 +73,10 @@ class SearchActivity : AppCompatActivity() {
                 binding.tvSearchNotif.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putString(STATE, binding.searchView.query.toString())
     }
 }

@@ -10,9 +10,11 @@
     <string name="discover">Discover</string>
     <string name="intro">Discover Developer around the world, learn how they build various project in various technology</string>
     <string name="search">Search</string>
-    <string name="lets_searching">there is no result on your seraching lets searching another one</string>
+    <string name="lets_searching">there is no result on your serching lets searching another one</string>
     <string name="repoitory">repoitory</string>
     <string name="repository">repository</string>
+    <string name="no_follow">No One Is Follow</string>
+    <string name="no_following">No One Is Following</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
@@ -117,6 +119,4 @@
         <item>user9</item>
         <item>user10</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

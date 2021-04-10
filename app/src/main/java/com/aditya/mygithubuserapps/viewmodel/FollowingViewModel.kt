@@ -33,7 +33,7 @@ class FollowingViewModel: ViewModel() {
                 val responseList = ArrayList<ApiUserModel>()
                 response.body()?.let { responseList.addAll(it) }
                 listFollowing.postValue(responseList)
-                Log.d("reqAPIFolowing", response?.body().toString())
+                Log.d("reqAPIFolowing", response.body().toString())
             }
             override fun onFailure(call: Call<ArrayList<ApiUserModel>?>, t: Throwable) {
                 TODO("Not yet implemented")
