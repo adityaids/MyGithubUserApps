@@ -33,8 +33,8 @@ class FollowerFragment : Fragment() {
     private val userAdapter = UserAdapter()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         mBinding = FragmentFollowerBinding.inflate(inflater, container, false)
         binding.rvFollow.layoutManager = LinearLayoutManager(context)
@@ -48,7 +48,7 @@ class FollowerFragment : Fragment() {
         val userName = arguments?.getString(NAME_ARG)
         followerViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FollowerViewModel::class.java)
         if (userName != null) {
-            if (!userName.equals("dummy")) {
+            if (userName != "dummy") {
                 followerViewModel.getFollower(userName)
                 followerViewModel.getFollowerList().observe(viewLifecycleOwner){result->
                     if (result != null) {

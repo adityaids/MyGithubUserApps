@@ -29,10 +29,10 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
     }
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+            parent: ViewGroup,
+            viewType: Int
     ): UserVerticalViewHolder = UserVerticalViewHolder(
-        UserItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            UserItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun onBindViewHolder(holder: UserVerticalViewHolder, position: Int) {
@@ -48,14 +48,14 @@ class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVertica
         :RecyclerView.ViewHolder(binding.root) {
         fun bind(userDetailModel: UserDetailModel){
             val intRes: Int = itemView.context.resources.getIdentifier(userDetailModel.avatarUrl,
-                "drawable", itemView.context.packageName)
+                    "drawable", itemView.context.packageName)
             val avatar: Drawable? = ContextCompat.getDrawable(itemView.context, intRes)
             binding.tvName.text = userDetailModel.name
             binding.tvUsername.text = userDetailModel.login
             Glide.with(itemView.context)
-                .load(avatar)
-                .apply(RequestOptions().override(80, 80))
-                .into(binding.imgProfile)
+                    .load(avatar)
+                    .apply(RequestOptions().override(80, 80))
+                    .into(binding.imgProfile)
             binding.btnFollow.setOnClickListener {
                 if (userDetailModel.isFollow) {
                     binding.btnFollow.text = itemView.context.getString(R.string.follow)

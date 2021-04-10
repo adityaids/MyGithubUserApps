@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aditya.mygithubuserapps.api.ApiService
 import com.aditya.mygithubuserapps.model.ApiUserModel
-import com.aditya.mygithubuserapps.model.SearchUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,9 +24,9 @@ class FollowerViewModel: ViewModel() {
 
     fun getFollower(userName: String){
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
         val service = retrofit.create(ApiService::class.java)
         val userListCall = service.getFollower(userName)
         userListCall.enqueue(object : Callback<ArrayList<ApiUserModel>> {
@@ -37,11 +36,10 @@ class FollowerViewModel: ViewModel() {
                     response.body()?.let { responseList.addAll(it) }
                 }
                 listFollower.postValue(responseList)
-                Log.d("reqAPIFolower", response?.body().toString())
             }
 
             override fun onFailure(call: Call<ArrayList<ApiUserModel>>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
         })
     }

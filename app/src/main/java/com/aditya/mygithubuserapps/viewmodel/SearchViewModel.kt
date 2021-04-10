@@ -23,11 +23,11 @@ class SearchViewModel : ViewModel() {
     private val listSearchUser = MutableLiveData<ArrayList<ApiUserModel>>()
     private val userDetail = MutableLiveData<UserDetailModel>()
 
-    fun setQuerySarch(q: String){
+    fun setQuerySearch(q: String){
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(urlSearch)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+                .baseUrl(urlSearch)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
         val service = retrofit.create(ApiService::class.java)
         val userListCall = service.getUserList(q)
         userListCall.enqueue(object : Callback<SearchUserModel?> {
@@ -56,15 +56,15 @@ class SearchViewModel : ViewModel() {
         userCall.enqueue(object : Callback<UserDetailModel> {
             override fun onResponse(call: Call<UserDetailModel>, response: Response<UserDetailModel>) {
                 userDetailModel = UserDetailModel(
-                    response.body()?.login,
-                    response.body()?.name,
-                    response.body()?.avatarUrl,
-                    response.body()?.location,
-                    response.body()?.company,
-                    response.body()?.publicRepos,
-                    response.body()?.followers,
-                    response.body()?.following,
-                    isFollow
+                        response.body()?.login,
+                        response.body()?.name,
+                        response.body()?.avatarUrl,
+                        response.body()?.location,
+                        response.body()?.company,
+                        response.body()?.publicRepos,
+                        response.body()?.followers,
+                        response.body()?.following,
+                        isFollow
                 )
                 userDetail.postValue(userDetailModel)
             }

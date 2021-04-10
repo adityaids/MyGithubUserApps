@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         showRecycler()
 
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-            MainViewModel::class.java)
+                MainViewModel::class.java)
         mainViewModel.prepare(this)
         mainViewModel.getListUser().observe(this){ listItem ->
             if (listItem != null) {

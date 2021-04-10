@@ -50,10 +50,10 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
-                    searchViewModel.setQuerySarch(query)
+                    searchViewModel.setQuerySearch(query)
                     binding.searchingLoading.visibility = View.VISIBLE
                 }
                 return true

@@ -2,19 +2,16 @@ package com.aditya.mygithubuserapps
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
 import com.aditya.mygithubuserapps.adapter.UserAdapter
-import com.aditya.mygithubuserapps.databinding.FragmentFollowerBinding
 import com.aditya.mygithubuserapps.databinding.FragmentFollowingBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
-import com.aditya.mygithubuserapps.viewmodel.FollowerViewModel
 import com.aditya.mygithubuserapps.viewmodel.FollowingViewModel
 
 
@@ -36,8 +33,8 @@ class FollowingFragment : Fragment() {
     private val userAdapter = UserAdapter()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         mBinding = FragmentFollowingBinding.inflate(inflater, container, false)
         binding.rvFollow.layoutManager = LinearLayoutManager(context)
@@ -51,7 +48,7 @@ class FollowingFragment : Fragment() {
         val userName = arguments?.getString(NAME_ARG)
         followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FollowingViewModel::class.java)
         if (userName != null) {
-            if (!userName.equals("dummy")) {
+            if (userName != "dummy") {
                 followingViewModel.getFollowing(userName)
                 followingViewModel.getFollowingList().observe(viewLifecycleOwner){result->
                     if (result != null) {

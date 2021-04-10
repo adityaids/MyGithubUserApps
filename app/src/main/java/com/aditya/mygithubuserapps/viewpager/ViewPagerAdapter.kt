@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aditya.mygithubuserapps.FollowerFragment
 import com.aditya.mygithubuserapps.FollowingFragment
-import com.aditya.mygithubuserapps.model.ApiUserModel
 
 class ViewPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     private lateinit var userName: String

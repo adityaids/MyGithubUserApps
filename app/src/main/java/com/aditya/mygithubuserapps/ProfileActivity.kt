@@ -8,11 +8,8 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.aditya.mygithubuserapps.databinding.ActivityProfileBinding
-import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
-import com.aditya.mygithubuserapps.viewmodel.ProfileViewModel
 import com.aditya.mygithubuserapps.viewpager.ViewPagerAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
@@ -104,7 +101,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     binding.btnFollow.text = resources.getString(R.string.following)
                     binding.btnFollow.setTextColor(ContextCompat.getColor(this,
-                        R.color.text_secondary_color
+                            R.color.text_secondary_color
                     ))
                     Toast.makeText(this, "Following", Toast.LENGTH_LONG).show()
                     userDetailModel.isFollow = true
