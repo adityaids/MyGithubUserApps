@@ -25,8 +25,8 @@
                 android:paddingBottom="@dimen/_12sdp">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img_detail_profile"
-                    android:layout_width="@dimen/_140sdp"
-                    android:layout_height="@dimen/_140sdp"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
                     android:layout_marginTop="@dimen/_24sdp"
                     android:transitionName="extra_image_transition"
                     app:layout_constraintStart_toStartOf="parent"
