@@ -74,7 +74,6 @@ class FollowerFragment : Fragment() {
                     }
                 }
             } else {
-                Log.d("userName dummy", userName)
                 binding.loadingFollower.visibility = View.GONE
                 binding.rvFollow.visibility = View.GONE
                 binding.tvFollowerNotif.visibility = View.VISIBLE
