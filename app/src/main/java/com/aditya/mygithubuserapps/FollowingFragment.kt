@@ -37,9 +37,11 @@ class FollowingFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         mBinding = FragmentFollowingBinding.inflate(inflater, container, false)
-        binding.rvFollow.layoutManager = LinearLayoutManager(context)
-        binding.rvFollow.setHasFixedSize(true)
-        binding.rvFollow.adapter = userAdapter
+        binding.rvFollow.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = userAdapter
+        }
         return binding.root
     }
 

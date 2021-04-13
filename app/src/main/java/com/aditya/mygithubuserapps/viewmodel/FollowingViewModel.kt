@@ -20,6 +20,7 @@ class FollowingViewModel: ViewModel() {
 
     private val listFollowing = MutableLiveData<ArrayList<ApiUserModel>>()
     private val userDetail = MutableLiveData<UserDetailModel>()
+    private val errorResponse = MutableLiveData<String>()
 
     fun getFollowing(userName: String){
 
@@ -77,5 +78,8 @@ class FollowingViewModel: ViewModel() {
 
     fun getUserDetail(): LiveData<UserDetailModel>{
         return userDetail
+    }
+    fun getErrorResponse(): LiveData<String>{
+        return errorResponse
     }
 }

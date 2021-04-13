@@ -22,6 +22,7 @@ class SearchViewModel : ViewModel() {
 
     private val listSearchUser = MutableLiveData<ArrayList<ApiUserModel>>()
     private val userDetail = MutableLiveData<UserDetailModel>()
+    private val errorResponse = MutableLiveData<String>()
 
     fun setQuerySearch(q: String){
         val retrofit: Retrofit = Retrofit.Builder()
@@ -80,5 +81,8 @@ class SearchViewModel : ViewModel() {
     }
     fun getUserDetail(): LiveData<UserDetailModel>{
         return userDetail
+    }
+    fun getErrorResponse(): LiveData<String>{
+        return errorResponse
     }
 }

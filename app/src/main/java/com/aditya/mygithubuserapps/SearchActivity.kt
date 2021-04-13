@@ -12,6 +12,7 @@ import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
 import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.ActivitySearchBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
+import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.SearchViewModel
 
 class SearchActivity : AppCompatActivity() {
@@ -32,23 +33,20 @@ class SearchActivity : AppCompatActivity() {
         binding.searchView.setQuery(savedInstanceState?.getString(STATE)?:"", false)
         searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
         userAdapter = UserAdapter()
-        binding.rvSearch.layoutManager = LinearLayoutManager(this)
-        binding.rvSearch.setHasFixedSize(true)
-        binding.rvSearch.adapter = userAdapter
+        binding.rvSearch.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = userAdapter
+        }
 
         userAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 searchViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
             }
         })
-        searchViewModel.getUserDetail().observe(this){ result->
-            if (result != null) {
-                val intent = Intent(this@SearchActivity, ProfileActivity::class.java).apply {
-                    putExtra(ProfileActivity.EXTRA_DATA_API, result)
-                }
-                startActivity(intent)
-            }
-        }
+
+        searchViewModel.getUserDetail().observe(this, ::detailUserObserver)
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -64,19 +62,30 @@ class SearchActivity : AppCompatActivity() {
             }
         })
 
-        searchViewModel.getListSearchUser().observe(this){result->
-            if (result != null) {
-                binding.searchingLoading.visibility = View.GONE
-                userAdapter.setData(result)
-            } else {
-                binding.searchingLoading.visibility = View.GONE
-                binding.tvSearchNotif.visibility = View.VISIBLE
-            }
-        }
+        searchViewModel.getListSearchUser().observe(this, ::observeListSearchUser)
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         outState.putString(STATE, binding.searchView.query.toString())
+    }
+
+    private fun observeListSearchUser(result: ArrayList<ApiUserModel>?){
+        if (result != null) {
+            binding.searchingLoading.visibility = View.GONE
+            userAdapter.setData(result)
+        } else {
+            binding.searchingLoading.visibility = View.GONE
+            binding.tvSearchNotif.visibility = View.VISIBLE
+        }
+    }
+
+    private fun detailUserObserver(result: UserDetailModel?){
+        if (result != null) {
+            val intent = Intent(this@SearchActivity, ProfileActivity::class.java).apply {
+                putExtra(ProfileActivity.EXTRA_DATA_API, result)
+            }
+            startActivity(intent)
+        }
     }
 }

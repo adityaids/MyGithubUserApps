@@ -2,13 +2,13 @@ package com.aditya.mygithubuserapps
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
 import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.FragmentFollowerBinding
@@ -37,9 +37,11 @@ class FollowerFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         mBinding = FragmentFollowerBinding.inflate(inflater, container, false)
-        binding.rvFollow.layoutManager = LinearLayoutManager(context)
-        binding.rvFollow.setHasFixedSize(true)
-        binding.rvFollow.adapter = userAdapter
+        binding.rvFollow.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = userAdapter
+        }
         return binding.root
     }
 

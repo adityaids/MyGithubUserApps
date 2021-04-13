@@ -21,6 +21,7 @@ class FollowerViewModel: ViewModel() {
 
     private val listFollower = MutableLiveData<ArrayList<ApiUserModel>>()
     private val userDetail = MutableLiveData<UserDetailModel>()
+    private val errorResponse = MutableLiveData<String>()
 
     fun getFollower(userName: String){
         val retrofit: Retrofit = Retrofit.Builder()
@@ -79,5 +80,8 @@ class FollowerViewModel: ViewModel() {
     }
     fun getUserDetail(): LiveData<UserDetailModel>{
         return userDetail
+    }
+    fun getErrorResponse(): LiveData<String>{
+        return errorResponse
     }
 }
