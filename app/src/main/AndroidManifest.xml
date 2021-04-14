@@ -13,11 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGithubUserApps"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchActivity"
+        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".FavoritActivity" />
+        <activity
+            android:name=".SearchActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".IntroActivity"
@@ -37,4 +40,5 @@
                 android:value="com.aditya.mygithubuserapps.MainActivity" />
         </activity>
     </application>
+
 </manifest>
