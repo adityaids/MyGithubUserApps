@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">MyGithubUserApps</string>
-    <string name="welcome">Welcome</string>
-    <string name="connect">Connect with developers around the world</string>
-    <string name="recommended_for_you">Recommended For You</string>
-    <string name="share">Share</string>
-    <string name="follow">Follow</string>
-    <string name="follower">Follower</string>
-    <string name="following">Following</string>
-    <string name="discover">Discover</string>
-    <string name="intro">Discover Developer around the world, learn how they build various project in various technology</string>
-    <string name="search">Search</string>
-    <string name="lets_searching">there is no result on your serching lets searching another one</string>
-    <string name="repository">repository</string>
-    <string name="no_follow">No One Is Follow</string>
-    <string name="no_following">No One Is Following</string>
-    <string name="change_language">Change Language</string>
-    <string name="notification_reminder">Notification Reminder</string>
+    <string name="welcome">Selamat Datang</string>
+    <string name="connect">Terhubung Dengan Developer di Seluruh Dunia</string>
+    <string name="recommended_for_you">Di Rekomendasikan Untuk Anda</string>
+    <string name="share">Bagikan</string>
+    <string name="follow">Ikuti</string>
+    <string name="follower">Pengikut</string>
+    <string name="following">Mengikuti</string>
+    <string name="discover">Temukan</string>
+    <string name="intro">Temukan Developer di seluruh dunia, pelajari cara mereka membangun berbagai proyek dalam berbagai teknologi</string>
+    <string name="search">Cari</string>
+    <string name="lets_searching">Tidak ada hasil dalam pencarian anda, mari coba yang lagi</string>
+    <string name="repository">repositori</string>
+    <string name="no_follow">Belum Mengikuti Siapa pun</string>
+    <string name="no_following">Tidak ada satupun pengikut</string>
+    <string name="change_language">Ubah Bahasa</string>
+    <string name="notification_reminder">Pengingat Pemberitahuan</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
