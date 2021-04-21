@@ -16,6 +16,8 @@
     <string name="no_following">No One Is Following</string>
     <string name="change_language">Change Language</string>
     <string name="notification_reminder">Notification Reminder</string>
+    <string name="notif_on">otification Turn On</string>
+    <string name="notif_off">Notification Turn Off</string>
 
     <string-array name="username">
         <item>JakeWharton</item>

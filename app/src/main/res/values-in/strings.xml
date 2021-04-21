@@ -16,6 +16,8 @@
     <string name="no_following">Tidak ada satupun pengikut</string>
     <string name="change_language">Ubah Bahasa</string>
     <string name="notification_reminder">Pengingat Pemberitahuan</string>
+    <string name="notif_on">Pemberitahuan Di Nyalakan</string>
+    <string name="notif_off">Pemberitahuan Di Matikan</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
