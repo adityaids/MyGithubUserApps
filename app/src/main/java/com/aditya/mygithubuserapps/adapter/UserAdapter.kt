@@ -1,6 +1,5 @@
 package com.aditya.mygithubuserapps.adapter
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,8 +14,8 @@ import com.bumptech.glide.Glide
 class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
 
     private val listUser = ArrayList<ApiUserModel>()
-    private lateinit var onItemClickedRecyclerCallback: OnClickedApiRecycler
-    private lateinit var onFavoritItemClickCallback: OnClickedFavoriteItem
+    private lateinit var onItemClickedRecyclerCallback: OnClickedSearchUser
+    private lateinit var onFavoritItemClickCallback: OnClickedSearchUser
 
     fun setData(items: ArrayList<ApiUserModel>){
         listUser.clear()
@@ -24,11 +23,11 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setOnItemCLickCallback(onClickRecyclerItem: OnClickedApiRecycler){
+    fun setOnItemCLickCallback(onClickRecyclerItem: OnClickedSearchUser){
         this.onItemClickedRecyclerCallback = onClickRecyclerItem
     }
 
-    fun setOnFavoritItemCallBack(onClickedFavoriteItem: OnClickedFavoriteItem){
+    fun setOnFavoritItemCallBack(onClickedFavoriteItem: OnClickedSearchUser){
         this.onFavoritItemClickCallback = onClickedFavoriteItem
     }
 

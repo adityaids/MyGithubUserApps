@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
+import com.aditya.mygithubuserapps.adapter.OnClickedSearchUser
 import com.aditya.mygithubuserapps.adapter.OnClickedFavoriteItem
 import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.ActivitySearchBinding
@@ -40,13 +41,13 @@ class SearchActivity : AppCompatActivity() {
             adapter = userAdapter
         }
 
-        userAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
+        userAdapter.setOnItemCLickCallback(object : OnClickedSearchUser{
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 searchViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
             }
         })
 
-        userAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
+        userAdapter.setOnFavoritItemCallBack(object : OnClickedSearchUser{
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 if (apiUserModel.isFavorited){
                     searchViewModel.insertDb(apiUserModel)
@@ -56,7 +57,9 @@ class SearchActivity : AppCompatActivity() {
             }
         })
 
+        searchViewModel.getDbResponse().observe(this, ::showMessage)
         searchViewModel.getUserDetail().observe(this, ::detailUserObserver)
+        searchViewModel.getErrorResponse().observe(this, ::showMessage)
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -98,5 +101,9 @@ class SearchActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+    }
+
+    private fun showMessage(message: String){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }

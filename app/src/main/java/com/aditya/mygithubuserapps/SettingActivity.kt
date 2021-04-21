@@ -26,9 +26,9 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
             if (isChecked) {
                 alarmNotification.setReminder(this, getString(R.string.app_name), getString(R.string.notification_reminder))
                 Toast.makeText(this, resources.getString(R.string.notif_on), Toast.LENGTH_SHORT).show()
-                sharedPreference.setNotif(true);
+                sharedPreference.setNotif(true)
             } else {
-                alarmNotification.cancelReminder(this);
+                alarmNotification.cancelReminder(this)
                 Toast.makeText(this, resources.getString(R.string.notif_off), Toast.LENGTH_SHORT)
                     .show()
                 sharedPreference.setNotif(false)

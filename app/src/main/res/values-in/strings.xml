@@ -18,7 +18,7 @@
     <string name="notification_reminder">Pengingat Pemberitahuan</string>
     <string name="notif_on">Pemberitahuan Di Nyalakan</string>
     <string name="notif_off">Pemberitahuan Di Matikan</string>
-
+    <string name="no_favorit_user">Tidak Ada Satu Orang pun Pada Daftar Favorit Anda, Ayo Tambahkan Seseorang</string>
     <string-array name="username">
         <item>JakeWharton</item>
         <item>amitshekhariitbhu</item>

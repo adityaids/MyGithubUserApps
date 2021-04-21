@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
+import com.aditya.mygithubuserapps.adapter.OnClickedSearchUser
 import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.FragmentFollowerBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
@@ -62,7 +61,7 @@ class FollowerFragment : Fragment() {
                         binding.tvFollowerNotif.visibility = View.VISIBLE
                     }
                 }
-                userAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
+                userAdapter.setOnItemCLickCallback(object : OnClickedSearchUser{
                     override fun onItemClicked(apiUserModel: ApiUserModel) {
                         followerViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
                     }

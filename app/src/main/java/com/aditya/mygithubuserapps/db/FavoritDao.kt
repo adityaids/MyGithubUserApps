@@ -9,7 +9,7 @@ import com.aditya.mygithubuserapps.model.FavoritModel
 @Dao
 interface FavoritDao {
     @Query("Select * from " + FavoritModel.TABLE_NAME)
-    fun getFavoritList(): LiveData<List<FavoritModel?>?>?
+    fun getFavoritList(): LiveData<List<FavoritModel>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(favoritModel: FavoritModel?)

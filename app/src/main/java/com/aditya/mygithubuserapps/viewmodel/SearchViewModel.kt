@@ -17,7 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchViewModel(private val db: FavoritDatabase) : ViewModel() {
+class SearchViewModel(db: FavoritDatabase) : ViewModel() {
 
     companion object {
         const val urlSearch : String = "https://api.github.com/search/"
@@ -26,7 +26,6 @@ class SearchViewModel(private val db: FavoritDatabase) : ViewModel() {
     private val favoritDao = db.favoritDao()
     private val listSearchUser = MutableLiveData<ArrayList<ApiUserModel>>()
     private val userDetail = MutableLiveData<UserDetailModel>()
-    private val favoritedUser: LiveData<List<FavoritModel?>?>? = favoritDao?.getFavoritList()
     private val errorResponse = MutableLiveData<String>()
     private val dbResponse = MutableLiveData<String>()
 

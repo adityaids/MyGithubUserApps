@@ -16,4 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_list_favorit"/>
+
+    <TextView
+        android:id="@+id/tv_favorit_notif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/no_favorit_user"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:textAlignment="center"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

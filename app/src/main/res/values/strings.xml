@@ -18,6 +18,7 @@
     <string name="notification_reminder">Notification Reminder</string>
     <string name="notif_on">otification Turn On</string>
     <string name="notif_off">Notification Turn Off</string>
+    <string name="no_favorit_user">There is No One In Your Favorit List, Lets Add Someone</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
