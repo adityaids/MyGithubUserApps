@@ -20,6 +20,7 @@ data class ApiUserModel(
 
 		@field:SerializedName("avatar_url")
 		val avatarUrl: String? = null,
-		var isFollow: Boolean = false
+		var isFollow: Boolean = false,
+		var isFavorited: Boolean = false
 
 ) : Parcelable

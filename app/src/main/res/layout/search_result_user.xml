@@ -56,5 +56,15 @@
             android:textSize="@dimen/_10ssp"
             android:textAllCaps="false"
             android:text="@string/follow"/>
+
+        <Button
+            android:id="@+id/btn_search_favorit"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableTop="@drawable/ic_favorite_32"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

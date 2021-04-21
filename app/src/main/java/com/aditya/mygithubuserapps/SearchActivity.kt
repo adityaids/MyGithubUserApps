@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedApiRecycler
+import com.aditya.mygithubuserapps.adapter.OnClickedFavoriteItem
 import com.aditya.mygithubuserapps.adapter.UserAdapter
 import com.aditya.mygithubuserapps.databinding.ActivitySearchBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
@@ -31,7 +32,7 @@ class SearchActivity : AppCompatActivity() {
 
         actionBar?.title = "Search"
         binding.searchView.setQuery(savedInstanceState?.getString(STATE)?:"", false)
-        searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
+        searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         userAdapter = UserAdapter()
         binding.rvSearch.apply {
             layoutManager = LinearLayoutManager(context)
@@ -42,6 +43,16 @@ class SearchActivity : AppCompatActivity() {
         userAdapter.setOnItemCLickCallback(object : OnClickedApiRecycler{
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 searchViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
+            }
+        })
+
+        userAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
+            override fun onItemClicked(apiUserModel: ApiUserModel) {
+                if (apiUserModel.isFavorited){
+                    searchViewModel.insertDb(apiUserModel)
+                } else {
+                    searchViewModel.deleteDb(apiUserModel)
+                }
             }
         })
 

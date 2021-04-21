@@ -30,7 +30,7 @@ class AlarmNotification: BroadcastReceiver() {
         showNotification(context, title, message)
     }
 
-    fun setReminder(context: Context, title: String?, message: String?) {
+    fun setReminder(context: Context, title: String, message: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmNotification::class.java)
         intent.putExtra(EXTRA_TITLE, title)

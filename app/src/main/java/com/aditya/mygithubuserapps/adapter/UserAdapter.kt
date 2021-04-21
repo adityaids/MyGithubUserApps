@@ -1,5 +1,7 @@
 package com.aditya.mygithubuserapps.adapter
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -14,6 +16,7 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
 
     private val listUser = ArrayList<ApiUserModel>()
     private lateinit var onItemClickedRecyclerCallback: OnClickedApiRecycler
+    private lateinit var onFavoritItemClickCallback: OnClickedFavoriteItem
 
     fun setData(items: ArrayList<ApiUserModel>){
         listUser.clear()
@@ -21,8 +24,12 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setOnItemCLickCallback(onCLickRecyclerItem: OnClickedApiRecycler){
-        this.onItemClickedRecyclerCallback = onCLickRecyclerItem
+    fun setOnItemCLickCallback(onClickRecyclerItem: OnClickedApiRecycler){
+        this.onItemClickedRecyclerCallback = onClickRecyclerItem
+    }
+
+    fun setOnFavoritItemCallBack(onClickedFavoriteItem: OnClickedFavoriteItem){
+        this.onFavoritItemClickCallback = onClickedFavoriteItem
     }
 
     override fun onCreateViewHolder(
@@ -60,6 +67,19 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
                     binding.btnFollowSearch.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_secondary_color))
                     Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
                     apiUserModel.isFollow = true
+                }
+            }
+            binding.btnSearchFavorit.setOnClickListener {
+                if (apiUserModel.isFavorited) {
+                    val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32)
+                    binding.btnSearchFavorit.setCompoundDrawables(null, drawable, null, null)
+                    apiUserModel.isFavorited = false
+                    onFavoritItemClickCallback.onItemClicked(apiUserModel)
+                } else {
+                    val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32_red)
+                    binding.btnSearchFavorit.setCompoundDrawables(null, drawable, null, null)
+                    apiUserModel.isFavorited = true
+                    onFavoritItemClickCallback.onItemClicked(apiUserModel)
                 }
             }
             itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(apiUserModel) }

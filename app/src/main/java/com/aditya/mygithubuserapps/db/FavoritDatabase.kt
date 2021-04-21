@@ -3,8 +3,10 @@ package com.aditya.mygithubuserapps.db
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
+import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.RoomDatabase
 import com.aditya.mygithubuserapps.model.FavoritModel
+import kotlinx.coroutines.CoroutineScope
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
