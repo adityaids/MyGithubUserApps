@@ -18,7 +18,7 @@
         android:background="@color/primary">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profile_search"
+            android:id="@+id/img_profile_favorit"
             android:layout_width="@dimen/_64sdp"
             android:layout_height="@dimen/_64sdp"
             android:layout_marginTop="@dimen/_8sdp"
@@ -33,7 +33,7 @@
             tools:src="@drawable/user1"/>
 
         <TextView
-            android:id="@+id/tv_name_search"
+            android:id="@+id/tv_name_favorit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_14sdp"
@@ -41,31 +41,20 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             android:fontFamily="@font/roboto_medium"
-            app:layout_constraintStart_toEndOf="@+id/img_profile_search"
+            app:layout_constraintStart_toEndOf="@+id/img_profile_favorit"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="jake wharton" />
 
         <Button
-            android:id="@+id/btn_follow_search"
-            android:layout_width="@dimen/_76sdp"
-            android:layout_height="@dimen/_32sdp"
+            android:id="@+id/btn_delete_favorit"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_42sdp"
             android:theme="@style/buttonView"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textSize="@dimen/_10ssp"
-            android:textAllCaps="false"
-            android:text="@string/follow"/>
-
-        <Button
-            android:id="@+id/btn_search_favorit"
-            android:layout_width="@dimen/_32sdp"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_4sdp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:drawableTop="@drawable/ic_favorite_32"/>
+            android:drawableTop="@drawable/ic_delete"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
