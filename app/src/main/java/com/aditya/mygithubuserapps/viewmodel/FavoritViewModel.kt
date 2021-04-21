@@ -1,7 +1,6 @@
 package com.aditya.mygithubuserapps.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aditya.mygithubuserapps.db.FavoritDatabase
 import com.aditya.mygithubuserapps.model.FavoritModel
@@ -11,9 +10,7 @@ class FavoritViewModel(db: FavoritDatabase): ViewModel() {
     private val listUser = favoritDao?.getFavoritList()
 
     fun delete(favoritModel: FavoritModel){
-        if (favoritDao != null) {
-            favoritDao.delete(favoritModel)
-        }
+        favoritDao?.delete(favoritModel)
     }
 
     fun getListUser(): LiveData<List<FavoritModel>>? {

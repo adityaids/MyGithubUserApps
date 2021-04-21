@@ -24,8 +24,8 @@ class IntroActivity : AppCompatActivity() {
         val sharedPreference = SharedPreference(this)
         val firstRun: Boolean = sharedPreference.getFirstRun()
         if (firstRun) {
-            val reminderBroadcast = AlarmNotification()
-            reminderBroadcast.setReminder(
+            val alarmNotification = AlarmNotification()
+            alarmNotification.setReminder(
                 this,
                 getString(R.string.app_name),
                 resources.getString(R.string.notification_reminder)

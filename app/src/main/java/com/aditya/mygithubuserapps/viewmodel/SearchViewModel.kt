@@ -49,7 +49,7 @@ class SearchViewModel(db: FavoritDatabase) : ViewModel() {
             }
 
             override fun onFailure(call: Call<SearchUserModel?>, t: Throwable) {
-                Log.d("MainActivity", "error loading from API")
+                errorResponse.postValue(t.message)
             }
         })
     }
@@ -82,7 +82,7 @@ class SearchViewModel(db: FavoritDatabase) : ViewModel() {
             }
 
             override fun onFailure(call: Call<UserDetailModel>, t: Throwable) {
-                Log.d("request detail error", t.message.toString())
+                errorResponse.postValue(t.message)
             }
         })
     }
@@ -96,13 +96,11 @@ class SearchViewModel(db: FavoritDatabase) : ViewModel() {
             apiUserModel.isFavorited
         )
         FavoritDatabase.databaseWriteExecutor.execute {
-            if (favoritDao != null) {
-                favoritDao.insert(favoritModel)
-            }
+            favoritDao?.insert(favoritModel)
         }
         val position = listSearchUser.value?.indexOf(apiUserModel)
         if (position != null) {
-            listSearchUser.getValue()?.get(position)?.isFavorited = true
+            listSearchUser.value?.get(position)?.isFavorited = true
         }
     }
 
@@ -115,13 +113,11 @@ class SearchViewModel(db: FavoritDatabase) : ViewModel() {
             apiUserModel.isFavorited
         )
         FavoritDatabase.databaseWriteExecutor.execute {
-            if (favoritDao != null) {
-                favoritDao.delete(favoritModel)
-            }
+            favoritDao?.delete(favoritModel)
         }
         val position = listSearchUser.value?.indexOf(apiUserModel)
         if (position != null) {
-            listSearchUser.getValue()?.get(position)?.isFavorited = false
+            listSearchUser.value?.get(position)?.isFavorited = false
         }
     }
 

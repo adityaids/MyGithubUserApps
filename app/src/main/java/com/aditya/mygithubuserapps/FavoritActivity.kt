@@ -34,10 +34,12 @@ class FavoritActivity : AppCompatActivity() {
 
     private fun showRecycler(list: List<FavoritModel>?) {
         if (list != null) {
-            binding.rvFavorit.layoutManager = LinearLayoutManager(this)
-            binding.rvFavorit.setHasFixedSize(true)
-            binding.rvFavorit.adapter = favoritAdapter
             favoritAdapter.setData(list as ArrayList<FavoritModel>)
+            binding.rvFavorit.apply {
+                layoutManager = LinearLayoutManager(this@FavoritActivity)
+                setHasFixedSize(true)
+                adapter = favoritAdapter
+            }
         } else {
             binding.rvFavorit.visibility = View.GONE
             binding.tvFavoritNotif.visibility = View.VISIBLE

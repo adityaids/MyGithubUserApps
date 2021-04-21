@@ -8,7 +8,6 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
-import android.provider.AlarmClock
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.aditya.mygithubuserapps.MainActivity
@@ -26,7 +25,7 @@ class AlarmNotification: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val title = intent.getStringExtra(EXTRA_TITLE)
-        val message = intent.getStringExtra(AlarmClock.EXTRA_MESSAGE)
+        val message = intent.getStringExtra(EXTRA_MESSAGE)
         showNotification(context, title, message)
     }
 
@@ -34,7 +33,7 @@ class AlarmNotification: BroadcastReceiver() {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmNotification::class.java)
         intent.putExtra(EXTRA_TITLE, title)
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE, message)
+        intent.putExtra(EXTRA_MESSAGE, message)
         val calendar: Calendar = Calendar.getInstance()
         if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 9) {
             calendar.add(Calendar.DAY_OF_YEAR, 1)

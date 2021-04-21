@@ -80,13 +80,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showRecycler(){
-        binding.rvUserVertical.layoutManager = LinearLayoutManager(this)
-        binding.rvUserVertical.setHasFixedSize(true)
-        binding.rvUserVertical.adapter = userVerticalAdapter
-
-        binding.rvUserHorizontal.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvUserHorizontal.setHasFixedSize(true)
-        binding.rvUserHorizontal.adapter = userHorizontalAdapter
+        binding.rvUserVertical.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            setHasFixedSize(true)
+            adapter = userVerticalAdapter
+        }
+        binding.rvUserHorizontal.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            adapter = userHorizontalAdapter
+        }
     }
 
     private fun setDataRecycler(listUser: ArrayList<UserDetailModel>){
