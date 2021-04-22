@@ -2,6 +2,7 @@ package com.aditya.mygithubuserapps.viewmodel
 
 import android.app.Application
 import android.content.Context
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -88,41 +89,11 @@ class SearchViewModel : ViewModel() {
     }
 
     fun insertDb(apiUserModel: ApiUserModel, application: Application){
-        val db = FavoritDatabase.getInstance(application)
-        val favoritDao = db?.favoritDao()
-        val favoritModel = FavoritModel(
-            apiUserModel.login?:"-",
-            apiUserModel.avatarUrl?:"-",
-            apiUserModel.url,
-            apiUserModel.isFollow,
-            apiUserModel.isFavorited
-        )
-        FavoritDatabase.databaseWriteExecutor.execute {
-            favoritDao?.insert(favoritModel)
-        }
-        val position = listSearchUser.value?.indexOf(apiUserModel)
-        if (position != null) {
-            listSearchUser.value?.get(position)?.isFavorited = true
-        }
+
     }
 
     fun deleteDb(apiUserModel: ApiUserModel, application: Application){
-        val db = FavoritDatabase.getInstance(application)
-        val favoritDao = db?.favoritDao()
-        val favoritModel = FavoritModel(
-            apiUserModel.login?:"-",
-            apiUserModel.avatarUrl?:"-",
-            apiUserModel.url,
-            apiUserModel.isFollow,
-            apiUserModel.isFavorited
-        )
-        FavoritDatabase.databaseWriteExecutor.execute {
-            favoritDao?.delete(favoritModel)
-        }
-        val position = listSearchUser.value?.indexOf(apiUserModel)
-        if (position != null) {
-            listSearchUser.value?.get(position)?.isFavorited = false
-        }
+
     }
 
     fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>> {

@@ -3,10 +3,12 @@ package com.aditya.mygithubuserapps
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.FavoritAdapter
 import com.aditya.mygithubuserapps.adapter.OnClickedFavoriteItem
+import com.aditya.mygithubuserapps.application.GithubApplication
 import com.aditya.mygithubuserapps.databinding.ActivityFavoritBinding
 import com.aditya.mygithubuserapps.model.FavoritModel
 import com.aditya.mygithubuserapps.viewmodel.FavoritViewModel
@@ -14,7 +16,9 @@ import com.aditya.mygithubuserapps.viewmodel.FavoritViewModel
 class FavoritActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoritBinding
-    private lateinit var favoritViewModel: FavoritViewModel
+    private val favoritViewModel: FavoritViewModel by viewModels {
+        FavoritViewModel.FavoritViewModelFactory((application as GithubApplication).repository)
+    }
     private lateinit var favoritAdapter: FavoritAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +27,10 @@ class FavoritActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         favoritAdapter = FavoritAdapter()
-        favoritViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FavoritViewModel::class.java)
-        favoritViewModel.getListUser(application)?.observe(this, ::showRecycler)
+        favoritViewModel.listFavorit.observe(this, ::showRecycler)
         favoritAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
             override fun onItemClicked(favoritModel: FavoritModel) {
-                favoritViewModel.delete(favoritModel, application)
+                favoritViewModel.delete(favoritModel)
             }
         })
     }

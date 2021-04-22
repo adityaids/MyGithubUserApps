@@ -2,25 +2,29 @@ package com.aditya.mygithubuserapps.viewmodel
 
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.aditya.mygithubuserapps.db.FavoritDao
 import com.aditya.mygithubuserapps.db.FavoritDatabase
+import com.aditya.mygithubuserapps.db.FavoritRepository
 import com.aditya.mygithubuserapps.model.FavoritModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
-class FavoritViewModel: ViewModel() {
+class FavoritViewModel(private val repository: FavoritRepository): ViewModel() {
 
-    fun delete(favoritModel: FavoritModel, application: Application){
-        val db = FavoritDatabase.getInstance(application)
-        val favoritDao = db?.favoritDao()
-        FavoritDatabase.databaseWriteExecutor.execute {
-            favoritDao?.delete(favoritModel)
-        }
+    val listFavorit: LiveData<List<FavoritModel>> = repository.favoritedUser.asLiveData()
+
+    fun delete(favoritModel: FavoritModel) = viewModelScope.launch{
+        repository.delete(favoritModel)
     }
 
-    fun getListUser(application: Application): LiveData<List<FavoritModel>>? {
-        val db = FavoritDatabase.getInstance(application)
-        val favoritDao = db?.favoritDao()
-        return favoritDao?.getFavoritList()
+    class FavoritViewModelFactory(private val repository: FavoritRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(FavoritViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return FavoritViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
     }
 }
