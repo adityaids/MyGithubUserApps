@@ -1,11 +1,9 @@
 package com.aditya.mygithubuserapps.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aditya.mygithubuserapps.databinding.ItemListFavoritBinding
-import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.FavoritModel
 import com.bumptech.glide.Glide
 
@@ -33,7 +31,7 @@ class FavoritAdapter: RecyclerView.Adapter<FavoritAdapter.FavoritViewHolder>() {
         )
 
     override fun onBindViewHolder(holder: FavoritViewHolder, position: Int) {
-        val user = listUser.get(position)
+        val user = listUser[position]
         holder.bind(user)
     }
 

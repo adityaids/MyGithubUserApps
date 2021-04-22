@@ -1,6 +1,7 @@
 package com.aditya.mygithubuserapps.viewmodel
 
-import android.util.Log
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,13 +18,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchViewModel(db: FavoritDatabase) : ViewModel() {
+class SearchViewModel : ViewModel() {
 
     companion object {
         const val urlSearch : String = "https://api.github.com/search/"
         const val urlDetailUser: String = "https://api.github.com/users/"
     }
-    private val favoritDao = db.favoritDao()
     private val listSearchUser = MutableLiveData<ArrayList<ApiUserModel>>()
     private val userDetail = MutableLiveData<UserDetailModel>()
     private val errorResponse = MutableLiveData<String>()
@@ -87,7 +87,9 @@ class SearchViewModel(db: FavoritDatabase) : ViewModel() {
         })
     }
 
-    fun insertDb(apiUserModel: ApiUserModel){
+    fun insertDb(apiUserModel: ApiUserModel, application: Application){
+        val db = FavoritDatabase.getInstance(application)
+        val favoritDao = db?.favoritDao()
         val favoritModel = FavoritModel(
             apiUserModel.login?:"-",
             apiUserModel.avatarUrl?:"-",
@@ -104,7 +106,9 @@ class SearchViewModel(db: FavoritDatabase) : ViewModel() {
         }
     }
 
-    fun deleteDb(apiUserModel: ApiUserModel){
+    fun deleteDb(apiUserModel: ApiUserModel, application: Application){
+        val db = FavoritDatabase.getInstance(application)
+        val favoritDao = db?.favoritDao()
         val favoritModel = FavoritModel(
             apiUserModel.login?:"-",
             apiUserModel.avatarUrl?:"-",

@@ -24,10 +24,10 @@ class FavoritActivity : AppCompatActivity() {
 
         favoritAdapter = FavoritAdapter()
         favoritViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FavoritViewModel::class.java)
-        favoritViewModel.getListUser()?.observe(this, ::showRecycler)
+        favoritViewModel.getListUser(application)?.observe(this, ::showRecycler)
         favoritAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
             override fun onItemClicked(favoritModel: FavoritModel) {
-                favoritViewModel.delete(favoritModel)
+                favoritViewModel.delete(favoritModel, application)
             }
         })
     }

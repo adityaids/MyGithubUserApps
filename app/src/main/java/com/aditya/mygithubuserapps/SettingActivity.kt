@@ -13,16 +13,18 @@ import com.aditya.mygithubuserapps.preference.SharedPreference
 class SettingActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivitySettingBinding
     private lateinit var sharedPreference: SharedPreference
-    private lateinit var alarmNotification: AlarmNotification
+    private val alarmNotification = AlarmNotification()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreference = SharedPreference(this)
         val notifState: Boolean = sharedPreference.getNotifState()
         binding.switchReminder.isChecked = notifState
-        binding.switchReminder.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.btnSettingLanguage.setOnClickListener(this)
+        binding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 alarmNotification.setReminder(this, getString(R.string.app_name), getString(R.string.notification_reminder))
                 Toast.makeText(this, resources.getString(R.string.notif_on), Toast.LENGTH_SHORT).show()

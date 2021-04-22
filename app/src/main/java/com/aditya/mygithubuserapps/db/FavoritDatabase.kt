@@ -3,15 +3,13 @@ package com.aditya.mygithubuserapps.db
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
-import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.RoomDatabase
 import com.aditya.mygithubuserapps.model.FavoritModel
-import kotlinx.coroutines.CoroutineScope
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-@Database(entities = arrayOf(FavoritModel::class), exportSchema = false, version = 1)
+@Database(entities = [FavoritModel::class], exportSchema = false, version = 1)
 abstract class FavoritDatabase : RoomDatabase() {
     abstract fun favoritDao(): FavoritDao?
 
@@ -27,7 +25,7 @@ abstract class FavoritDatabase : RoomDatabase() {
         fun getInstance(context: Context): FavoritDatabase? {
             if (instance == null) {
                 instance = Room.databaseBuilder(
-                    context.getApplicationContext(),
+                    context.applicationContext,
                     FavoritDatabase::class.java, DB_NAME
                 )
                     .build()

@@ -3,17 +3,16 @@ package com.aditya.mygithubuserapps
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Pair
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedRecyclerItem
-import com.aditya.mygithubuserapps.databinding.ActivityMainBinding
 import com.aditya.mygithubuserapps.adapter.UserHorizontalAdapter
 import com.aditya.mygithubuserapps.adapter.UserVerticalAdapter
+import com.aditya.mygithubuserapps.databinding.ActivityMainBinding
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.MainViewModel
 
@@ -44,6 +43,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         binding.btnSearch.setOnClickListener(this)
+        binding.btnFavorit.setOnClickListener(this)
+        binding.btnSetting.setOnClickListener(this)
         userVerticalAdapter.setOnItemClickCallback(object: OnClickedRecyclerItem {
             override fun onItemClicked(userDetailModel: UserDetailModel, imageView: View) {
                 val imagePair = Pair.create(imageView, ProfileActivity.EXTRA_IMAGE_TRANSITION)
@@ -97,10 +98,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         userVerticalAdapter.setData(listUser)
     }
 
-    override fun onClick(v: View?) {
-        when(v?.id){
+    override fun onClick(v: View) {
+        when(v.id){
             R.id.btn_search -> {
                 val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_setting -> {
+                val intent = Intent(this@MainActivity, SettingActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_favorit -> {
+                val intent = Intent(this@MainActivity, FavoritActivity::class.java)
                 startActivity(intent)
             }
         }
