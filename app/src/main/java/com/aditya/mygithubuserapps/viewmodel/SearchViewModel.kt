@@ -3,15 +3,15 @@ package com.aditya.mygithubuserapps.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.aditya.mygithubuserapps.api.ApiService
 import com.aditya.mygithubuserapps.db.FavoritDatabase
+import com.aditya.mygithubuserapps.db.FavoritRepository
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.FavoritModel
 import com.aditya.mygithubuserapps.model.SearchUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel(private val repository: FavoritRepository) : ViewModel() {
 
     companion object {
         const val urlSearch : String = "https://api.github.com/search/"
@@ -88,12 +88,26 @@ class SearchViewModel : ViewModel() {
         })
     }
 
-    fun insertDb(apiUserModel: ApiUserModel, application: Application){
-
+    fun insertDb(apiUserModel: ApiUserModel) = viewModelScope.launch{
+        val user = FavoritModel(
+            apiUserModel.login?:"-",
+            apiUserModel.avatarUrl?:"-",
+            apiUserModel.url,
+            apiUserModel.isFavorited,
+            apiUserModel.isFollow
+        )
+        repository.insert(user)
     }
 
-    fun deleteDb(apiUserModel: ApiUserModel, application: Application){
-
+    fun deleteDb(apiUserModel: ApiUserModel)= viewModelScope.launch{
+        val user = FavoritModel(
+            apiUserModel.login?:"-",
+            apiUserModel.avatarUrl?:"-",
+            apiUserModel.url,
+            apiUserModel.isFavorited,
+            apiUserModel.isFollow
+        )
+        repository.delete(user)
     }
 
     fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>> {
