@@ -123,3 +123,12 @@ class SearchViewModel(private val repository: FavoritRepository) : ViewModel() {
         return dbResponse
     }
 }
+class SearchViewModelFactory(private val repository: FavoritRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return SearchViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}

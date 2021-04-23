@@ -17,14 +17,13 @@ class FavoritViewModel(private val repository: FavoritRepository): ViewModel() {
     fun delete(favoritModel: FavoritModel) = viewModelScope.launch{
         repository.delete(favoritModel)
     }
-
-    class FavoritViewModelFactory(private val repository: FavoritRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(FavoritViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return FavoritViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
+}
+class FavoritViewModelFactory(private val repository: FavoritRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(FavoritViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return FavoritViewModel(repository) as T
         }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

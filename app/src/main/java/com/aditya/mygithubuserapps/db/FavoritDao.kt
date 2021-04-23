@@ -19,5 +19,5 @@ interface FavoritDao {
     suspend fun delete(favoritModel: FavoritModel?)
 
     @Query("SELECT * FROM " + FavoritModel.TABLE_NAME)
-    suspend fun selectAll(): Cursor?
+    fun selectAll(): Cursor
 }

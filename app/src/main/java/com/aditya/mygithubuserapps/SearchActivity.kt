@@ -6,15 +6,17 @@ import android.os.PersistableBundle
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedSearchUser
 import com.aditya.mygithubuserapps.adapter.UserAdapter
+import com.aditya.mygithubuserapps.application.MyGithubUserApps
 import com.aditya.mygithubuserapps.databinding.ActivitySearchBinding
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.SearchViewModel
+import com.aditya.mygithubuserapps.viewmodel.SearchViewModelFactory
 
 class SearchActivity : AppCompatActivity() {
 
@@ -22,7 +24,9 @@ class SearchActivity : AppCompatActivity() {
         const val STATE: String = "state"
     }
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var searchViewModel: SearchViewModel
+    private val searchViewModel: SearchViewModel by viewModels {
+        SearchViewModelFactory((application as MyGithubUserApps).repository)
+    }
     private lateinit var userAdapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +36,6 @@ class SearchActivity : AppCompatActivity() {
 
         actionBar?.title = "Search"
         binding.searchView.setQuery(savedInstanceState?.getString(STATE)?:"", false)
-        searchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SearchViewModel::class.java)
         userAdapter = UserAdapter()
         binding.rvSearch.apply {
             layoutManager = LinearLayoutManager(context)
@@ -49,9 +52,9 @@ class SearchActivity : AppCompatActivity() {
         userAdapter.setOnFavoritItemCallBack(object : OnClickedSearchUser{
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 if (apiUserModel.isFavorited){
-                    searchViewModel.insertDb(apiUserModel, application)
+                    searchViewModel.insertDb(apiUserModel)
                 } else {
-                    searchViewModel.deleteDb(apiUserModel, application)
+                    searchViewModel.deleteDb(apiUserModel)
                 }
             }
         })
