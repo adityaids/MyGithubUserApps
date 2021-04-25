@@ -14,13 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGithubUserApps"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SettingActivity"
+        <provider
+            android:name=".provider.GithubProvider"
+            android:authorities="com.aditya.mygithubuserapps"
+            android:enabled="true"
+            android:exported="true"></provider>
+
+        <activity
+            android:name=".SettingActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".FavoritActivity"
+        <activity
+            android:name=".FavoritActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -51,4 +59,5 @@
                 android:value="com.aditya.mygithubuserapps.MainActivity" />
         </activity>
     </application>
+
 </manifest>

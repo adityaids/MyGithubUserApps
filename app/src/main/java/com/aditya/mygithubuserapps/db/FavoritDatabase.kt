@@ -17,10 +17,9 @@ abstract class FavoritDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: FavoritDatabase? = null
-
+        const val AUTHORITY = "com.aditya.mygithubuserapps"
         fun getDatabase(
-                context: Context,
-                scope: CoroutineScope
+                context: Context
         ): FavoritDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
