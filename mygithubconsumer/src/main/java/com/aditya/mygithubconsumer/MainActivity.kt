@@ -22,7 +22,7 @@ import com.aditya.mygithubconsumer.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps/favorit")
+        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps.provider/favorit")
         private const val COLUMN_ID = BaseColumns._ID
         const val COLUMN_NAME = "nama"
         const val COLUMN_AVATAR = "avatar"

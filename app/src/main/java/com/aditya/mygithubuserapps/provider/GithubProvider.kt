@@ -14,7 +14,7 @@ class GithubProvider : ContentProvider() {
 
     companion object {
         private const val FAVORIT_ID = 1
-        private const val AUTHORITY = "com.aditya.mygithubuserapps"
+        private const val AUTHORITY = "com.aditya.mygithubuserapps.provider"
         private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
         init {
             sUriMatcher.addURI(AUTHORITY, TABLE_NAME, FAVORIT_ID)
@@ -29,12 +29,12 @@ class GithubProvider : ContentProvider() {
                        selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
         val code: Int = sUriMatcher.match(uri)
         val cursor: Cursor
-        val context: Context = (context?:getContext()) as Context
-        val db: FavoritDatabase = FavoritDatabase.getDatabase(context)
-        val mFavoritDao = db.favoritDao()
+        val context: Context? = context
+        val db: FavoritDatabase? = context?.let { FavoritDatabase.getDatabase(it) }
+        val mFavoritDao = db?.favoritDao()
         return if (code == FAVORIT_ID) {
-            cursor = mFavoritDao.selectAll()
-            cursor.run { setNotificationUri(context.getContentResolver(), uri) }
+            cursor = mFavoritDao?.selectAll()!!
+            cursor.setNotificationUri(context.getContentResolver(), uri)
             cursor
         } else {
             throw IllegalArgumentException("Unknown URI: $uri")
