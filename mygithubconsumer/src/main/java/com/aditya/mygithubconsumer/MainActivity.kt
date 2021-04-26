@@ -6,6 +6,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
@@ -14,6 +16,8 @@ import com.aditya.mygithubconsumer.adapter.FavoritAdapter
 import com.aditya.mygithubconsumer.adapter.OnClickedFavoriteItem
 import com.aditya.mygithubconsumer.databinding.ActivityMainBinding
 import com.aditya.mygithubconsumer.model.FavoritModel
+import com.aditya.mygithubconsumer.model.UserDetailModel
+import com.aditya.mygithubconsumer.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -25,12 +29,14 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var favoritAdapter: FavoritAdapter
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
         binding.rvFavorit.apply{
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
@@ -39,12 +45,11 @@ class MainActivity : AppCompatActivity() {
         LoaderManager.getInstance(this).initLoader(1, null, mLoaderCallbacks)
         favoritAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
             override fun onItemClicked(favoritModel: FavoritModel) {
-                intent = Intent(this@MainActivity, ProfileActivity::class.java).apply {
-                    putExtra(ProfileActivity.EXTRA_USER, favoritModel)
-                }
+                mainViewModel.getDetailUser(favoritModel.url)
             }
-
         })
+        mainViewModel.getUserDetail().observe(this, ::toProfileAcitivity)
+        mainViewModel.getErrorResponse().observe(this, ::showMessage)
     }
 
     private val mLoaderCallbacks: LoaderManager.LoaderCallbacks<Cursor?> =
@@ -67,4 +72,14 @@ class MainActivity : AppCompatActivity() {
                 favoritAdapter.setUser(null)
             }
         }
+
+    private fun toProfileAcitivity(detailModel: UserDetailModel){
+        intent = Intent(this@MainActivity, ProfileActivity::class.java).apply {
+            putExtra(ProfileActivity.EXTRA_USER, detailModel)
+        }
+    }
+
+    private fun showMessage(message: String){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
 }
