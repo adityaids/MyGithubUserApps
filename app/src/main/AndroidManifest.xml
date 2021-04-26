@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true">
 
         <provider
-            android:authorities="com.aditya.mygithubuserapps.provider"
+            android:authorities="com.aditya.mygithubuserapps"
             android:name=".provider.GithubProvider"
             android:exported="true"
             android:enabled="true"

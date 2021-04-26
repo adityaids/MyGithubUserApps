@@ -1,9 +1,12 @@
 package com.aditya.mygithubconsumer.viewmodel
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.aditya.mygithubconsumer.MainActivity
 import com.aditya.mygithubconsumer.api.ApiService
+import com.aditya.mygithubconsumer.model.FavoritModel
 import com.aditya.mygithubconsumer.model.UserDetailModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,6 +52,19 @@ class MainViewModel: ViewModel() {
                 errorResponse.postValue(t.message)
             }
         })
+    }
+    fun mapCursorToArrayList(notesCursor: Cursor?): ArrayList<FavoritModel> {
+        val notesList = ArrayList<FavoritModel>()
+
+        notesCursor?.apply {
+            while (moveToNext()) {
+                val name = getString(getColumnIndexOrThrow(MainActivity.COLUMN_NAME))
+                val avatar = getString(getColumnIndexOrThrow(MainActivity.COLUMN_AVATAR))
+                val url = getString(getColumnIndexOrThrow(MainActivity.COLUMN_URL))
+                notesList.add(FavoritModel(name, avatar, url))
+            }
+        }
+        return notesList
     }
     fun getUserDetail(): LiveData<UserDetailModel> {
         return userDetail

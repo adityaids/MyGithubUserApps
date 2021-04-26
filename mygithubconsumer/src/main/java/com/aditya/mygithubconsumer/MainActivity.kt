@@ -1,10 +1,13 @@
 package com.aditya.mygithubconsumer
 
 import android.content.Intent
+import android.database.ContentObserver
 import android.database.Cursor
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import android.provider.BaseColumns
 import android.util.Log
 import android.widget.Toast
@@ -19,10 +22,14 @@ import com.aditya.mygithubconsumer.databinding.ActivityMainBinding
 import com.aditya.mygithubconsumer.model.FavoritModel
 import com.aditya.mygithubconsumer.model.UserDetailModel
 import com.aditya.mygithubconsumer.viewmodel.MainViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps.provider/favorit")
+        private val URI: Uri = Uri.parse("com.aditya.mygithubuserapps/favorit")
         private const val COLUMN_ID = BaseColumns._ID
         const val COLUMN_NAME = "nama"
         const val COLUMN_AVATAR = "avatar"
@@ -44,7 +51,16 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
             adapter = favoritAdapter
         }
-        LoaderManager.getInstance(this).initLoader(1, null, mLoaderCallbacks)
+        //LoaderManager.getInstance(this).initLoader(1, null, mLoaderCallbacks)
+        val handlerThread = HandlerThread("DataObserver")
+        handlerThread.start()
+        val handler = Handler(handlerThread.looper)
+        val myObserver = object : ContentObserver(handler) {
+            override fun onChange(self: Boolean) {
+                loadNotesAsync()
+            }
+        }
+        contentResolver.registerContentObserver(URI, true, myObserver)
         favoritAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
             override fun onItemClicked(favoritModel: FavoritModel) {
                 mainViewModel.getDetailUser(favoritModel.url)
@@ -66,13 +82,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onLoadFinished(loader: Loader<Cursor?>, data: Cursor?) {
                 if (data != null) {
-                    favoritAdapter.setUser(data)
+                    //favoritAdapter.setUser(data)
                     Log.d("cursor", data.getString(1).toString())
                 }
             }
 
             override fun onLoaderReset(loader: Loader<Cursor?>) {
-                favoritAdapter.setUser(null)
+                //favoritAdapter.setUser(null)
                 Log.d("cursor", loader.toString())
             }
         }
@@ -85,5 +101,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMessage(message: String){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun loadNotesAsync() {
+        GlobalScope.launch(Dispatchers.Main) {
+            val deferredNotes = async(Dispatchers.IO) {
+                val cursor = contentResolver.query(URI, null, null, null, null)
+                mainViewModel.mapCursorToArrayList(cursor)
+            }
+            val favoritList = deferredNotes.await()
+            if (favoritList.size > 0) {
+                favoritAdapter.setUser(favoritList)
+            } else {
+                favoritAdapter.setUser(null)
+            }
+        }
     }
 }

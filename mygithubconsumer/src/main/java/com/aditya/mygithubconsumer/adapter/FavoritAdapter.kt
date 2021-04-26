@@ -16,12 +16,14 @@ import com.bumptech.glide.request.target.Target
 
 class FavoritAdapter: RecyclerView.Adapter<FavoritAdapter.FavoritViewHolder>() {
 
-    private val listUser = ArrayList<FavoritModel>()
+    private var mListUser = ArrayList<FavoritModel>()
     private lateinit var onFavoritItemClick: OnClickedFavoriteItem
-    private var mCursor: Cursor? = null
 
-    fun setUser(cursor: Cursor?) {
-        mCursor = cursor
+    fun setUser(listUser: ArrayList<FavoritModel>?) {
+        if (listUser != null) {
+            listUser.clear()
+            listUser.addAll(listUser)
+        }
         notifyDataSetChanged()
     }
 
@@ -38,31 +40,22 @@ class FavoritAdapter: RecyclerView.Adapter<FavoritAdapter.FavoritViewHolder>() {
         )
 
     override fun onBindViewHolder(holder: FavoritViewHolder, position: Int) {
-        holder.bind(mCursor, position)
+        val user = mListUser[position]
+        holder.bind(user)
     }
 
     override fun getItemCount(): Int {
-        return listUser.size
+        return mListUser.size
     }
 
     inner class FavoritViewHolder(private val binding: ItemListFavoritBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(cursor: Cursor?, position: Int){
-            if (cursor != null) {
-                if (cursor.moveToPosition(position)) {
-                    val favoritModel = FavoritModel(
-                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AVATAR)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_URL))
-                    )
-                    Log.d("adapter", favoritModel.nama)
-                    binding.tvNameFavorit.text = favoritModel.nama
-                    Glide.with(itemView.context)
-                        .load(favoritModel.avatarUrl)
-                        .into(binding.imgProfileFavorit)
-                    itemView.setOnClickListener{onFavoritItemClick.onItemClicked(favoritModel)}
-                }
-            }
+        fun bind(favoritModel: FavoritModel){
+            binding.tvNameFavorit.text = favoritModel.nama
+            Glide.with(itemView.context)
+                    .load(favoritModel.avatarUrl)
+                    .into(binding.imgProfileFavorit)
+            itemView.setOnClickListener{onFavoritItemClick.onItemClicked(favoritModel)}
         }
     }
 }
