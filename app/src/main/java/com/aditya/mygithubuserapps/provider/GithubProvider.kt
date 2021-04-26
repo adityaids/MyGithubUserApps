@@ -6,18 +6,18 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 import com.aditya.mygithubuserapps.db.FavoritDatabase
-import com.aditya.mygithubuserapps.db.FavoritDatabase.Companion.AUTHORITY
 import com.aditya.mygithubuserapps.model.FavoritModel.Companion.TABLE_NAME
 
 class GithubProvider : ContentProvider() {
 
     companion object {
         private const val FAVORIT_ID = 1
-        private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
-        private lateinit var favoritDatabase: FavoritDatabase
-        init {
-            sUriMatcher.addURI(AUTHORITY, "$TABLE_NAME/#", FAVORIT_ID)
-        }
+        private const val AUTHORITY = "com.aditya.mygithubuserapps"
+    }
+    private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
+    private lateinit var favoritDatabase: FavoritDatabase
+    init {
+        sUriMatcher.addURI(AUTHORITY, TABLE_NAME, FAVORIT_ID)
     }
 
     override fun onCreate(): Boolean {

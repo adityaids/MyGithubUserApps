@@ -7,6 +7,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.aditya.mygithubuserapps.MainActivity
@@ -27,6 +28,7 @@ class AlarmNotification: BroadcastReceiver() {
         val title = intent.getStringExtra(EXTRA_TITLE)
         val message = intent.getStringExtra(EXTRA_MESSAGE)
         showNotification(context, title, message)
+        Toast.makeText(context, "One time alarm set up", Toast.LENGTH_SHORT).show()
     }
 
     fun setReminder(context: Context, title: String, message: String) {
@@ -35,18 +37,14 @@ class AlarmNotification: BroadcastReceiver() {
         intent.putExtra(EXTRA_TITLE, title)
         intent.putExtra(EXTRA_MESSAGE, message)
         val calendar: Calendar = Calendar.getInstance()
-        if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 9) {
+        if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 12) {
             calendar.add(Calendar.DAY_OF_YEAR, 1)
         }
         calendar.set(Calendar.HOUR_OF_DAY, 9)
+        calendar.set(Calendar.MINUTE, 19)
         val pendingIntent =
             PendingIntent.getBroadcast(context, notifId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-        alarmManager.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
     }
 
     fun cancelReminder(context: Context) {
@@ -64,7 +62,7 @@ class AlarmNotification: BroadcastReceiver() {
         val notificationManagerCompat =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notifications_white)
             .setContentTitle(title)
             .setContentText(message)
@@ -82,7 +80,7 @@ class AlarmNotification: BroadcastReceiver() {
             builder.setChannelId(CHANNEL_ID)
             notificationManagerCompat.createNotificationChannel(channel)
         }
-        val notification: Notification = builder.build()
+        val notification = builder.build()
         notificationManagerCompat.notify(notifId, notification)
     }
 }

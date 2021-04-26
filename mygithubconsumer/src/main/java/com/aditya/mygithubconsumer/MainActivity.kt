@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.loader.app.LoaderManager
@@ -21,7 +22,7 @@ import com.aditya.mygithubconsumer.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps/favorit")
+        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps/favorit/1")
         private const val COLUMN_ID = BaseColumns._ID
         const val COLUMN_NAME = "nama"
         const val COLUMN_AVATAR = "avatar"
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        favoritAdapter = FavoritAdapter()
         binding.rvFavorit.apply{
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             override fun onLoadFinished(loader: Loader<Cursor?>, data: Cursor?) {
                 if (data != null) {
                     favoritAdapter.setUser(data)
+                    Log.d("cursor", data.getString(1).toString())
                 }
             }
 
