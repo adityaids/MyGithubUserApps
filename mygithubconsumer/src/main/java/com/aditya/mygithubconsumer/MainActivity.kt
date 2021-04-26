@@ -1,5 +1,6 @@
 package com.aditya.mygithubconsumer
 
+import android.content.ContentUris
 import android.content.Intent
 import android.database.ContentObserver
 import android.database.Cursor
@@ -29,7 +30,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        private val URI: Uri = Uri.parse("com.aditya.mygithubuserapps/favorit")
+        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps.provider.GithubProvider/favorit")
         private const val COLUMN_ID = BaseColumns._ID
         const val COLUMN_NAME = "nama"
         const val COLUMN_AVATAR = "avatar"

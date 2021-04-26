@@ -14,7 +14,7 @@ class GithubProvider : ContentProvider() {
 
     companion object {
         private const val FAVORIT_ID = 1
-        private const val AUTHORITY = "com.aditya.mygithubuserapps"
+        private const val AUTHORITY = "com.aditya.mygithubuserapps.provider.GithubProvider"
         private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
         private lateinit var favoritDatabase: FavoritDatabase
         init {
