@@ -3,10 +3,12 @@
     package="com.aditya.mygithubuserapps">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <permission android:name="com.aditya.mygithubuserapps.READ_DATABASE"/>
-    <permission android:name="com.aditya.usergithub.WRITE_DATABASE"/>
+    <permission android:name="com.aditya.mygithubuserapps.READ_DATABASE" android:protectionLevel="normal"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <queries>
+        <package android:name="com.aditya.mygithubuserapps" />
+    </queries>
 
     <application
         android:name=".application.MyGithubUserApps"
@@ -20,10 +22,10 @@
         android:usesCleartextTraffic="true">
 
         <provider
-            android:name=".provider.GithubProvider"
             android:authorities="com.aditya.mygithubuserapps"
-            android:enabled="true"
+            android:name=".provider.GithubProvider"
             android:exported="true"
+            android:enabled="true"
             android:readPermission="com.aditya.mygithubuserapps.READ_DATABASE"/>
 
         <receiver

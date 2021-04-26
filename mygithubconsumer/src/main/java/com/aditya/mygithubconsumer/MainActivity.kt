@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         object : LoaderManager.LoaderCallbacks<Cursor?> {
             override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor?> {
                 return CursorLoader(
-                    applicationContext,
+                    this@MainActivity,
                     URI, arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_AVATAR, COLUMN_URL),
                     null, null, null
                 )
@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onLoaderReset(loader: Loader<Cursor?>) {
                 favoritAdapter.setUser(null)
+                Log.d("cursor", loader.toString())
             }
         }
 

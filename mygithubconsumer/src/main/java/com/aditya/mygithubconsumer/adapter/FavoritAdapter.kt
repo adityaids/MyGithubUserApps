@@ -2,6 +2,7 @@ package com.aditya.mygithubconsumer.adapter
 
 import android.database.Cursor
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -49,21 +50,16 @@ class FavoritAdapter: RecyclerView.Adapter<FavoritAdapter.FavoritViewHolder>() {
         fun bind(cursor: Cursor?, position: Int){
             if (cursor != null) {
                 if (cursor.moveToPosition(position)) {
-                    val urlImage = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AVATAR))
-                    binding.tvNameFavorit.text =
-                        cursor.getString(
-                            cursor.getColumnIndexOrThrow(
-                                COLUMN_NAME
-                            )
-                        )
-                    Glide.with(itemView.context)
-                        .load(urlImage)
-                        .into(binding.imgProfileFavorit)
                     val favoritModel = FavoritModel(
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AVATAR)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_URL))
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AVATAR)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_URL))
                     )
+                    Log.d("adapter", favoritModel.nama)
+                    binding.tvNameFavorit.text = favoritModel.nama
+                    Glide.with(itemView.context)
+                        .load(favoritModel.avatarUrl)
+                        .into(binding.imgProfileFavorit)
                     itemView.setOnClickListener{onFavoritItemClick.onItemClicked(favoritModel)}
                 }
             }
