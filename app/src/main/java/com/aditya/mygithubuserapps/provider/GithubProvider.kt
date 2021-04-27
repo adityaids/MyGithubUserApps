@@ -2,7 +2,6 @@ package com.aditya.mygithubuserapps.provider
 
 import android.content.ContentProvider
 import android.content.ContentValues
-import android.content.Context
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
@@ -14,7 +13,7 @@ class GithubProvider : ContentProvider() {
 
     companion object {
         private const val FAVORIT_ID = 1
-        private const val AUTHORITY = "com.aditya.mygithubuserapps.provider.GithubProvider"
+        private const val AUTHORITY = "com.aditya.mygithubuserapps.provider"
         private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
         private lateinit var favoritDatabase: FavoritDatabase
         init {

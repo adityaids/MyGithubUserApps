@@ -3,7 +3,7 @@
     package="com.aditya.mygithubuserapps">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <permission android:name="com.aditya.mygithubuserapps.READ_DATABASE"/>
+    <permission android:name="com.aditya.mygithubuserapps.provider.READ_DATABASE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -19,15 +19,16 @@
         android:usesCleartextTraffic="true">
 
         <provider
-            android:authorities="com.aditya.mygithubuserapps.provider.GithubProvider"
-            android:name="com.aditya.mygithubuserapps.provider.GithubProvider"
+            android:authorities="com.aditya.mygithubuserapps.provider"
+            android:name=".provider.GithubProvider"
             android:exported="true"
-            android:enabled="true"/>
+            android:enabled="true"
+            android:readPermission="com.aditya.myusergithubapps.provider"
+            android:grantUriPermissions="true"/>
 
         <receiver
             android:name=".notification.AlarmNotification"
-            android:enabled="true"
-            android:exported="true" />
+            android:enabled="true" />
 
         <activity
             android:name=".SettingActivity"

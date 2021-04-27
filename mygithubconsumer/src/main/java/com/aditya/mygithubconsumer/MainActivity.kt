@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps.provider.GithubProvider/favorit")
+        private val URI: Uri = Uri.parse("content://com.aditya.mygithubuserapps.provider/favorit")
         private const val COLUMN_ID = BaseColumns._ID
         const val COLUMN_NAME = "nama"
         const val COLUMN_AVATAR = "avatar"
@@ -52,8 +52,8 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
             adapter = favoritAdapter
         }
-        //LoaderManager.getInstance(this).initLoader(1, null, mLoaderCallbacks)
-        val handlerThread = HandlerThread("DataObserver")
+        LoaderManager.getInstance(this).initLoader(1, null, mLoaderCallbacks)
+        /*val handlerThread = HandlerThread("DataObserver")
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
         val myObserver = object : ContentObserver(handler) {
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 loadNotesAsync()
             }
         }
-        contentResolver.registerContentObserver(URI, true, myObserver)
+        contentResolver.registerContentObserver(URI, true, myObserver)*/
         favoritAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
             override fun onItemClicked(favoritModel: FavoritModel) {
                 mainViewModel.getDetailUser(favoritModel.url)
@@ -82,9 +82,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onLoadFinished(loader: Loader<Cursor?>, data: Cursor?) {
+                Log.d("cursor", data?.getString(1).toString())
                 if (data != null) {
-                    //favoritAdapter.setUser(data)
-                    Log.d("cursor", data.getString(1).toString())
+                    favoritAdapter.setUser(mainViewModel.mapCursorToArrayList(data))
                 }
             }
 
