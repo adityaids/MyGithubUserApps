@@ -1,7 +1,6 @@
 package com.aditya.mygithubuserapps.db
 
 import android.database.Cursor
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.aditya.mygithubuserapps.model.FavoritModel
 import kotlinx.coroutines.flow.Flow

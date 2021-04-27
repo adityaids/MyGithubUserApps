@@ -1,17 +1,13 @@
 package com.aditya.mygithubconsumer
 
-import android.content.ContentUris
 import android.content.Intent
-import android.database.ContentObserver
 import android.database.Cursor
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.provider.BaseColumns
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
@@ -82,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onLoadFinished(loader: Loader<Cursor?>, data: Cursor?) {
-                Log.d("cursor", data?.getString(1).toString())
+                Log.d("cursor", URI.toString())
                 if (data != null) {
                     favoritAdapter.setUser(mainViewModel.mapCursorToArrayList(data))
                 }

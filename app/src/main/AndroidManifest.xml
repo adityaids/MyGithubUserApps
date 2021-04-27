@@ -6,6 +6,9 @@
     <permission android:name="com.aditya.mygithubuserapps.provider.READ_DATABASE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <queries>
+        <package android:name="com.aditya.mygithubuserapps.provider" />
+    </queries>
 
     <application
         android:name=".application.MyGithubUserApps"

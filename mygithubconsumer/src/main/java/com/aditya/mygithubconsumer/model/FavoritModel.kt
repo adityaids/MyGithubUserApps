@@ -1,7 +1,6 @@
 package com.aditya.mygithubconsumer.model
 
 import android.os.Parcelable
-import android.provider.BaseColumns
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

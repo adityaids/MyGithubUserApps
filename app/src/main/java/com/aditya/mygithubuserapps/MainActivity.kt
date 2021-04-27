@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.Pair
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 setDataRecycler(listItem)
             }
         }
-
         binding.btnSearch.setOnClickListener(this)
         binding.btnFavorit.setOnClickListener(this)
         binding.btnSetting.setOnClickListener(this)

@@ -1,18 +1,11 @@
 package com.aditya.mygithubconsumer.adapter
 
-import android.database.Cursor
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.aditya.mygithubconsumer.MainActivity.Companion.COLUMN_AVATAR
-import com.aditya.mygithubconsumer.MainActivity.Companion.COLUMN_NAME
-import com.aditya.mygithubconsumer.MainActivity.Companion.COLUMN_URL
 import com.aditya.mygithubconsumer.databinding.ItemListFavoritBinding
 import com.aditya.mygithubconsumer.model.FavoritModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target
 
 class FavoritAdapter: RecyclerView.Adapter<FavoritAdapter.FavoritViewHolder>() {
 

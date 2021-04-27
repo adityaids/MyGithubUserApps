@@ -1,11 +1,7 @@
 package com.aditya.mygithubuserapps.viewmodel
 
-import android.app.Application
-import android.content.Context
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.*
 import com.aditya.mygithubuserapps.api.ApiService
-import com.aditya.mygithubuserapps.db.FavoritDatabase
 import com.aditya.mygithubuserapps.db.FavoritRepository
 import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.FavoritModel

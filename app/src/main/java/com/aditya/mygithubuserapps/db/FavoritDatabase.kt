@@ -5,9 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aditya.mygithubuserapps.model.FavoritModel
-import kotlinx.coroutines.CoroutineScope
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
 
 @Database(entities = [FavoritModel::class], exportSchema = false, version = 1)

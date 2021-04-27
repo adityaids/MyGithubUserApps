@@ -1,13 +1,8 @@
 package com.aditya.mygithubuserapps.viewmodel
 
-import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
-import com.aditya.mygithubuserapps.db.FavoritDao
-import com.aditya.mygithubuserapps.db.FavoritDatabase
 import com.aditya.mygithubuserapps.db.FavoritRepository
 import com.aditya.mygithubuserapps.model.FavoritModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class FavoritViewModel(private val repository: FavoritRepository): ViewModel() {
