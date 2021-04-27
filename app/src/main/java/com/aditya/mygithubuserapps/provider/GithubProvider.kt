@@ -1,11 +1,17 @@
 package com.aditya.mygithubuserapps.provider
 
+import android.app.Application
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.Context
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
+import android.util.Log
+import androidx.core.content.ContextCompat
+import com.aditya.mygithubuserapps.application.MyGithubUserApps
 import com.aditya.mygithubuserapps.db.FavoritDatabase
+import com.aditya.mygithubuserapps.db.FavoritRepository
 
 
 class GithubProvider : ContentProvider() {
@@ -16,15 +22,10 @@ class GithubProvider : ContentProvider() {
         private const val TABLE_NAME = "favorit"
         private const val SCHEME = "content"
         private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
-        private lateinit var favoritDatabase: FavoritDatabase
         init {
             sUriMatcher.addURI(AUTHORITY, TABLE_NAME, FAVORIT_ID)
         }
     }
-    val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME)
-        .authority(AUTHORITY)
-        .appendPath(TABLE_NAME)
-        .build()
 
     override fun onCreate(): Boolean {
         return true
@@ -33,9 +34,11 @@ class GithubProvider : ContentProvider() {
     override fun query(
         uri: Uri, projection: Array<String>?, selection: String?,
         selectionArgs: Array<String>?, sortOrder: String?
-    ): Cursor {
+    ): Cursor? {
         return when (sUriMatcher.match(uri)) {
-            FAVORIT_ID -> favoritDatabase.favoritDao().selectAll()
+            FAVORIT_ID -> {
+                context?.let { FavoritDatabase.getDatabase(it).favoritDao().selectAll() }
+            }
             else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
     }

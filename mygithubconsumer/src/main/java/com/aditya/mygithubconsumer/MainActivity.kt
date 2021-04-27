@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.provider.BaseColumns
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -36,10 +37,12 @@ class MainActivity : AppCompatActivity() {
         const val COLUMN_NAME = "nama"
         const val COLUMN_AVATAR = "avatar"
         const val COLUMN_URL = "url"
+        const val EXTRA_STATE = "extra"
     }
     private lateinit var favoritAdapter: FavoritAdapter
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
+    private var favoritList = ArrayList<FavoritModel>()
     private val uri: Uri = Uri.Builder().scheme(SCHEME)
         .authority(AUTHORITY)
         .appendPath(TABLE_NAME)
@@ -50,14 +53,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
         favoritAdapter = FavoritAdapter()
         binding.rvFavorit.apply{
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
             adapter = favoritAdapter
         }
-        //LoaderManager.getInstance(this).initLoader(1, null, mLoaderCallbacks)
+        mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
         val handlerThread = HandlerThread("DataObserver")
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
@@ -74,35 +76,19 @@ class MainActivity : AppCompatActivity() {
         })
         mainViewModel.getUserDetail().observe(this, ::toProfileAcitivity)
         mainViewModel.getErrorResponse().observe(this, ::showMessage)
-    }
-
-    private val mLoaderCallbacks: LoaderManager.LoaderCallbacks<Cursor?> =
-        object : LoaderManager.LoaderCallbacks<Cursor?> {
-            override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor?> {
-                return CursorLoader(
-                    applicationContext,
-                    uri, arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_AVATAR, COLUMN_URL),
-                    null, null, null
-                )
-            }
-
-            override fun onLoadFinished(loader: Loader<Cursor?>, data: Cursor?) {
-                Log.d("cursor", uri.toString())
-                if (data != null) {
-                    favoritAdapter.setUser(mainViewModel.mapCursorToArrayList(data))
-                }
-            }
-
-            override fun onLoaderReset(loader: Loader<Cursor?>) {
-                //favoritAdapter.setUser(null)
-                Log.d("cursor", loader.toString())
-            }
+        if (savedInstanceState == null) {
+            loadNotesAsync()
+        } else {
+            savedInstanceState.getParcelableArrayList<FavoritModel>(EXTRA_STATE)?.also { favoritAdapter.mListUser = favoritList}
         }
+
+    }
 
     private fun toProfileAcitivity(detailModel: UserDetailModel){
         intent = Intent(this@MainActivity, ProfileActivity::class.java).apply {
             putExtra(ProfileActivity.EXTRA_USER, detailModel)
         }
+        startActivity(intent)
     }
 
     private fun showMessage(message: String){
@@ -115,12 +101,16 @@ class MainActivity : AppCompatActivity() {
                 val cursor = contentResolver.query(uri, null, null, null, null)
                 mainViewModel.mapCursorToArrayList(cursor)
             }
-            val favoritList = deferredNotes.await()
+            favoritList = deferredNotes.await()
             if (favoritList.size > 0) {
-                favoritAdapter.setUser(favoritList)
+                favoritAdapter.mListUser = favoritList
             } else {
-                favoritAdapter.setUser(null)
+                binding.rvFavorit.visibility = View.GONE
             }
         }
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList(EXTRA_STATE, favoritList)
     }
 }

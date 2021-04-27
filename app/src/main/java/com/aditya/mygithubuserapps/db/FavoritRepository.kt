@@ -1,5 +1,6 @@
 package com.aditya.mygithubuserapps.db
 
+import android.database.Cursor
 import androidx.annotation.WorkerThread
 import com.aditya.mygithubuserapps.model.FavoritModel
 import kotlinx.coroutines.flow.Flow
@@ -7,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class FavoritRepository(private val favoritDao: FavoritDao) {
 
     val favoritedUser: Flow<List<FavoritModel>> = favoritDao.getFavoritList()
+    val favoritSelectAll: Cursor = favoritDao.selectAll()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aditya.mygithubuserapps">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <permission android:name="com.aditya.mygithubuserapps.READ_DATABASE" android:protectionLevel="normal"/>
     <permission android:name="com.aditya.mygithubuserapps.WRITE_DATABASE" android:protectionLevel="normal"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -18,18 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGithubUserApps"
         android:usesCleartextTraffic="true">
-
-        <provider
-            android:authorities="com.aditya.mygithubuserapps"
-            android:name="com.aditya.mygithubuserapps.provider.GithubProvider"
-            android:exported="true"
-            android:enabled="true"
-            android:readPermission="com.aditya.myusergithubapps"
-            android:writePermission="com.aditya.myusergithubapps"/>
-
-        <receiver
-            android:name=".notification.AlarmNotification"
-            android:enabled="true" />
 
         <activity
             android:name=".SettingActivity"
@@ -69,5 +58,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aditya.mygithubuserapps.MainActivity" />
         </activity>
+        <provider
+            android:authorities="com.aditya.mygithubuserapps"
+            android:name="com.aditya.mygithubuserapps.provider.GithubProvider"
+            android:exported="true"
+            android:enabled="true"/>
+        <receiver
+            android:name=".notification.AlarmNotification"
+            android:enabled="true" />
     </application>
 </manifest>
