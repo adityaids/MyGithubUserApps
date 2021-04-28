@@ -9,6 +9,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedSearchUser
 import com.aditya.mygithubuserapps.adapter.UserAdapter
@@ -18,6 +19,7 @@ import com.aditya.mygithubuserapps.model.ApiUserModel
 import com.aditya.mygithubuserapps.model.UserDetailModel
 import com.aditya.mygithubuserapps.viewmodel.SearchViewModel
 import com.aditya.mygithubuserapps.viewmodel.SearchViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class SearchActivity : AppCompatActivity() {
 
@@ -54,10 +56,8 @@ class SearchActivity : AppCompatActivity() {
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 if (apiUserModel.isFavorited){
                     searchViewModel.insertDb(apiUserModel)
-                    Log.d("apimodelTrue", apiUserModel.isFavorited.toString())
                 } else {
-                    searchViewModel.deleteDb(apiUserModel)
-                    Log.d("apimodelfalse", apiUserModel.isFavorited.toString())
+                    apiUserModel.login?.let { searchViewModel.deleteDb(it) }
                 }
             }
         })
@@ -95,7 +95,8 @@ class SearchActivity : AppCompatActivity() {
             userAdapter.setData(result)
         } else {
             binding.searchingLoading.visibility = View.GONE
-            binding.tvSearchNotif.visibility = View.VISIBLE
+            val message = resources.getString(R.string.lets_searching)
+            showSnackBarMessage(message)
         }
     }
 
@@ -110,5 +111,8 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showMessage(message: String){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+    private fun showSnackBarMessage(message: String) {
+        Snackbar.make(binding.rvSearch, message, Snackbar.LENGTH_SHORT).show()
     }
 }

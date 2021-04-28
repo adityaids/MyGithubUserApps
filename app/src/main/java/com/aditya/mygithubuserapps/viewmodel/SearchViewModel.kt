@@ -98,15 +98,8 @@ class SearchViewModel(private val repository: FavoritRepository) : ViewModel() {
         dbResponse.postValue("User Added to Favorit")
     }
 
-    fun deleteDb(apiUserModel: ApiUserModel)= viewModelScope.launch{
-        val user = FavoritModel(
-                apiUserModel.login?:"-",
-                apiUserModel.avatarUrl?:"-",
-                apiUserModel.url,
-                apiUserModel.isFollow,
-                apiUserModel.isFavorited
-        )
-        repository.delete(user)
+    fun deleteDb(userName: String)= viewModelScope.launch{
+        repository.delete(userName)
         dbResponse.postValue("User Remove From Favorit")
     }
 

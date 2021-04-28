@@ -33,22 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_view"/>
 
-    <TextView
-        android:id="@+id/tv_search_notif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:text="@string/lets_searching"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
-
     <ProgressBar
         android:id="@+id/searching_loading"
         android:layout_width="wrap_content"

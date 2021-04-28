@@ -17,6 +17,9 @@ interface FavoritDao {
     @Delete
     suspend fun delete(favoritModel: FavoritModel?)
 
+    @Query("DELETE from favorit WHERE nama = :userName")
+    suspend fun deleteByUserName(userName: String)
+
     @Query("SELECT * FROM " + FavoritModel.TABLE_NAME)
     fun selectAll(): Cursor
 }
