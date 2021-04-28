@@ -3,6 +3,7 @@ package com.aditya.mygithubuserapps
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
@@ -53,8 +54,10 @@ class SearchActivity : AppCompatActivity() {
             override fun onItemClicked(apiUserModel: ApiUserModel) {
                 if (apiUserModel.isFavorited){
                     searchViewModel.insertDb(apiUserModel)
+                    Log.d("apimodelTrue", apiUserModel.isFavorited.toString())
                 } else {
                     searchViewModel.deleteDb(apiUserModel)
+                    Log.d("apimodelfalse", apiUserModel.isFavorited.toString())
                 }
             }
         })
@@ -87,7 +90,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun observeListSearchUser(result: ArrayList<ApiUserModel>?){
-        if (result != null) {
+        if (result != null && !result.isEmpty()) {
             binding.searchingLoading.visibility = View.GONE
             userAdapter.setData(result)
         } else {

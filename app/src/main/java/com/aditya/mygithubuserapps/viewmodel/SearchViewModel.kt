@@ -1,5 +1,7 @@
 package com.aditya.mygithubuserapps.viewmodel
 
+import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.aditya.mygithubuserapps.api.ApiService
 import com.aditya.mygithubuserapps.db.FavoritRepository
@@ -35,8 +37,8 @@ class SearchViewModel(private val repository: FavoritRepository) : ViewModel() {
         val userListCall = service.getUserList(q)
         userListCall.enqueue(object : Callback<SearchUserModel?> {
             override fun onResponse(
-                call: Call<SearchUserModel?>?,
-                response: Response<SearchUserModel?>
+                    call: Call<SearchUserModel?>?,
+                    response: Response<SearchUserModel?>
             ) {
                 if (response.body() != null) {
                     val responseList = ArrayList<ApiUserModel>()
@@ -61,19 +63,19 @@ class SearchViewModel(private val repository: FavoritRepository) : ViewModel() {
         val userCall = service.getUserDetail(userName)
         userCall.enqueue(object : Callback<UserDetailModel> {
             override fun onResponse(
-                call: Call<UserDetailModel>,
-                response: Response<UserDetailModel>
+                    call: Call<UserDetailModel>,
+                    response: Response<UserDetailModel>
             ) {
                 userDetailModel = UserDetailModel(
-                    response.body()?.login,
-                    response.body()?.name,
-                    response.body()?.avatarUrl,
-                    response.body()?.location,
-                    response.body()?.company,
-                    response.body()?.publicRepos,
-                    response.body()?.followers,
-                    response.body()?.following,
-                    isFollow
+                        response.body()?.login,
+                        response.body()?.name,
+                        response.body()?.avatarUrl,
+                        response.body()?.location,
+                        response.body()?.company,
+                        response.body()?.publicRepos,
+                        response.body()?.followers,
+                        response.body()?.following,
+                        isFollow
                 )
                 userDetail.postValue(userDetailModel)
             }
@@ -86,24 +88,26 @@ class SearchViewModel(private val repository: FavoritRepository) : ViewModel() {
 
     fun insertDb(apiUserModel: ApiUserModel) = viewModelScope.launch{
         val user = FavoritModel(
-            apiUserModel.login?:"-",
-            apiUserModel.avatarUrl?:"-",
-            apiUserModel.url,
-            apiUserModel.isFavorited,
-            apiUserModel.isFollow
+                apiUserModel.login?:"-",
+                apiUserModel.avatarUrl?:"-",
+                apiUserModel.url,
+                apiUserModel.isFollow,
+                apiUserModel.isFavorited
         )
         repository.insert(user)
+        dbResponse.postValue("User Added to Favorit")
     }
 
     fun deleteDb(apiUserModel: ApiUserModel)= viewModelScope.launch{
         val user = FavoritModel(
-            apiUserModel.login?:"-",
-            apiUserModel.avatarUrl?:"-",
-            apiUserModel.url,
-            apiUserModel.isFavorited,
-            apiUserModel.isFollow
+                apiUserModel.login?:"-",
+                apiUserModel.avatarUrl?:"-",
+                apiUserModel.url,
+                apiUserModel.isFollow,
+                apiUserModel.isFavorited
         )
         repository.delete(user)
+        dbResponse.postValue("User Remove From Favorit")
     }
 
     fun getListSearchUser(): LiveData<ArrayList<ApiUserModel>> {

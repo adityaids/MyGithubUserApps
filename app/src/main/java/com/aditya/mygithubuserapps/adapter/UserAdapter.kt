@@ -41,7 +41,7 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
         val user = listUser[position]
-        holder.bind(user)
+        holder.bind(user, position)
     }
 
     override fun getItemCount(): Int {
@@ -50,7 +50,7 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
 
     inner class SearchResultViewHolder(private val binding: SearchResultUserBinding) :
             RecyclerView.ViewHolder(binding.root) {
-        fun bind(apiUserModel: ApiUserModel){
+        fun bind(apiUserModel: ApiUserModel, position: Int){
             Glide.with(itemView.context)
                     .load(apiUserModel.avatarUrl)
                     .into(binding.imgProfileSearch)
@@ -69,16 +69,20 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
                 }
             }
             binding.btnSearchFavorit.setOnClickListener {
-                if (apiUserModel.isFavorited) {
+                if (listUser.get(position).isFavorited) {
                     val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32)
-                    binding.btnSearchFavorit.setCompoundDrawables(null, drawable, null, null)
+                    binding.btnSearchFavorit.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
                     apiUserModel.isFavorited = false
+                    listUser.get(position).isFavorited = apiUserModel.isFavorited
                     onFavoritItemClickCallback.onItemClicked(apiUserModel)
+                    notifyDataSetChanged()
                 } else {
                     val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32_red)
-                    binding.btnSearchFavorit.setCompoundDrawables(null, drawable, null, null)
+                    binding.btnSearchFavorit.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
                     apiUserModel.isFavorited = true
+                    listUser.get(position).isFavorited = apiUserModel.isFavorited
                     onFavoritItemClickCallback.onItemClicked(apiUserModel)
+                    notifyDataSetChanged()
                 }
             }
             itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(apiUserModel) }

@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.Flow
 class FavoritRepository(private val favoritDao: FavoritDao) {
 
     val favoritedUser: Flow<List<FavoritModel>> = favoritDao.getFavoritList()
-    val favoritSelectAll: Cursor = favoritDao.selectAll()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
