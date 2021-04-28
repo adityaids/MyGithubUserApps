@@ -1,6 +1,5 @@
 package com.aditya.mygithubuserapps.db
 
-import android.database.Cursor
 import androidx.annotation.WorkerThread
 import com.aditya.mygithubuserapps.model.FavoritModel
 import kotlinx.coroutines.flow.Flow

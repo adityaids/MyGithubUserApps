@@ -1,6 +1,5 @@
 package com.aditya.mygithubconsumer.adapter
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast

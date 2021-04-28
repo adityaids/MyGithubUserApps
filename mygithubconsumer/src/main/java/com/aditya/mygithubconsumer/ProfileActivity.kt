@@ -1,8 +1,8 @@
 package com.aditya.mygithubconsumer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.aditya.mygithubconsumer.databinding.ActivityProfileBinding
 import com.aditya.mygithubconsumer.model.UserDetailModel
@@ -35,7 +35,7 @@ class ProfileActivity : AppCompatActivity() {
         init(userDetailModel)
         initAdapter(userDetailModel.login.toString())
     }
-    fun init(userDetailModel: UserDetailModel){
+    private fun init(userDetailModel: UserDetailModel){
         Glide.with(this)
             .load(userDetailModel.avatarUrl)
             .into(binding.imgDetailProfile)

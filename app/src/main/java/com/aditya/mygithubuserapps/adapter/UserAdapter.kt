@@ -68,18 +68,18 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
                 }
             }
             binding.btnSearchFavorit.setOnClickListener {
-                if (listUser.get(position).isFavorited) {
+                if (listUser[position].isFavorited) {
                     val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32)
                     binding.btnSearchFavorit.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
                     apiUserModel.isFavorited = false
-                    listUser.get(position).isFavorited = apiUserModel.isFavorited
+                    listUser[position].isFavorited = apiUserModel.isFavorited
                     onFavoritItemClickCallback.onItemClicked(apiUserModel)
                     notifyDataSetChanged()
                 } else {
                     val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32_red)
                     binding.btnSearchFavorit.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
                     apiUserModel.isFavorited = true
-                    listUser.get(position).isFavorited = apiUserModel.isFavorited
+                    listUser[position].isFavorited = apiUserModel.isFavorited
                     onFavoritItemClickCallback.onItemClicked(apiUserModel)
                     notifyDataSetChanged()
                 }

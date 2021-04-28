@@ -2,10 +2,12 @@ package com.aditya.mygithubconsumer.api
 
 import com.aditya.mygithubconsumer.BuildConfig
 import com.aditya.mygithubconsumer.model.ApiUserModel
-import com.aditya.mygithubconsumer.model.FavoritModel
 import com.aditya.mygithubconsumer.model.UserDetailModel
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.Path
+import retrofit2.http.Url
 
 interface ApiService {
 

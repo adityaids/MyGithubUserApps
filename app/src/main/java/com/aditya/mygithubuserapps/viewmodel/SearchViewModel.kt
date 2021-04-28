@@ -1,7 +1,5 @@
 package com.aditya.mygithubuserapps.viewmodel
 
-import android.util.Log
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.aditya.mygithubuserapps.api.ApiService
 import com.aditya.mygithubuserapps.db.FavoritRepository

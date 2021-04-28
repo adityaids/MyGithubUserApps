@@ -1,17 +1,11 @@
 package com.aditya.mygithubuserapps.provider
 
-import android.app.Application
 import android.content.ContentProvider
 import android.content.ContentValues
-import android.content.Context
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
-import android.util.Log
-import androidx.core.content.ContextCompat
-import com.aditya.mygithubuserapps.application.MyGithubUserApps
 import com.aditya.mygithubuserapps.db.FavoritDatabase
-import com.aditya.mygithubuserapps.db.FavoritRepository
 
 
 class GithubProvider : ContentProvider() {

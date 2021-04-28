@@ -3,13 +3,11 @@ package com.aditya.mygithubuserapps
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubuserapps.adapter.OnClickedSearchUser
 import com.aditya.mygithubuserapps.adapter.UserAdapter
@@ -90,7 +88,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun observeListSearchUser(result: ArrayList<ApiUserModel>?){
-        if (result != null && !result.isEmpty()) {
+        if (result != null && result.isNotEmpty()) {
             binding.searchingLoading.visibility = View.GONE
             userAdapter.listUser = result
         } else {

@@ -2,20 +2,15 @@ package com.aditya.mygithubconsumer
 
 import android.content.Intent
 import android.database.ContentObserver
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.provider.BaseColumns
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.loader.app.LoaderManager
-import androidx.loader.content.CursorLoader
-import androidx.loader.content.Loader
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aditya.mygithubconsumer.adapter.FavoritAdapter
 import com.aditya.mygithubconsumer.adapter.OnClickedFavoriteItem
