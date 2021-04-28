@@ -92,7 +92,7 @@ class SearchActivity : AppCompatActivity() {
     private fun observeListSearchUser(result: ArrayList<ApiUserModel>?){
         if (result != null && !result.isEmpty()) {
             binding.searchingLoading.visibility = View.GONE
-            userAdapter.setData(result)
+            userAdapter.listUser = result
         } else {
             binding.searchingLoading.visibility = View.GONE
             val message = resources.getString(R.string.lets_searching)

@@ -9,14 +9,13 @@ import com.bumptech.glide.Glide
 
 class FavoritAdapter: RecyclerView.Adapter<FavoritAdapter.FavoritViewHolder>() {
 
-    private val listUser = ArrayList<FavoritModel>()
     private lateinit var onFavoritItemClick: OnClickedFavoriteItem
-
-    fun setData(items: ArrayList<FavoritModel>){
-        listUser.clear()
-        listUser.addAll(items)
-        notifyDataSetChanged()
-    }
+    var listUser= ArrayList<FavoritModel>()
+        set(listUser) {
+            this.listUser.clear()
+            this.listUser.addAll(listUser)
+            notifyDataSetChanged()
+        }
 
     fun setOnFavoritItemCallBack(onClickedFavoriteItem: OnClickedFavoriteItem){
         this.onFavoritItemClick = onClickedFavoriteItem

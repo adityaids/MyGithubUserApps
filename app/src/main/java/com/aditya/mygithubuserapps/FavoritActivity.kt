@@ -42,7 +42,7 @@ class FavoritActivity : AppCompatActivity() {
 
     private fun showRecycler(list: List<FavoritModel>?) {
         if (list != null) {
-            favoritAdapter.setData(list as ArrayList<FavoritModel>)
+            favoritAdapter.listUser = list as ArrayList<FavoritModel>
         } else {
             binding.rvFavorit.visibility = View.GONE
             binding.tvFavoritNotif.visibility = View.VISIBLE

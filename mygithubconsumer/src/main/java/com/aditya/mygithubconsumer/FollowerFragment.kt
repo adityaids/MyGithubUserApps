@@ -1,4 +1,4 @@
-package com.aditya.mygithubuserapps
+package com.aditya.mygithubconsumer
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.mygithubuserapps.adapter.OnClickedSearchUser
-import com.aditya.mygithubuserapps.adapter.UserAdapter
-import com.aditya.mygithubuserapps.databinding.FragmentFollowerBinding
-import com.aditya.mygithubuserapps.model.ApiUserModel
-import com.aditya.mygithubuserapps.viewmodel.FollowerViewModel
+import com.aditya.mygithubconsumer.adapter.OnClickedSearchUser
+import com.aditya.mygithubconsumer.adapter.UserAdapter
+import com.aditya.mygithubconsumer.databinding.FragmentFollowerBinding
+import com.aditya.mygithubconsumer.model.ApiUserModel
+import com.aditya.mygithubconsumer.viewmodel.FollowerViewModel
 
 class FollowerFragment : Fragment() {
 
@@ -20,11 +20,11 @@ class FollowerFragment : Fragment() {
         private const val NAME_ARG = "name_arg"
         @JvmStatic
         fun newInstance(userName: String) =
-                FollowerFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(NAME_ARG, userName)
-                    }
+            FollowerFragment().apply {
+                arguments = Bundle().apply {
+                    putString(NAME_ARG, userName)
                 }
+            }
     }
     private var mBinding: FragmentFollowerBinding? = null
     private val binding get() = mBinding!!
@@ -32,8 +32,8 @@ class FollowerFragment : Fragment() {
     private val userAdapter = UserAdapter()
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         mBinding = FragmentFollowerBinding.inflate(inflater, container, false)
         binding.rvFollow.apply {
@@ -61,7 +61,7 @@ class FollowerFragment : Fragment() {
                         binding.tvFollowerNotif.visibility = View.VISIBLE
                     }
                 }
-                userAdapter.setOnItemCLickCallback(object : OnClickedSearchUser{
+                userAdapter.setOnItemCLickCallback(object : OnClickedSearchUser {
                     override fun onItemClicked(apiUserModel: ApiUserModel) {
                         followerViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
                     }

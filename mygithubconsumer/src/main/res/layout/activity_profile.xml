@@ -237,5 +237,4 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/_4sdp"/>
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

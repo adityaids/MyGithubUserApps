@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         favoritAdapter.setOnFavoritItemCallBack(object : OnClickedFavoriteItem{
             override fun onItemClicked(favoritModel: FavoritModel) {
                 mainViewModel.getDetailUser(favoritModel.url)
+                binding.toProfileLoading.visibility = View.VISIBLE
             }
         })
         mainViewModel.getUserDetail().observe(this, ::toProfileAcitivity)

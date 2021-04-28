@@ -94,8 +94,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setDataRecycler(listUser: ArrayList<UserDetailModel>){
-        userHorizontalAdapter.setData(listUser)
-        userVerticalAdapter.setData(listUser)
+        userHorizontalAdapter.listUser = listUser
+        userVerticalAdapter.listUser = listUser
     }
 
     override fun onClick(v: View) {

@@ -1,12 +1,11 @@
-package com.aditya.mygithubuserapps.viewmodel
+package com.aditya.mygithubconsumer.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.aditya.mygithubuserapps.api.ApiService
-import com.aditya.mygithubuserapps.model.ApiUserModel
-import com.aditya.mygithubuserapps.model.UserDetailModel
+import com.aditya.mygithubconsumer.api.ApiService
+import com.aditya.mygithubconsumer.model.ApiUserModel
+import com.aditya.mygithubconsumer.model.UserDetailModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -76,10 +75,10 @@ class FollowingViewModel: ViewModel() {
         return listFollowing
     }
 
-    fun getUserDetail(): LiveData<UserDetailModel>{
+    fun getUserDetail(): LiveData<UserDetailModel> {
         return userDetail
     }
-    fun getErrorResponse(): LiveData<String>{
+    fun getErrorResponse(): LiveData<String> {
         return errorResponse
     }
 }

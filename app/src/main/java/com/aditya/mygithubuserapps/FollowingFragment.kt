@@ -54,7 +54,7 @@ class FollowingFragment : Fragment() {
                 followingViewModel.getFollowing(userName)
                 followingViewModel.getFollowingList().observe(viewLifecycleOwner){result->
                     if (result != null) {
-                        userAdapter.setData(result)
+                        userAdapter.listUser = result
                         binding.loadingFollowing.visibility = View.GONE
                     } else {
                         binding.loadingFollowing.visibility = View.GONE

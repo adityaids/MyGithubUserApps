@@ -12,14 +12,13 @@ import com.bumptech.glide.request.RequestOptions
 
 class UserHorizontalAdapter : RecyclerView.Adapter<UserHorizontalAdapter.UserHorizontalViewHolder>() {
 
-    private val listUser = ArrayList<UserDetailModel>()
     private lateinit var onItemClickedRecyclerCallback: OnClickedRecyclerItem
-
-    fun setData(items: ArrayList<UserDetailModel>){
-        listUser.clear()
-        listUser.addAll(items)
-        notifyDataSetChanged()
-    }
+    var listUser= ArrayList<UserDetailModel>()
+        set(listUser) {
+            this.listUser.clear()
+            this.listUser.addAll(listUser)
+            notifyDataSetChanged()
+        }
 
     fun setOnItemCLickCallback(onCLickRecyclerItem: OnClickedRecyclerItem){
         this.onItemClickedRecyclerCallback = onCLickRecyclerItem

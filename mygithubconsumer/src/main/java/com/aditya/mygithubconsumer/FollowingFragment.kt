@@ -1,4 +1,4 @@
-package com.aditya.mygithubuserapps
+package com.aditya.mygithubconsumer
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,34 +8,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aditya.mygithubuserapps.adapter.OnClickedSearchUser
-import com.aditya.mygithubuserapps.adapter.UserAdapter
-import com.aditya.mygithubuserapps.databinding.FragmentFollowerBinding
-import com.aditya.mygithubuserapps.model.ApiUserModel
-import com.aditya.mygithubuserapps.viewmodel.FollowerViewModel
+import com.aditya.mygithubconsumer.adapter.OnClickedSearchUser
+import com.aditya.mygithubconsumer.adapter.UserAdapter
+import com.aditya.mygithubconsumer.databinding.FragmentFollowingBinding
+import com.aditya.mygithubconsumer.model.ApiUserModel
+import com.aditya.mygithubconsumer.viewmodel.FollowingViewModel
 
-class FollowerFragment : Fragment() {
+class FollowingFragment : Fragment() {
 
     companion object {
         private const val NAME_ARG = "name_arg"
+
         @JvmStatic
         fun newInstance(userName: String) =
-                FollowerFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(NAME_ARG, userName)
-                    }
+            FollowingFragment().apply {
+                arguments = Bundle().apply {
+                    putString(NAME_ARG, userName)
                 }
+            }
     }
-    private var mBinding: FragmentFollowerBinding? = null
+
+    private var mBinding: FragmentFollowingBinding? = null
     private val binding get() = mBinding!!
-    private lateinit var followerViewModel: FollowerViewModel
+    private lateinit var followingViewModel: FollowingViewModel
     private val userAdapter = UserAdapter()
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        mBinding = FragmentFollowerBinding.inflate(inflater, container, false)
+        mBinding = FragmentFollowingBinding.inflate(inflater, container, false)
         binding.rvFollow.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -47,26 +49,29 @@ class FollowerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userName = arguments?.getString(NAME_ARG)
-        followerViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(FollowerViewModel::class.java)
+        followingViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(FollowingViewModel::class.java)
         if (userName != null) {
             if (userName != "dummy") {
-                followerViewModel.getFollower(userName)
-                followerViewModel.getFollowerList().observe(viewLifecycleOwner){result->
+                followingViewModel.getFollowing(userName)
+                followingViewModel.getFollowingList().observe(viewLifecycleOwner) { result ->
                     if (result != null) {
                         userAdapter.listUser = result
-                        binding.loadingFollower.visibility = View.GONE
+                        binding.loadingFollowing.visibility = View.GONE
                     } else {
-                        binding.loadingFollower.visibility = View.GONE
+                        binding.loadingFollowing.visibility = View.GONE
                         binding.rvFollow.visibility = View.GONE
-                        binding.tvFollowerNotif.visibility = View.VISIBLE
+                        binding.tvFollowingNotif.visibility = View.VISIBLE
                     }
                 }
-                userAdapter.setOnItemCLickCallback(object : OnClickedSearchUser{
+                userAdapter.setOnItemCLickCallback(object : OnClickedSearchUser {
                     override fun onItemClicked(apiUserModel: ApiUserModel) {
-                        followerViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
+                        followingViewModel.getDetailUser(apiUserModel.url, apiUserModel.isFollow)
                     }
                 })
-                followerViewModel.getUserDetail().observe(viewLifecycleOwner){result->
+                followingViewModel.getUserDetail().observe(viewLifecycleOwner) { result ->
                     if (result != null) {
                         val intent = Intent(context, ProfileActivity::class.java).apply {
                             putExtra(ProfileActivity.EXTRA_DATA_API, result)
@@ -75,9 +80,9 @@ class FollowerFragment : Fragment() {
                     }
                 }
             } else {
-                binding.loadingFollower.visibility = View.GONE
+                binding.loadingFollowing.visibility = View.GONE
                 binding.rvFollow.visibility = View.GONE
-                binding.tvFollowerNotif.visibility = View.VISIBLE
+                binding.tvFollowingNotif.visibility = View.VISIBLE
             }
         }
     }

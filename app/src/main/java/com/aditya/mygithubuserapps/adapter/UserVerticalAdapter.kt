@@ -15,14 +15,13 @@ import java.util.*
 
 class UserVerticalAdapter : RecyclerView.Adapter<UserVerticalAdapter.UserVerticalViewHolder>(){
 
-    private val listUser = ArrayList<UserDetailModel>()
     private lateinit var onItemClickedRecyclerCallback: OnClickedRecyclerItem
-
-    fun setData(items: ArrayList<UserDetailModel>){
-        listUser.clear()
-        listUser.addAll(items)
-        notifyDataSetChanged()
-    }
+    var listUser= ArrayList<UserDetailModel>()
+        set(listUser) {
+            this.listUser.clear()
+            this.listUser.addAll(listUser)
+            notifyDataSetChanged()
+        }
 
     fun setOnItemClickCallback(onClickedRecyclerItem: OnClickedRecyclerItem){
         this.onItemClickedRecyclerCallback = onClickedRecyclerItem

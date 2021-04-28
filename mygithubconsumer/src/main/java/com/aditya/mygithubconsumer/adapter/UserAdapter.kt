@@ -1,4 +1,4 @@
-package com.aditya.mygithubuserapps.adapter
+package com.aditya.mygithubconsumer.adapter
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.aditya.mygithubuserapps.R
-import com.aditya.mygithubuserapps.databinding.SearchResultUserBinding
-import com.aditya.mygithubuserapps.model.ApiUserModel
+import com.aditya.mygithubconsumer.R
+import com.aditya.mygithubconsumer.databinding.SearchResultUserBinding
+import com.aditya.mygithubconsumer.model.ApiUserModel
 import com.bumptech.glide.Glide
 
 class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
@@ -26,17 +26,13 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
         this.onItemClickedRecyclerCallback = onClickRecyclerItem
     }
 
-    fun setOnFavoritItemCallBack(onClickedFavoriteItem: OnClickedSearchUser){
-        this.onFavoritItemClickCallback = onClickedFavoriteItem
-    }
-
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
+        parent: ViewGroup,
+        viewType: Int
     ): SearchResultViewHolder =
-            SearchResultViewHolder(
-                    SearchResultUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
+        SearchResultViewHolder(
+            SearchResultUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
         val user = listUser[position]
@@ -48,11 +44,11 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
     }
 
     inner class SearchResultViewHolder(private val binding: SearchResultUserBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(apiUserModel: ApiUserModel, position: Int){
             Glide.with(itemView.context)
-                    .load(apiUserModel.avatarUrl)
-                    .into(binding.imgProfileSearch)
+                .load(apiUserModel.avatarUrl)
+                .into(binding.imgProfileSearch)
             binding.tvNameSearch.text = apiUserModel.login
             binding.btnFollowSearch.setOnClickListener {
                 if (apiUserModel.isFollow) {
@@ -65,23 +61,6 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.SearchResultViewHolder>() {
                     binding.btnFollowSearch.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_secondary_color))
                     Toast.makeText(itemView.context, "Followed", Toast.LENGTH_SHORT).show()
                     apiUserModel.isFollow = true
-                }
-            }
-            binding.btnSearchFavorit.setOnClickListener {
-                if (listUser.get(position).isFavorited) {
-                    val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32)
-                    binding.btnSearchFavorit.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
-                    apiUserModel.isFavorited = false
-                    listUser.get(position).isFavorited = apiUserModel.isFavorited
-                    onFavoritItemClickCallback.onItemClicked(apiUserModel)
-                    notifyDataSetChanged()
-                } else {
-                    val drawable: Drawable? = ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_32_red)
-                    binding.btnSearchFavorit.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
-                    apiUserModel.isFavorited = true
-                    listUser.get(position).isFavorited = apiUserModel.isFavorited
-                    onFavoritItemClickCallback.onItemClicked(apiUserModel)
-                    notifyDataSetChanged()
                 }
             }
             itemView.setOnClickListener { onItemClickedRecyclerCallback.onItemClicked(apiUserModel) }
